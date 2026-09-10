@@ -21,7 +21,7 @@ def pixel_to_roma_coords(
         scale = points_px.new_tensor((max(width - 1, 1), max(height - 1, 1)))
         return 2.0 * points_px / scale - 1.0
     scale = points_px.new_tensor((width, height))
-    return 2.0 * (points_px + 0.5) / scale - 1.0
+    return 2.0 * points_px / scale - 1.0
 
 
 def roma_to_pixel_coords(
@@ -32,7 +32,7 @@ def roma_to_pixel_coords(
         scale = points_roma.new_tensor((max(width - 1, 1), max(height - 1, 1)))
         return (points_roma + 1.0) * scale / 2.0
     scale = points_roma.new_tensor((width, height))
-    return (points_roma + 1.0) * scale / 2.0 - 0.5
+    return (points_roma + 1.0) * scale / 2.0
 
 
 def gt_pixel_warp_to_roma(warp_px: torch.Tensor, target_size: tuple[int, int]) -> torch.Tensor:

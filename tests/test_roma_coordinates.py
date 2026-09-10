@@ -12,3 +12,10 @@ def test_pixel_roma_pixel_roundtrip_corners_center_and_non_square() -> None:
     )
     restored = roma_warp_to_pixel(gt_pixel_warp_to_roma(points, (480, 640)), (480, 640))
     assert torch.max(torch.abs(restored - points)).item() < 0.01
+
+
+def test_roma_uses_pixel_centres_like_official_grid() -> None:
+    pixel_center = torch.tensor([[0.5, 0.5]])
+    roma = gt_pixel_warp_to_roma(pixel_center, (480, 640))
+    expected = torch.tensor([[-1.0 + 1.0 / 640, -1.0 + 1.0 / 480]])
+    assert torch.allclose(roma, expected)

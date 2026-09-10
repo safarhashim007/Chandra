@@ -28,7 +28,7 @@ def main() -> int:
     healthy &= report(
         "PASS" if sys.version_info >= (3, 10) else "FAIL", "Python", sys.version.split()[0]
     )
-    for module in ("numpy", "torch", "pytest", "sqlite3"):
+    for module in ("numpy", "torch", "pytest", "sqlite3", "rasterio", "pyproj", "shapely"):
         available = can_import(module)
         healthy &= report(
             "PASS" if available else "WARN", module, "available" if available else "not installed"

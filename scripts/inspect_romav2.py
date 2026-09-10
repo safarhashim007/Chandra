@@ -33,6 +33,8 @@ def main() -> int:
     parser.add_argument(
         "--run", action="store_true", help="load checkpoint and run a random smoke forward"
     )
+    parser.add_argument("--checkpoint", type=Path, help="optional local official checkpoint")
+    parser.add_argument("--setting", default="turbo", choices=("turbo", "fast", "base", "precise"))
     args = parser.parse_args()
     report = source_report()
     if args.run:
@@ -40,9 +42,9 @@ def main() -> int:
         import torch
         from romav2 import RoMaV2
 
-        model = RoMaV2()
-        model.apply_setting("turbo")
-        sample = torch.rand(1, 3, 320, 320)
+        model = RoMaV2(checkpoint_path=str(args.checkpoint) if args.checkpoint else None)
+        model.apply_setting(args.setting)
+        sample = torch.rand(1, 3, model.H_lr, model.W_lr, device=next(model.parameters()).device)
         predictions = model(sample, sample)
         report["parameter_count"] = sum(p.numel() for p in model.parameters())
         report["trainable_parameter_count"] = sum(
@@ -50,6 +52,15 @@ def main() -> int:
         )
         report["output_shapes"] = {
             key: list(value.shape) for key, value in predictions.items() if hasattr(value, "shape")
+        }
+        report["output_ranges"] = {
+            key: {
+                "min": float(value.min().item()),
+                "max": float(value.max().item()),
+                "finite": bool(torch.isfinite(value).all().item()),
+            }
+            for key, value in predictions.items()
+            if hasattr(value, "shape") and value is not None
         }
     output = ROOT / "artifacts" / "romav2_inspection.json"
     output.parent.mkdir(exist_ok=True)

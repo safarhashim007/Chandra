@@ -1,22 +1,22 @@
 # Known Issues
 
-## KI-001 — RoMa v2 execution unverified on Python 3.14
+## KI-001 — Incomplete Python 3.14 runtime remains unsupported
 
 Severity: HIGH
 
 Affects: baseline matching and training
 
-Reproduction: current host runs Python 3.14.2; upstream lists Python >=3.10 and documents testing on 3.12.
+Reproduction: `/usr/local/bin/python3` is Python 3.14.2 and lacks `_sqlite3`; official RoMa execution was verified with `/usr/bin/python` 3.10 instead.
 
-Workaround: create a Python 3.12-compatible isolated environment before downloading a checkpoint or running RoMa.
+Workaround: use `/usr/bin/python` for project commands, or provision a coherent Python 3.12+ environment with SQLite and the declared dependencies.
 
-## KI-002 — No local NASA dataset or product manifest
+## KI-002 — No LunarMatch-NASA training dataset or geographic split
 
 Severity: HIGH
 
-Affects: catalog build, ground-truth generation, benchmark, and training.
+Affects: training-pair generation, held-out T0 benchmark, and fine-tuning.
 
-Workaround: the project can validate synthetic geometry and metadata contracts while awaiting an explicit data source.
+Workaround: the project can validate the geometry contract and use the small ignored NAC pair for smoke tests, but it cannot claim a training or held-out benchmark result.
 
 ## KI-003 — `python3` host build lacks SQLite extension
 
@@ -28,14 +28,22 @@ Root cause: the host's Python 3.14 build is missing the optional `_sqlite3` exte
 
 Impact: invoking project scripts through `python3` breaks the SQLite catalog. The supported local interpreter is `/usr/bin/python` (Python 3.10, SQLite enabled); use `python`, not `python3`, for project commands.
 
-## KI-004 — Declared geospatial runtime packages are not installed
+## KI-004 — Declared geospatial runtime packages were previously absent
 
 Severity: HIGH
 
 Affects: real LROC ingestion and raster-backed metadata validation.
 
-Reproduction: `/usr/bin/python -c 'import rasterio, pyproj, shapely'` fails because the modules are not installed.
+Resolution: `/usr/bin/python` now imports rasterio 1.4.4, pyproj 3.7.1, and shapely 2.1.2; the WAC ingestion regression passes.
 
-Current workaround: the downloaded LROC fixture can be inspected at the GeoTIFF-tag level with the installed `tifffile`; this does not substitute for the project ingestion test.
+Current status: resolved in the current workspace; keep the adapter's clear missing-dependency error for clean environments.
 
-Permanent fix: provision the declared runtime dependencies in the supported Python 3.10 environment, then add and execute the rasterio-backed real-product regression test.
+## KI-005 — One-batch T1 overfit gate is not passed
+
+Severity: HIGH
+
+Affects: all LunarRoMa fine-tuning stages.
+
+Evidence: on the available 320x320 NAC crop, refiner-only CUDA optimization reduced robust warp loss from `0.04048` to `0.00921`, but median EPE increased from `1.58 px` to `11.61 px` and PCK@1 fell from `0.470` to `0.0002` after 50 steps.
+
+Required action: diagnose the training objective/data sample with a valid LunarMatch-NASA batch, then rerun the one-batch gate. Do not launch full training while this issue remains.

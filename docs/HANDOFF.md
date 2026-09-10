@@ -6,7 +6,7 @@
 
 ## Current commit
 
-`6358c8d` (last substantive fixture/state commit)
+Pending the verified session commit; use `git log --oneline -1`.
 
 ## Goal
 
@@ -14,12 +14,12 @@ Build the verifiable Chandrappan foundation before any model training.
 
 ## Current state
 
-The workspace began empty. Phase 0 is complete and synthetic lunar geometry tests pass. A public LROC WAC map-projected GeoTIFF/XML fixture (`WAC_TIO2_E350N0450`, MD5 `7774860882ef0330cf6afdacbca2b731`) was downloaded under ignored `data/raw/lroc_fixture/`. Its GeoTIFF tags and PDS XML were checked directly; the derived affine pixel/world roundtrip error was `2.6e-13 px`, with the expected equirectangular Moon radius and 35°N/45°E center. Public RoMa v2 source is inspected from an ignored vendor checkout; no checkpoint/model run has occurred. Initial code implements lunar conventions, affine pixel/world roundtrips, a metadata contract, an SQLite/RTree catalog, pixel-space GT generation, RoMa coordinate conversions, and mask-safe loss primitives.
+Phase 0 is complete. GEO-001 is complete for the available real products: the WAC fixture passes the rasterio-backed adapter and a real NAC photometric pair is cataloged with overlapping footprints. Public RoMa v2 source is inspected from an ignored vendor checkout; the official v2.0.1 checkpoint loads and CUDA inference smoke tests pass. A separate gradient-enabled training forward and centralized freezing helpers exist; 13 project tests pass.
 
 ## Known blockers
 
-The declared geospatial runtime packages (`rasterio`, `pyproj`, `shapely`) are not installed in `/usr/bin/python`; the real-product check was therefore tag-level via installed `tifffile`, not a project ingestion test. No official RoMa checkpoint is present. Use `/usr/bin/python` (Python 3.10) for project commands, not the incomplete `/usr/local/bin/python3` build.
+No LunarMatch-NASA training manifest, geographic split, or held-out T0 benchmark is available. The mandatory one-batch refiner-only diagnostic on the available NAC crop lowers robust loss but worsens pixel metrics, so TRAIN-001 remains blocked. Use `/usr/bin/python` (Python 3.10), not the incomplete `/usr/local/bin/python3` build. The ignored vendored RoMa checkout contains an existing local checkpoint-path constructor edit; preserve it unless explicitly reviewed.
 
 ## Next step
 
-Provision the declared geospatial runtime, implement the rasterio-backed LROC metadata adapter, and add a real-product metadata/roundtrip regression test using the ignored fixture. Do not ingest it into the catalog until that test passes.
+Provide the LunarMatch-NASA products/manifest and geographic train/validation/test split; then build immutable T0, diagnose the one-batch gate, and only after it passes launch staged T1 fine-tuning.

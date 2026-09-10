@@ -36,6 +36,6 @@
   "validation": {
     "method": "GeoTIFF ModelPixelScale/ModelTiepoint tags plus PDS4 XML",
     "max_affine_roundtrip_error_px": 2.5579538487363607e-13,
-    "project_ingestion_test": "not_run; rasterio, pyproj, and shapely are absent"
+    "project_ingestion_test": "passed; rasterio-backed metadata and affine roundtrip test"
   }
 }

@@ -1,0 +1,35 @@
+{
+  "dataset_version": "lroc-nac-pho-pair-2026-09-10",
+  "source": {
+    "mission": "Lunar Reconnaissance Orbiter",
+    "instrument": "LROC NAC",
+    "product_type": "map-projected photometric pair",
+    "products": [
+      {
+        "product_id": "NAC_PHO_E018N3346_M107042466L",
+        "image_md5": "95252b07f1be1a55f4fc3c07b240fbad"
+      },
+      {
+        "product_id": "NAC_PHO_E018N3346_M107042466R",
+        "image_md5": "9c9066a0d89b9e4b47e698c471ff0456"
+      }
+    ]
+  },
+  "local_paths": {
+    "directory": "data/raw/lroc_pair"
+  },
+  "observed": {
+    "projection": "EQUIRECTANGULAR MOON",
+    "lunar_radius_m": 1737400.0,
+    "gsd_m_per_px": 1.1,
+    "world_footprints_overlap": true,
+    "catalog_query": "passed"
+  },
+  "validation": {
+    "metadata_adapter": "passed",
+    "affine_roundtrip": "passed",
+    "pixel_gt_warp": "passed for explicit overlapping crop",
+    "official_roma_gpu_smoke": "passed",
+    "t0_benchmark": "not_complete; no held-out LunarMatch-NASA split"
+  }
+}
