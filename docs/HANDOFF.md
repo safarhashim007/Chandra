@@ -6,7 +6,7 @@
 
 ## Current commit
 
-Pending the verified session commit; use `git log --oneline -1`.
+`6d71896` (verified ingestion and RoMa training-readiness changes)
 
 ## Goal
 

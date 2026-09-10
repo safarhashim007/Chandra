@@ -1,10 +1,10 @@
 # Chandrappan Project State
 
-Last updated: 2026-09-10 Asia/Kolkata
+Last updated: 2026-09-11 Asia/Kolkata
 
 Current version: pre-v0.1
 
-Current stable commit: pending this session's verified ingestion/training-readiness changes
+Current stable commit: `6d71896` (verified ingestion and RoMa training-readiness changes)
 
 Integration branch: `dev`
 
