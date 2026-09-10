@@ -16,6 +16,10 @@ class AcceptanceConfig:
     min_scale: float = 0.8
     max_scale: float = 1.25
     max_rotation_degrees: float = 15.0
+    min_grid_coverage: float = 0.10
+    min_hull_coverage: float = 0.01
+    max_shear: float = 0.25
+    max_anisotropy: float = 1.25
 
     def as_dict(self) -> dict[str, float | int]:
         return asdict(self)
@@ -28,8 +32,12 @@ def accept_registration(metrics: dict[str, float | int], config: AcceptanceConfi
         "inlier_ratio",
         "reprojection_error_px",
         "spatial_coverage",
+        "grid_coverage",
+        "hull_coverage",
         "scale",
         "rotation_degrees",
+        "shear",
+        "anisotropy",
     )
     if any(key not in metrics for key in required):
         raise ValueError(f"registration metrics missing keys: {required}")
@@ -39,8 +47,12 @@ def accept_registration(metrics: dict[str, float | int], config: AcceptanceConfi
         and metrics["inlier_ratio"] >= config.min_inlier_ratio
         and metrics["reprojection_error_px"] <= config.max_reprojection_error_px
         and metrics["spatial_coverage"] >= config.min_spatial_coverage
+        and metrics["grid_coverage"] >= config.min_grid_coverage
+        and metrics["hull_coverage"] >= config.min_hull_coverage
         and config.min_scale <= metrics["scale"] <= config.max_scale
         and abs(metrics["rotation_degrees"]) <= config.max_rotation_degrees
+        and metrics["shear"] <= config.max_shear
+        and metrics["anisotropy"] <= config.max_anisotropy
     )
 
 

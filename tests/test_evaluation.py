@@ -1,6 +1,8 @@
+import numpy as np
 import pytest
 import torch
 
+from chandrappan.evaluation.analysis import confidence_subsets, error_distribution
 from chandrappan.evaluation.metrics import correspondence_metrics
 from chandrappan.evaluation.protocol import AcceptanceConfig, accept_registration, vrr_far
 from chandrappan.evaluation.quality_gate import (
@@ -8,6 +10,7 @@ from chandrappan.evaluation.quality_gate import (
     evaluate_quality_gate,
     require_quality_gate,
 )
+from chandrappan.evaluation.thresholds import select_validation_thresholds
 
 
 def test_correspondence_metrics_and_pck() -> None:
@@ -28,8 +31,12 @@ def test_acceptance_and_vrr_far_are_deterministic() -> None:
         "inlier_ratio": 0.5,
         "reprojection_error_px": 1,
         "spatial_coverage": 0.5,
+        "grid_coverage": 0.5,
+        "hull_coverage": 0.5,
         "scale": 1,
         "rotation_degrees": 1,
+        "shear": 0,
+        "anisotropy": 1,
     }
     assert accept_registration(metrics, config)
     assert vrr_far([(True, True), (True, False), (False, True), (False, False)]) == {
@@ -51,3 +58,41 @@ def test_quality_gate_pass_and_fail() -> None:
     assert not result["passed"]
     with pytest.raises(RuntimeError, match="FULL TRAINING BLOCKED"):
         require_quality_gate(result)
+
+
+def test_error_distribution_and_confidence_analysis() -> None:
+    distribution = error_distribution(np.array([0.5, 1, 2, 10, 100]))
+    assert distribution["median"] == pytest.approx(2)
+    assert distribution["fraction_above_10_px"] == pytest.approx(0.2)
+    subsets = confidence_subsets(np.array([1, 10, 2, 20]), np.array([0.9, 0.1, 0.8, 0.7]))
+    assert subsets[0]["median_epe_px"] == pytest.approx(6)
+    assert subsets[-1]["count"] == 1
+
+
+def test_threshold_selection_is_validation_only() -> None:
+    base = {
+        "correspondences": 20,
+        "inliers": 10,
+        "inlier_ratio": 0.5,
+        "reprojection_error_px": 1,
+        "spatial_coverage": 0.5,
+        "grid_coverage": 0.5,
+        "hull_coverage": 0.5,
+        "scale": 1,
+        "rotation_degrees": 1,
+        "shear": 0,
+        "anisotropy": 1,
+    }
+    rows = [
+        {"is_positive": True, "metrics": base},
+        {"is_positive": False, "metrics": dict(base, inliers=0)},
+    ]
+    result = select_validation_thresholds(
+        rows,
+        [AcceptanceConfig(min_correspondences=10, min_inliers=5)],
+        far_limit=0,
+        dataset_name="validation",
+    )
+    assert result.vrr == 1
+    with pytest.raises(ValueError, match="T0"):
+        select_validation_thresholds(rows, [AcceptanceConfig()], far_limit=0, dataset_name="T0_v1")
