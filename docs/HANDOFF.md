@@ -6,7 +6,7 @@
 
 ## Current commit
 
-`447edb4` (dataset, T0, and validation-gate milestone)
+`46ea2cc` (dataset, T0, gate, and regression milestone)
 
 ## Goal
 

@@ -4,7 +4,7 @@ Last updated: 2026-09-11 Asia/Kolkata
 
 Current version: pre-v0.1
 
-Current stable commit: `447edb4` (dataset, T0, and validation-gate milestone)
+Current stable commit: `46ea2cc` (dataset, T0, gate, and regression milestone)
 
 Integration branch: `dev`
 
