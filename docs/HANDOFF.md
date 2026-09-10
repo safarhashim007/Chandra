@@ -10,12 +10,12 @@ Build the verifiable Chandrappan foundation before any model training.
 
 ## Current state
 
-The workspace began empty. Repository workflow initialization and Phase 0 are in progress. Public RoMa v2 source is inspected from an ignored vendor checkout, but no checkpoint/model run has occurred.
+The workspace began empty. Phase 0 is complete and synthetic lunar geometry tests pass. Public RoMa v2 source is inspected from an ignored vendor checkout; no checkpoint/model run has occurred. Initial code implements lunar conventions, affine pixel/world roundtrips, a metadata contract, an SQLite/RTree catalog, pixel-space GT generation, RoMa coordinate conversions, and mask-safe loss primitives.
 
 ## Known blockers
 
-No NASA data or checkpoint is present. Python 3.14 compatibility with upstream RoMa v2 remains unverified.
+No NASA data or checkpoint is present. Use `/usr/bin/python` (Python 3.10) for project commands, not the incomplete `/usr/local/bin/python3` build.
 
 ## Next step
 
-Run `python3 scripts/doctor.py` and `make test`; then continue GEO-001 only after the persistent state files are current.
+Run `make doctor` and `make test`. Then supply or locate a small LROC map-projected product plus metadata sidecar and add a real-product metadata/roundtrip regression test.

@@ -4,6 +4,8 @@ Last updated: 2026-09-10 Asia/Kolkata
 
 Current version: pre-v0.1
 
+Current stable commit: `ac651be` (workflow baseline; lunar primitives pending checkpoint)
+
 Integration branch: `dev`
 
 Primary production matcher: RoMa v2 (not yet installed/benchmarked)
@@ -22,8 +24,8 @@ Phase 0 / repository workflow and environment health check. The public RoMa v2 s
 
 ## In progress
 
-- [ ] Repository-management infrastructure and Phase 0 tools.
-- [ ] Lunar CRS / metadata / catalog foundation.
+- [x] Repository-management infrastructure and Phase 0 tools.
+- [x] Moon-specific longitude conventions, affine pixel/world transforms, metadata contract, SQLite/RTree catalog implementation, and synthetic roundtrip tests.
 
 ## Blockers
 
@@ -36,4 +38,4 @@ Phase 0 / repository workflow and environment health check. The public RoMa v2 s
 
 ## Next exact task
 
-Finish Phase 0 scaffold and tests, document inspected RoMa internals, then implement and test lunar coordinate primitives before data ingestion.
+Provide a NASA LROC product/metadata manifest, then validate the metadata adapter against a real map-projected product before catalog ingestion.

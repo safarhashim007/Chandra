@@ -2,7 +2,7 @@
 
 ## REPO-001
 
-Status: IN_PROGRESS  
+Status: DONE  
 Priority: HIGH  
 Goal: Establish reproducible repository workflow, health checks, documentation, and CPU-safe tests.
 
@@ -10,10 +10,10 @@ Acceptance: state/handoff files, doctor/system checks, format/lint/test commands
 
 ## GEO-001
 
-Status: READY  
+Status: IN_PROGRESS  
 Priority: HIGH  
 Depends on: REPO-001  
-Goal: Implement Moon-specific CRS, pixel/world transforms, footprint metadata, catalog, and roundtrip tests.
+Goal: Validate the implemented Moon-specific CRS, pixel/world transforms, footprint metadata, and catalog against real LROC map-projected products.
 
 ## MATCH-001
 
