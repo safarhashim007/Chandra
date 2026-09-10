@@ -4,7 +4,7 @@ Last updated: 2026-09-11 Asia/Kolkata
 
 Current version: pre-v0.1
 
-Current stable commit: `6d71896` (verified ingestion and RoMa training-readiness changes)
+Current stable commit: `447edb4` (dataset, T0, and validation-gate milestone)
 
 Integration branch: `dev`
 
@@ -14,7 +14,7 @@ Experimental matcher: LunarRoMa (not started)
 
 ## Current phase
 
-Phase 1 / GEO-001 is complete for the available real products. MATCH-001 is in progress: the public RoMa v2 source checkout is at `vendor/romav2`, commit `95c9968145c8906b7b59383258e9f73b02853d89`, and the ignored official v2.0.1 checkpoint is available locally. Supported local interpreter is `/usr/bin/python` (Python 3.10).
+Phase 2 dataset/evaluation foundation is complete for the available real products. MATCH-001 and TRAIN-001 remain blocked for production claims: the public RoMa v2 source checkout is at `vendor/romav2`, commit `95c9968145c8906b7b59383258e9f73b02853d89`, and the ignored official v2.0.1 checkpoint is available locally. Supported local interpreter is `/usr/bin/python` (Python 3.10).
 
 ## Completed
 
@@ -33,18 +33,24 @@ Phase 1 / GEO-001 is complete for the available real products. MATCH-001 is in p
 - [x] Official RoMa v2.0.1 checkpoint loaded; turbo and base CUDA inference smoke tests returned finite normalized warps and confidence tensors.
 - [x] Separate gradient-enabled training forward implemented; a CUDA gradient smoke test reached the refiner parameters while frozen descriptor/matcher parameters stayed without gradients.
 - [x] Pixel-centre GT and official RoMa coordinate semantics are covered by regression tests.
+- [x] Canonical Parquet image manifest, deterministic geographic splits, leakage checks, and footprint-overlap pair generation implemented.
+- [x] Project-defined one-pair T0 benchmark frozen and SHA256 checked; untouched RoMa v2 baseline recorded on CUDA.
+- [x] VRR/FAR acceptance definitions and a hard validation quality gate implemented; T0 is rejected from training by path or checksum.
+- [x] Known loss/EPE/PCK regression reproduced with beta=1.0 and an objective-scale ablation recorded with beta=0.01.
 
 ## Blockers
 
 - A proper LunarMatch-NASA training manifest, geographic train/validation/test split, and held-out benchmark are not available.
-- The one-batch refiner-only diagnostic on the available NAC pair reduced robust training loss but worsened PCK/EPE; the mandatory overfit gate therefore remains failed.
+- The project-defined smoke split has 1 train image, 0 validation images, and 2 test images; it is not sufficient for threshold selection or full training.
+- The one-batch refiner-only diagnostic on the available NAC pair reduced robust training loss but worsened PCK@1/median EPE; the mandatory quality gate therefore remains failed.
+- The T0 smoke baseline has no geometric inliers, VRR, FAR, or coverage because no geometric verifier/negative set exists yet.
 - `/usr/local/bin/python3` is Python 3.14 and lacks `_sqlite3`; project commands must use `/usr/bin/python` (Python 3.10).
 - The vendored RoMa checkout has an existing local constructor/checkpoint-path modification; it is ignored and must not be overwritten or committed without explicit ownership review.
 
 ## Last commands
 
-`make format`; `make lint`; `make test`; `make test-geo`; `make test-training` — all passed using `/usr/bin/python` 3.10. Current suite: 13 tests. Official CUDA smoke inference and the gradient smoke both passed; the one-batch overfit gate did not.
+`make format`; `make lint`; `make test`; `make test-geo`; `make test-matching`; `make test-training` — all passed using `/usr/bin/python` 3.10. Current suite: 23 tests. Dataset build, T0 evaluation, and regression reproduction ran on CUDA; full fine-tuning was not launched.
 
 ## Next exact task
 
-Acquire or provide the LunarMatch-NASA products and manifest with geographic splits and photometric metadata; then establish an immutable T0 benchmark, make the one-batch test pass on a valid training sample, and only then start T1 refiner fine-tuning.
+Acquire or provide the LunarMatch-NASA products and official geographic split/metadata; add a real validation region and geometric verifier/negative set, then make the validation quality gate pass before any T1 fine-tuning.

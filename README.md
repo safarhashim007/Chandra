@@ -14,6 +14,8 @@ make test
 
 For the current phase, see `PROJECT_STATE.md`, `TASKS.md`, and `docs/HANDOFF.md`. Detailed operational instructions are in `docs/RUNBOOK.md`.
 
+Dataset/evaluation smoke commands and the immutable project-defined T0 limitations are documented in `docs/DATASET_EVALUATION.md`.
+
 ## Safety and scientific claims
 
 The software returns `VERIFIED`, `UNCERTAIN`, or `REJECTED`; it must not turn a failed stage into a result. A verified registration requires metadata/geometry checks, bidirectional consistency, spatial coverage, and configured quality gates—not merely a low fit error.

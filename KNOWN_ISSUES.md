@@ -47,3 +47,13 @@ Affects: all LunarRoMa fine-tuning stages.
 Evidence: on the available 320x320 NAC crop, refiner-only CUDA optimization reduced robust warp loss from `0.04048` to `0.00921`, but median EPE increased from `1.58 px` to `11.61 px` and PCK@1 fell from `0.470` to `0.0002` after 50 steps.
 
 Required action: diagnose the training objective/data sample with a valid LunarMatch-NASA batch, then rerun the one-batch gate. Do not launch full training while this issue remains.
+
+## KI-006 — Project-defined smoke T0 lacks validation and geometric verification
+
+Severity: HIGH
+
+Affects: threshold selection, VRR/FAR, and promotion decisions.
+
+Current status: `benchmarks/T0_v1.parquet` contains one real NAC pair. The current smoke split has no validation images, and the evaluator intentionally reports null geometric inliers, coverage, VRR, and FAR until the geometric verifier and negative set are implemented.
+
+Required action: provide sufficient geographically isolated LROC/LunarMatch-NASA regions and implement the verifier before using the gate for model promotion.

@@ -1,0 +1,32 @@
+{
+  "steps": 50,
+  "beta": 0.01,
+  "device": "cuda",
+  "before_loss": 0.15022647380828857,
+  "after_loss": 0.0907473936676979,
+  "before": {
+    "valid_correspondences": 102080,
+    "median_epe_px": 1.5817598104476929,
+    "mean_epe_px": 38.015480041503906,
+    "pck_1": 0.46968063712120056,
+    "pck_3": 0.5580720901489258,
+    "pck_5": 0.5849530100822449,
+    "pck_10": 0.6043005585670471
+  },
+  "after": {
+    "valid_correspondences": 102080,
+    "median_epe_px": 1.6094831228256226,
+    "mean_epe_px": 23.595703125,
+    "pck_1": 0.4610501527786255,
+    "pck_3": 0.559384822845459,
+    "pck_5": 0.5917613506317139,
+    "pck_10": 0.6323276162147522
+  },
+  "observations": [
+    "pixel-space GT crop center is approximately [160.5, 159.5]",
+    "pixel/normalized round-trip tests pass",
+    "the objective is Smooth L1 in normalized coordinates; beta is recorded above",
+    "official ConvRefiner detaches the previous warp between stages",
+    "this experiment narrows the failure to objective/optimization behavior or pair suitability; it does not prove a coordinate-direction bug"
+  ]
+}

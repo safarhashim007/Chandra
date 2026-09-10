@@ -32,3 +32,30 @@ Status: BLOCKED
 Priority: HIGH
 Depends on: MATCH-001, LunarMatch-NASA data, T0 benchmark, one-batch overfit
 Goal: Add a validated, source-compatible LunarRoMa training path without modifying official inference.
+
+## DATA-001
+
+Status: DONE
+Priority: HIGH
+Depends on: GEO-001
+Goal: Build validated canonical manifests, geographic splits, leakage checks, and geographic pair generation.
+
+Evidence: Parquet manifest/split/pair smoke artifacts are generated from one WAC and two NAC products; 23 tests pass.
+
+## BENCH-001
+
+Status: IN_PROGRESS
+Priority: HIGH
+Depends on: DATA-001, MATCH-001
+Goal: Freeze a project-defined T0 and record the untouched official RoMa v2 baseline.
+
+Evidence: `benchmarks/T0_v1.parquet` is checksummed and evaluated on CUDA. Baseline metrics are stored under `results/T0/`: median EPE 1.5818 px, mean EPE 38.0155 px, PCK@1 0.4697, PCK@3 0.5581, PCK@5 0.5850, PCK@10 0.6043. This is a one-pair smoke benchmark, not the official LunarMatch-NASA benchmark; geometric/VRR/FAR metrics remain unavailable.
+
+## GATE-001
+
+Status: BLOCKED
+Priority: HIGH
+Depends on: BENCH-001, TRAIN-001
+Goal: Prevent full training unless short validation training genuinely improves correspondence quality.
+
+Evidence: hard gate and preflight are implemented and tested. The available NAC diagnostic fails the gate: beta=1.0 changes median EPE 1.5818→11.6061 px and PCK@1 0.4697→0.0002; beta=0.01 avoids collapse but still changes median EPE 1.5818→1.6095 px and PCK@1 0.4697→0.4611. Full fine-tuning remains blocked.
