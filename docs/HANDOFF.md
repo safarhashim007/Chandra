@@ -6,7 +6,7 @@
 
 ## Current commit
 
-`3c757da` (geometric verification, real validation, and diagnostics)
+`0e581ea` (geometric verification, real validation, and complete baseline statistics)
 
 ## Goal
 

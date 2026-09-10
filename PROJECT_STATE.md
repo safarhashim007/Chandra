@@ -4,7 +4,7 @@ Last updated: 2026-09-11 Asia/Kolkata
 
 Current version: pre-v0.1
 
-Current stable commit: `3c757da` (geometric verification, real validation, and diagnostics)
+Current stable commit: `0e581ea` (complete geometric baseline statistics)
 
 Integration branch: `dev`
 
