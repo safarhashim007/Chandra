@@ -4,6 +4,10 @@
 
 `dev`
 
+## Current commit
+
+`feb7b8e`
+
 ## Goal
 
 Build the verifiable Chandrappan foundation before any model training.

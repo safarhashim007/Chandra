@@ -4,7 +4,7 @@ Last updated: 2026-09-10 Asia/Kolkata
 
 Current version: pre-v0.1
 
-Current stable commit: `ac651be` (workflow baseline; lunar primitives pending checkpoint)
+Current stable commit: `feb7b8e` (workflow and synthetic lunar primitives)
 
 Integration branch: `dev`
 
@@ -34,7 +34,7 @@ Phase 0 / repository workflow and environment health check. The public RoMa v2 s
 
 ## Last commands
 
-`python3 scripts/system_check.py`; `python3 scripts/doctor.py`; `python3 scripts/inspect_romav2.py`; `PYTHONPATH=. pytest -q`.
+`make format`; `make lint`; `make test` — all passed (8 tests) using `/usr/bin/python` 3.10.
 
 ## Next exact task
 
