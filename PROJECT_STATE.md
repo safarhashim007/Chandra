@@ -4,7 +4,7 @@ Last updated: 2026-09-10 Asia/Kolkata
 
 Current version: pre-v0.1
 
-Current stable commit: `b9fe06a` (verified lunar foundation and persistent state)
+Current stable commit: `6358c8d` (verified LROC fixture provenance and persistent state)
 
 Integration branch: `dev`
 

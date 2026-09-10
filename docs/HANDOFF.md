@@ -6,7 +6,7 @@
 
 ## Current commit
 
-`b9fe06a`
+`6358c8d` (last substantive fixture/state commit)
 
 ## Goal
 
