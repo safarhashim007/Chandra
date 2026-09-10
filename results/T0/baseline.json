@@ -1,0 +1,34 @@
+{
+  "benchmark": "T0_v1",
+  "benchmark_sha256": "ec720fc3cf0b977a30548b71f1c8ae169917a58bbc56c55891100d5b79f43622",
+  "benchmark_kind": "project-defined smoke benchmark; not official LunarMatch-NASA",
+  "checkpoint_sha256": "1557dec0d21b62366465f7ff4d5fdf228cc695d0582e196ad2b80e05230828b7",
+  "device": "cuda",
+  "setting": "turbo",
+  "pair_count": 1,
+  "successfully_evaluated_pairs": 1,
+  "failed_pairs": 0,
+  "pairs": [
+    {
+      "pair_id": "NAC_PHO_E018N3346_M107042466L__NAC_PHO_E018N3346_M107042466R",
+      "metrics": {
+        "valid_correspondences": 102080,
+        "median_epe_px": 1.5817598104476929,
+        "mean_epe_px": 38.015480041503906,
+        "pck_1": 0.46968063712120056,
+        "pck_3": 0.5580720901489258,
+        "pck_5": 0.5849530100822449,
+        "pck_10": 0.6043005585670471
+      },
+      "valid_registration": null,
+      "geometric_metrics": null,
+      "note": "VRR/FAR and geometric inliers require the not-yet-implemented verifier and negative set."
+    }
+  ],
+  "vrr": null,
+  "far": null,
+  "geometric_inliers": null,
+  "inlier_ratio": null,
+  "geometric_reprojection_error_px": null,
+  "spatial_coverage": null
+}

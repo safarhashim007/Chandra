@@ -1,0 +1,6 @@
+# Thresholds are validation-only. T0 is never used to tune these values.
+max_median_epe_increase_px: 0.0
+max_pck1_decrease: 0.0
+max_vrr_decrease: 0.0
+max_far_increase: 0.0
+min_pck3_or_pck5_increase: 0.0
