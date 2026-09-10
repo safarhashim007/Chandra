@@ -4,7 +4,7 @@ Last updated: 2026-09-11 Asia/Kolkata
 
 Current version: pre-v0.1
 
-Current stable commit: `3d6928c` (final dataset, T0, gate, and regression handoff)
+Current stable commit: pending final milestone commit (geometric verification, real validation, and diagnostics)
 
 Integration branch: `dev`
 
@@ -37,20 +37,22 @@ Phase 2 dataset/evaluation foundation is complete for the available real product
 - [x] Project-defined one-pair T0 benchmark frozen and SHA256 checked; untouched RoMa v2 baseline recorded on CUDA.
 - [x] VRR/FAR acceptance definitions and a hard validation quality gate implemented; T0 is rejected from training by path or checksum.
 - [x] Known loss/EPE/PCK regression reproduced with beta=1.0 and an objective-scale ablation recorded with beta=0.01.
+- [x] Expanded genuine LROC NAC corpus built: 20 images across 7 geographic regions, with leakage-safe train/validation/test manifests and positive/negative pair manifests.
+- [x] Untouched RoMa v2 validation baseline recorded: 2 positive pairs, 4 negatives, VRR 1.0, FAR 0.0 under the selected project configuration; confidence and outlier distributions recorded.
 
 ## Blockers
 
 - A proper LunarMatch-NASA training manifest, geographic train/validation/test split, and held-out benchmark are not available.
-- The project-defined smoke split has 1 train image, 0 validation images, and 2 test images; it is not sufficient for threshold selection or full training.
+- The immutable project-defined T0 remains a one-pair smoke benchmark; the expanded LROC corpus is a project validation corpus, not official LunarMatch-NASA.
 - The one-batch refiner-only diagnostic on the available NAC pair reduced robust training loss but worsened PCK@1/median EPE; the mandatory quality gate therefore remains failed.
-- The T0 smoke baseline has no geometric inliers, VRR, FAR, or coverage because no geometric verifier/negative set exists yet.
+- Validation geometry is available, but the current T0 result remains positive-only and is not used for threshold selection or FAR.
 - `/usr/local/bin/python3` is Python 3.14 and lacks `_sqlite3`; project commands must use `/usr/bin/python` (Python 3.10).
 - The vendored RoMa checkout has an existing local constructor/checkpoint-path modification; it is ignored and must not be overwritten or committed without explicit ownership review.
 
 ## Last commands
 
-`make format`; `make lint`; `make test`; `make test-geo`; `make test-matching`; `make test-training` — all passed using `/usr/bin/python` 3.10. Current suite: 23 tests. Dataset build, T0 evaluation, and regression reproduction ran on CUDA; full fine-tuning was not launched.
+`make format`; `make lint`; `make test`; `make test-geo`; `make test-matching`; `make test-training` — all passed using `/usr/bin/python` 3.10. Current suite: 33 tests. Expanded corpus build, validation evaluation, threshold selection, diagnostics, T0 evaluation, and regression reproduction ran on CUDA; full fine-tuning was not launched.
 
 ## Next exact task
 
-Acquire or provide the LunarMatch-NASA products and official geographic split/metadata; add a real validation region and geometric verifier/negative set, then make the validation quality gate pass before any T1 fine-tuning.
+Acquire or provide the LunarMatch-NASA products and official geographic split/metadata; improve the training objective until the mandatory validation quality gate passes before any T1 fine-tuning.

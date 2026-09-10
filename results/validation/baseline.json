@@ -1,0 +1,351 @@
+{
+  "dataset": "expanded_validation",
+  "manifest": "data/expanded/images.parquet",
+  "checkpoint_sha256": "1557dec0d21b62366465f7ff4d5fdf228cc695d0582e196ad2b80e05230828b7",
+  "device": "cuda",
+  "setting": "turbo",
+  "acceptance_config": {
+    "min_correspondences": 100,
+    "min_inliers": 30,
+    "min_inlier_ratio": 0.25,
+    "max_reprojection_error_px": 3.0,
+    "min_spatial_coverage": 0.1,
+    "min_scale": 0.8,
+    "max_scale": 1.25,
+    "max_rotation_degrees": 15.0,
+    "min_grid_coverage": 0.1,
+    "min_hull_coverage": 0.01,
+    "max_shear": 0.25,
+    "max_anisotropy": 1.25
+  },
+  "geometry_config": {
+    "ransac_reprojection_threshold_px": 3.0,
+    "confidence": 0.999,
+    "max_iterations": 2000,
+    "min_matches": 12,
+    "min_inliers": 8,
+    "min_inlier_ratio": 0.25,
+    "max_median_reprojection_error_px": 3.0,
+    "max_mean_reprojection_error_px": 5.0,
+    "min_grid_coverage": 0.1,
+    "min_hull_coverage": 0.01,
+    "min_scale": 0.8,
+    "max_scale": 1.25,
+    "max_rotation_degrees": 15.0,
+    "max_shear": 0.25,
+    "max_anisotropy": 1.25,
+    "min_determinant": 0.0001,
+    "grid_size": [
+      8,
+      8
+    ],
+    "model_order": [
+      "similarity",
+      "affine",
+      "homography"
+    ]
+  },
+  "pair_count": 6,
+  "registration": {
+    "positive_count": 2,
+    "negative_count": 4,
+    "vrr": 1.0,
+    "far": 0.0
+  },
+  "pairs": [
+    {
+      "pair_id": "NAC_PHO_E010N0230_M119699983L__NAC_PHO_E010N0230_M119699983R",
+      "image_a": "NAC_PHO_E010N0230_M119699983L",
+      "image_b": "NAC_PHO_E010N0230_M119699983R",
+      "is_positive": true,
+      "negative_type": null,
+      "accepted": true,
+      "matcher_failed": false,
+      "geometric_failed": false,
+      "rejection_reason": null,
+      "metrics": {
+        "correspondences": 4000,
+        "inliers": 4000,
+        "inlier_ratio": 1.0,
+        "reprojection_error_px": 0.09135916755640613,
+        "spatial_coverage": 0.21875,
+        "grid_coverage": 0.21875,
+        "hull_coverage": 0.118974609375,
+        "scale": 1.0000077641159424,
+        "rotation_degrees": 0.023149521708441693,
+        "shear": 0.0,
+        "anisotropy": 1.0000000000000002
+      },
+      "model_type": "similarity",
+      "confidence_analysis": [
+        {
+          "fraction": 1.0,
+          "count": 102400,
+          "median_epe_px": 11.308720588684082,
+          "mean_epe_px": 86.67141573256453,
+          "pck_1": 0.348193359375,
+          "pck_3": 0.435166015625,
+          "pck_5": 0.463310546875
+        },
+        {
+          "fraction": 0.75,
+          "count": 76800,
+          "median_epe_px": 1.3625115752220154,
+          "mean_epe_px": 52.469041235336576,
+          "pck_1": 0.46421875,
+          "pck_3": 0.58015625,
+          "pck_5": 0.6176432291666667
+        },
+        {
+          "fraction": 0.5,
+          "count": 51200,
+          "median_epe_px": 0.797474205493927,
+          "mean_epe_px": 4.055372338300585,
+          "pck_1": 0.6959765625,
+          "pck_3": 0.86701171875,
+          "pck_5": 0.9196484375
+        },
+        {
+          "fraction": 0.25,
+          "count": 25600,
+          "median_epe_px": 0.7366847395896912,
+          "mean_epe_px": 0.7306135743267077,
+          "pck_1": 1.0,
+          "pck_3": 1.0,
+          "pck_5": 1.0
+        },
+        {
+          "fraction": 0.1,
+          "count": 10240,
+          "median_epe_px": 0.736545741558075,
+          "mean_epe_px": 0.7262598430002981,
+          "pck_1": 1.0,
+          "pck_3": 1.0,
+          "pck_5": 1.0
+        }
+      ],
+      "correspondence_metrics": {
+        "valid_correspondences": 102400,
+        "median_epe_px": 11.308331489562988,
+        "mean_epe_px": 86.67140197753906,
+        "pck_1": 0.34819334745407104,
+        "pck_3": 0.43516600131988525,
+        "pck_5": 0.4633105397224426,
+        "pck_10": 0.4957323968410492
+      },
+      "error_distribution": {
+        "count": 102400,
+        "median": 11.308720588684082,
+        "mean": 86.67141573256453,
+        "std": 102.44171454561805,
+        "p90": 247.9930191040039,
+        "p95": 275.3263305664062,
+        "p99": 311.47458282470706,
+        "max": 353.81414794921875,
+        "fraction_above_5_px": 0.536689453125,
+        "fraction_above_10_px": 0.504267578125,
+        "fraction_above_25_px": 0.47375,
+        "fraction_above_50_px": 0.452490234375
+      }
+    },
+    {
+      "pair_id": "NAC_PHO_E074N3010_M1127569280L__NAC_PHO_E074N3010_M1127569280R",
+      "image_a": "NAC_PHO_E074N3010_M1127569280L",
+      "image_b": "NAC_PHO_E074N3010_M1127569280R",
+      "is_positive": true,
+      "negative_type": null,
+      "accepted": true,
+      "matcher_failed": false,
+      "geometric_failed": false,
+      "rejection_reason": null,
+      "metrics": {
+        "correspondences": 4000,
+        "inliers": 4000,
+        "inlier_ratio": 1.0,
+        "reprojection_error_px": 0.29020822148944353,
+        "spatial_coverage": 0.265625,
+        "grid_coverage": 0.265625,
+        "hull_coverage": 0.2787158203125,
+        "scale": 0.9963100298456723,
+        "rotation_degrees": 0.2898266553132092,
+        "shear": 0.0,
+        "anisotropy": 1.0
+      },
+      "model_type": "similarity",
+      "confidence_analysis": [
+        {
+          "fraction": 1.0,
+          "count": 102400,
+          "median_epe_px": 3.746347427368164,
+          "mean_epe_px": 30.22379538303052,
+          "pck_1": 0.001123046875,
+          "pck_3": 0.24580078125,
+          "pck_5": 0.651005859375
+        },
+        {
+          "fraction": 0.75,
+          "count": 76800,
+          "median_epe_px": 3.3510414361953735,
+          "mean_epe_px": 6.85883176339538,
+          "pck_1": 0.0014973958333333334,
+          "pck_3": 0.327734375,
+          "pck_5": 0.8677083333333333
+        },
+        {
+          "fraction": 0.5,
+          "count": 51200,
+          "median_epe_px": 3.376893401145935,
+          "mean_epe_px": 3.4344444399653002,
+          "pck_1": 0.0,
+          "pck_3": 0.29580078125,
+          "pck_5": 0.983984375
+        },
+        {
+          "fraction": 0.25,
+          "count": 25600,
+          "median_epe_px": 3.2561392784118652,
+          "mean_epe_px": 3.37093198354356,
+          "pck_1": 0.0,
+          "pck_3": 0.3630859375,
+          "pck_5": 0.9859375
+        },
+        {
+          "fraction": 0.1,
+          "count": 10240,
+          "median_epe_px": 3.05346941947937,
+          "mean_epe_px": 3.306554883508943,
+          "pck_1": 0.0,
+          "pck_3": 0.48740234375,
+          "pck_5": 0.99384765625
+        }
+      ],
+      "correspondence_metrics": {
+        "valid_correspondences": 102400,
+        "median_epe_px": 3.7463107109069824,
+        "mean_epe_px": 30.22379493713379,
+        "pck_1": 0.0011230468517169356,
+        "pck_3": 0.24580077826976776,
+        "pck_5": 0.6510058641433716,
+        "pck_10": 0.6741015315055847
+      },
+      "error_distribution": {
+        "count": 102400,
+        "median": 3.746347427368164,
+        "mean": 30.22379538303052,
+        "std": 45.99907305290268,
+        "p90": 112.71227569580078,
+        "p95": 126.93864936828611,
+        "p99": 168.52326538085924,
+        "max": 225.38453674316406,
+        "fraction_above_5_px": 0.348994140625,
+        "fraction_above_10_px": 0.3258984375,
+        "fraction_above_25_px": 0.294931640625,
+        "fraction_above_50_px": 0.2369921875
+      }
+    },
+    {
+      "pair_id": "NAC_PHO_E010N0230_M119699983L__NAC_PHO_E074N3010_M1127569280L",
+      "image_a": "NAC_PHO_E010N0230_M119699983L",
+      "image_b": "NAC_PHO_E074N3010_M1127569280L",
+      "is_positive": false,
+      "negative_type": "easy_geographic",
+      "accepted": false,
+      "matcher_failed": false,
+      "geometric_failed": false,
+      "rejection_reason": "low_inlier_ratio;implausible_scale;implausible_rotation;excessive_shear;excessive_anisotropy",
+      "metrics": {
+        "correspondences": 4000,
+        "inliers": 955,
+        "inlier_ratio": 0.23875,
+        "reprojection_error_px": 1.6115512170266317,
+        "spatial_coverage": 0.171875,
+        "grid_coverage": 0.171875,
+        "hull_coverage": 0.612724609375,
+        "scale": 0.05299685121133909,
+        "rotation_degrees": 131.69764392539764,
+        "shear": 0.4770695624869018,
+        "anisotropy": 4.789614789949042
+      },
+      "model_type": "homography",
+      "confidence_analysis": null
+    },
+    {
+      "pair_id": "NAC_PHO_E010N0230_M119699983L__NAC_PHO_E074N3010_M1127569280R",
+      "image_a": "NAC_PHO_E010N0230_M119699983L",
+      "image_b": "NAC_PHO_E074N3010_M1127569280R",
+      "is_positive": false,
+      "negative_type": "easy_geographic",
+      "accepted": false,
+      "matcher_failed": false,
+      "geometric_failed": false,
+      "rejection_reason": "low_inlier_ratio;implausible_scale;implausible_rotation;excessive_shear;excessive_anisotropy",
+      "metrics": {
+        "correspondences": 4000,
+        "inliers": 955,
+        "inlier_ratio": 0.23875,
+        "reprojection_error_px": 1.6115512170266317,
+        "spatial_coverage": 0.171875,
+        "grid_coverage": 0.171875,
+        "hull_coverage": 0.612724609375,
+        "scale": 0.05299685121133909,
+        "rotation_degrees": 131.69764392539764,
+        "shear": 0.4770695624869018,
+        "anisotropy": 4.789614789949042
+      },
+      "model_type": "homography",
+      "confidence_analysis": null
+    },
+    {
+      "pair_id": "NAC_PHO_E010N0230_M119699983R__NAC_PHO_E074N3010_M1127569280L",
+      "image_a": "NAC_PHO_E010N0230_M119699983R",
+      "image_b": "NAC_PHO_E074N3010_M1127569280L",
+      "is_positive": false,
+      "negative_type": "easy_geographic",
+      "accepted": false,
+      "matcher_failed": false,
+      "geometric_failed": false,
+      "rejection_reason": "implausible_scale;implausible_rotation;excessive_anisotropy",
+      "metrics": {
+        "correspondences": 4000,
+        "inliers": 2553,
+        "inlier_ratio": 0.63825,
+        "reprojection_error_px": 1.1063815655065998,
+        "spatial_coverage": 0.109375,
+        "grid_coverage": 0.109375,
+        "hull_coverage": 0.243564453125,
+        "scale": 0.028916367052466592,
+        "rotation_degrees": -173.22844757829995,
+        "shear": 0.03995330065410616,
+        "anisotropy": 14.965117974673966
+      },
+      "model_type": "homography",
+      "confidence_analysis": null
+    },
+    {
+      "pair_id": "NAC_PHO_E010N0230_M119699983R__NAC_PHO_E074N3010_M1127569280R",
+      "image_a": "NAC_PHO_E010N0230_M119699983R",
+      "image_b": "NAC_PHO_E074N3010_M1127569280R",
+      "is_positive": false,
+      "negative_type": "easy_geographic",
+      "accepted": false,
+      "matcher_failed": false,
+      "geometric_failed": false,
+      "rejection_reason": "implausible_scale;implausible_rotation;excessive_anisotropy",
+      "metrics": {
+        "correspondences": 4000,
+        "inliers": 2553,
+        "inlier_ratio": 0.63825,
+        "reprojection_error_px": 1.1063815655065998,
+        "spatial_coverage": 0.109375,
+        "grid_coverage": 0.109375,
+        "hull_coverage": 0.243564453125,
+        "scale": 0.028916367052466592,
+        "rotation_degrees": -173.22844757829995,
+        "shear": 0.03995330065410616,
+        "anisotropy": 14.965117974673966
+      },
+      "model_type": "homography",
+      "confidence_analysis": null
+    }
+  ]
+}

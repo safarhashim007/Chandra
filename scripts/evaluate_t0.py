@@ -20,6 +20,7 @@ from chandrappan.data.gt_warp import dense_pixel_warp
 from chandrappan.data.lroc_ingest import read_lroc_metadata
 from chandrappan.data.manifest import read_manifest
 from chandrappan.data.pairs import read_pairs
+from chandrappan.evaluation.analysis import confidence_subsets, error_distribution
 from chandrappan.evaluation.metrics import correspondence_metrics
 from chandrappan.evaluation.t0 import sha256_file, verify_checksum
 from chandrappan.geo.footprint import footprint_corners_world
@@ -95,21 +96,25 @@ def main() -> int:
         image_a = _read_crop(Path(first.image_path), origin_a, args.crop_size).to(device)
         image_b = _read_crop(Path(second.image_path), origin_b, args.crop_size).to(device)
         with torch.inference_mode():
-            prediction = model.match(image_a, image_b)["warp_AB"]
+            prediction = model.match(image_a, image_b)
         gt_np, valid_np = dense_pixel_warp(crop_a, crop_b)
         gt = torch.from_numpy(gt_np).to(device)[None]
         valid = torch.from_numpy(valid_np).to(device)[None]
-        predicted = roma_warp_to_pixel(prediction, (args.crop_size, args.crop_size))
+        predicted = roma_warp_to_pixel(prediction["warp_AB"], (args.crop_size, args.crop_size))
         metrics = correspondence_metrics(predicted, gt, valid, (1, 3, 5, 10))
+        errors = torch.linalg.vector_norm(predicted - gt, dim=-1)[valid.bool()].cpu().numpy()
+        confidence = prediction["overlap_AB"][0].reshape(-1)[valid.reshape(-1)].cpu().numpy()
         pair_results.append(
             {
                 "pair_id": pair.pair_id,
                 "metrics": metrics,
                 "valid_registration": None,
                 "geometric_metrics": None,
+                "error_distribution": error_distribution(errors),
+                "confidence_analysis": confidence_subsets(errors, confidence),
                 "note": (
-                    "VRR/FAR and geometric inliers require the not-yet-implemented "
-                    "verifier and negative set."
+                    "T0 remains positive-only; acceptance thresholds are selected on "
+                    "validation, never T0."
                 ),
             }
         )
@@ -150,8 +155,10 @@ def main() -> int:
             "This is a project-defined smoke benchmark over the currently available real "
             "LROC pair, not the official LunarMatch-NASA benchmark."
         ),
-        "Geometric inliers, VRR, FAR, and coverage remain unavailable until the verifier "
-        "and negative set exist.",
+        (
+            "T0 is reported without threshold tuning; registration thresholds are selected "
+            "on the separate validation corpus."
+        ),
         "",
     ]
     for row in pair_results:

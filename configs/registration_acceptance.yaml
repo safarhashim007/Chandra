@@ -1,0 +1,21 @@
+dataset: expanded_validation
+selected_at_utc: '2026-09-10T19:42:15.962501+00:00'
+far_limit: 0.05
+search_candidate_count: 36
+achieved_vrr: 1.0
+achieved_far: 0.0
+positive_count: 2
+negative_count: 4
+acceptance:
+  min_correspondences: 100
+  min_inliers: 30
+  min_inlier_ratio: 0.25
+  max_reprojection_error_px: 3.0
+  min_spatial_coverage: 0.1
+  min_scale: 0.8
+  max_scale: 1.25
+  max_rotation_degrees: 15.0
+  min_grid_coverage: 0.1
+  min_hull_coverage: 0.01
+  max_shear: 0.25
+  max_anisotropy: 1.25

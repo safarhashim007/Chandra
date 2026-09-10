@@ -22,7 +22,68 @@
       },
       "valid_registration": null,
       "geometric_metrics": null,
-      "note": "VRR/FAR and geometric inliers require the not-yet-implemented verifier and negative set."
+      "error_distribution": {
+        "count": 102080,
+        "median": 1.5817959308624268,
+        "mean": 38.01547941780254,
+        "std": 51.96722137469766,
+        "p90": 124.14486770629883,
+        "p95": 134.55043411254883,
+        "p99": 154.16182907104485,
+        "max": 215.5868377685547,
+        "fraction_above_5_px": 0.4150470219435737,
+        "fraction_above_10_px": 0.3956994514106583,
+        "fraction_above_25_px": 0.3662323667711599,
+        "fraction_above_50_px": 0.330221394984326
+      },
+      "confidence_analysis": [
+        {
+          "fraction": 1.0,
+          "count": 102080,
+          "median_epe_px": 1.5817959308624268,
+          "mean_epe_px": 38.01547941780253,
+          "pck_1": 0.46968064263322884,
+          "pck_3": 0.5580721003134796,
+          "pck_5": 0.5849529780564263
+        },
+        {
+          "fraction": 0.75,
+          "count": 76560,
+          "median_epe_px": 0.3619096279144287,
+          "mean_epe_px": 16.485580662373774,
+          "pck_1": 0.6262408568443051,
+          "pck_3": 0.7423850574712644,
+          "pck_5": 0.7747779519331244
+        },
+        {
+          "fraction": 0.5,
+          "count": 51040,
+          "median_epe_px": 0.25594133138656616,
+          "mean_epe_px": 0.39513626735153085,
+          "pck_1": 0.9180054858934169,
+          "pck_3": 0.995121473354232,
+          "pck_5": 0.999960815047022
+        },
+        {
+          "fraction": 0.25,
+          "count": 25520,
+          "median_epe_px": 0.23016002029180527,
+          "mean_epe_px": 0.23776066841548818,
+          "pck_1": 1.0,
+          "pck_3": 1.0,
+          "pck_5": 1.0
+        },
+        {
+          "fraction": 0.1,
+          "count": 10208,
+          "median_epe_px": 0.22827953845262527,
+          "mean_epe_px": 0.23702513100962566,
+          "pck_1": 1.0,
+          "pck_3": 1.0,
+          "pck_5": 1.0
+        }
+      ],
+      "note": "T0 remains positive-only; acceptance thresholds are selected on validation, never T0."
     }
   ],
   "vrr": null,

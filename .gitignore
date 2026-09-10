@@ -13,6 +13,7 @@ data/indexes/
 artifacts/
 checkpoints/
 logs/
+results/validation/diagnostics/
 vendor/
 *.pt
 *.pth

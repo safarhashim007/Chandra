@@ -5,7 +5,7 @@ Checkpoint SHA256: `1557dec0d21b62366465f7ff4d5fdf228cc695d0582e196ad2b80e052308
 Pairs: 1; successfully evaluated: 1
 
 This is a project-defined smoke benchmark over the currently available real LROC pair, not the official LunarMatch-NASA benchmark.
-Geometric inliers, VRR, FAR, and coverage remain unavailable until the verifier and negative set exist.
+T0 is reported without threshold tuning; registration thresholds are selected on the separate validation corpus.
 
 ## NAC_PHO_E018N3346_M107042466L__NAC_PHO_E018N3346_M107042466R
 - valid_correspondences: 102080

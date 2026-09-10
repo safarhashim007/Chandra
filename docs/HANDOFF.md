@@ -6,7 +6,7 @@
 
 ## Current commit
 
-`3d6928c` (final dataset, T0, gate, and regression handoff)
+pending final milestone commit
 
 ## Goal
 
@@ -18,8 +18,8 @@ Phase 0 and GEO-001 are complete for the available real products. The canonical 
 
 ## Known blockers
 
-The smoke dataset has 1 train image, 0 validation images, and 2 test images, so it cannot support training or threshold selection. The T0 smoke baseline has one pair and no geometric/VRR/FAR metrics. The one-batch refiner-only diagnostic lowers robust loss but fails the quality gate; TRAIN-001 remains blocked. Use `/usr/bin/python` (Python 3.10), not the incomplete `/usr/local/bin/python3` build. The ignored vendored RoMa checkout contains an existing local checkpoint-path constructor edit; preserve it unless explicitly reviewed.
+The immutable T0 smoke baseline has one pair and remains separate from threshold selection. A genuine expanded LROC corpus now has 20 images across 7 regions, with 2 validation positives and 4 validation negatives. The untouched RoMa baseline is VRR 1.0 and FAR 0.0 under validation-selected thresholds; diagnostic images and outlier/confidence analyses are in `results/validation/`. The one-batch refiner-only diagnostic lowers robust loss but fails the quality gate; TRAIN-001 remains blocked. Use `/usr/bin/python` (Python 3.10), not the incomplete `/usr/local/bin/python3` build. The ignored vendored RoMa checkout contains an existing local checkpoint-path constructor edit; preserve it unless explicitly reviewed.
 
 ## Next step
 
-Provide the LunarMatch-NASA products/manifest and official geographic split/photometric metadata; add real validation and negative regions, implement geometric verification, and only after the validation gate passes launch staged T1 fine-tuning.
+Provide the LunarMatch-NASA products/manifest and official geographic split/photometric metadata; resolve the training objective collapse, and only after the validation gate passes consider staged T1 fine-tuning.

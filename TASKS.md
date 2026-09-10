@@ -19,7 +19,7 @@ Evidence: the ignored WAC fixture is recorded in `data/manifests/lroc_fixture.js
 
 ## MATCH-001
 
-Status: IN_PROGRESS
+Status: DONE
 Priority: HIGH
 Depends on: GEO-001
 Goal: Establish official RoMa v2 baseline adapter and inspect actual tensor conventions.
@@ -49,7 +49,16 @@ Priority: HIGH
 Depends on: DATA-001, MATCH-001
 Goal: Freeze a project-defined T0 and record the untouched official RoMa v2 baseline.
 
-Evidence: `benchmarks/T0_v1.parquet` is checksummed and evaluated on CUDA. Baseline metrics are stored under `results/T0/`: median EPE 1.5818 px, mean EPE 38.0155 px, PCK@1 0.4697, PCK@3 0.5581, PCK@5 0.5850, PCK@10 0.6043. This is a one-pair smoke benchmark, not the official LunarMatch-NASA benchmark; geometric/VRR/FAR metrics remain unavailable.
+Evidence: `benchmarks/T0_v1.parquet` is checksummed and evaluated on CUDA. Baseline metrics and error/confidence distributions are stored under `results/T0/`. This remains a one-pair project-defined benchmark, not official LunarMatch-NASA data.
+
+## GEOM-001
+
+Status: DONE
+Priority: HIGH
+Depends on: BENCH-001
+Goal: Verify geometric registrations, measure coverage, create real negative pairs, and establish a real validation baseline.
+
+Evidence: OpenCV-backed similarity/affine/homography verification, grid/hull coverage, 20-image/7-region LROC corpus, geographically isolated validation with two positives and four negatives, validation-only threshold selection, confidence/outlier analysis, optional diagnostic PNGs, and tests are implemented. Untouched RoMa validation baseline is VRR 1.0 and FAR 0.0 under the selected project configuration.
 
 ## GATE-001
 

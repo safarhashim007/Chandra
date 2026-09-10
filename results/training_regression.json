@@ -1,5 +1,6 @@
 {
   "steps": 50,
+  "beta": 1.0,
   "device": "cuda",
   "before_loss": 0.04048477113246918,
   "after_loss": 0.00920531153678894,
@@ -24,7 +25,7 @@
   "observations": [
     "pixel-space GT crop center is approximately [160.5, 159.5]",
     "pixel/normalized round-trip tests pass",
-    "the objective is Smooth L1 in normalized coordinates with beta=1.0",
+    "the objective is Smooth L1 in normalized coordinates; beta is recorded above",
     "official ConvRefiner detaches the previous warp between stages",
     "this experiment narrows the failure to objective/optimization behavior or pair suitability; it does not prove a coordinate-direction bug"
   ]

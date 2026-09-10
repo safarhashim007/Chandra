@@ -48,12 +48,12 @@ Evidence: on the available 320x320 NAC crop, refiner-only CUDA optimization redu
 
 Required action: diagnose the training objective/data sample with a valid LunarMatch-NASA batch, then rerun the one-batch gate. Do not launch full training while this issue remains.
 
-## KI-006 — Project-defined smoke T0 lacks validation and geometric verification
+## KI-006 — Official LunarMatch-NASA data and benchmark remain unavailable
 
 Severity: HIGH
 
-Affects: threshold selection, VRR/FAR, and promotion decisions.
+Affects: official training, official split compliance, and final benchmark claims.
 
-Current status: `benchmarks/T0_v1.parquet` contains one real NAC pair. The current smoke split has no validation images, and the evaluator intentionally reports null geometric inliers, coverage, VRR, and FAR until the geometric verifier and negative set are implemented.
+Current status: the project-defined T0 remains one real NAC pair and is immutable. A separate real LROC validation corpus now has 20 images, two positive pairs, and four negatives; its geometric baseline has measurable VRR/FAR. This is not the official LunarMatch-NASA benchmark.
 
-Required action: provide sufficient geographically isolated LROC/LunarMatch-NASA regions and implement the verifier before using the gate for model promotion.
+Required action: provide the official LunarMatch-NASA products, split rules, complete metadata, and official acceptance protocol before making official benchmark or training claims.
