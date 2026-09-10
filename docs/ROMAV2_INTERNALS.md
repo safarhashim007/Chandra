@@ -13,6 +13,8 @@ Inspected source: `vendor/romav2` commit `95c9968145c8906b7b59383258e9f73b02853d
 | Warp | BHWC x/y target coordinates normalized to `[-1, 1]`; grid sampling uses `align_corners=False` |
 | Confidence | Matcher emits overlap logit; refiner confidence has overlap plus three precision parameters. `_map_confidence` maps overlap by sigmoid and precision via `prec_mat_from_prec_params`. |
 | Precision update | `ConvRefiner` uses softplus-positive Cholesky diagonal terms and emits symmetric precision parameters `[p00, p10, p11]`. |
+| Refiner gradient boundary | `ConvRefiner.forward` detaches `prev_warp`; `_interpolate_warp_and_confidence` also detaches. Every stride therefore needs its own supervised loss. |
+| Head displacement | The update is `raw / (refine_init * (W, H))` in normalized coordinates. With `refine_init=4`, raw head units equal `raw / 8` pixels on both axes, independent of stride. |
 | Checkpoint | `RoMaV2.__init__` calls `torch.hub.load_state_dict_from_url` for release `v2.0.1`, then `load_state_dict`. |
 
 This project does not alter the public inference method. Any training integration must be a separate, tested gradient-enabled path that uses these modules and preserves the original state-dict naming. `scripts/inspect_romav2.py` writes a repeatable inspection report; its `--run` option is intentionally explicit because it downloads and initializes the official checkpoint.

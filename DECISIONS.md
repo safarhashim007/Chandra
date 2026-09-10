@@ -21,3 +21,11 @@ Reason: Training loss is not evidence of better lunar registration.
 Date: 2026-09-10
 
 Decision: RoMa v2 integrations are derived from the inspected public source checkout, not assumed from prompt terminology.
+
+## ADR-004 — Refiner supervision is stage-wise and T0 is never optimized
+
+Date: 2026-09-11
+
+Decision: LunarRoMa supervision uses the RoMa robust Euclidean warp loss at strides 4, 2, and 1. Smooth-L1 remains an explicit legacy ablation only. T0 pair IDs are rejected before any training diagnostic.
+
+Reason: `ConvRefiner` detaches the incoming warp at every stage; a final-stage-only loss leaves earlier refiners unsupervised. The previous diagnostic also used immutable T0, so its numeric collapse is useful historical evidence but invalid as a training procedure.

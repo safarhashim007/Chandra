@@ -1,0 +1,691 @@
+{
+  "status": "FULL TRAINING BLOCKED",
+  "historical_t0_regression": {
+    "status": "reproduced previously but now invalid as training evidence: it used immutable T0",
+    "beta_1": {
+      "steps": 50,
+      "beta": 1.0,
+      "device": "cuda",
+      "before_loss": 0.04048477113246918,
+      "after_loss": 0.00920531153678894,
+      "before": {
+        "valid_correspondences": 102080,
+        "median_epe_px": 1.5817598104476929,
+        "mean_epe_px": 38.015480041503906,
+        "pck_1": 0.46968063712120056,
+        "pck_3": 0.5580720901489258,
+        "pck_5": 0.5849530100822449,
+        "pck_10": 0.6043005585670471
+      },
+      "after": {
+        "valid_correspondences": 102080,
+        "median_epe_px": 11.606117248535156,
+        "mean_epe_px": 22.191017150878906,
+        "pck_1": 0.00018612852727528661,
+        "pck_3": 0.0018318966031074524,
+        "pck_5": 0.007562696002423763,
+        "pck_10": 0.0833463966846466
+      },
+      "observations": [
+        "pixel-space GT crop center is approximately [160.5, 159.5]",
+        "pixel/normalized round-trip tests pass",
+        "the objective is Smooth L1 in normalized coordinates; beta is recorded above",
+        "official ConvRefiner detaches the previous warp between stages",
+        "this experiment narrows the failure to objective/optimization behavior or pair suitability; it does not prove a coordinate-direction bug"
+      ]
+    },
+    "beta_0_01": {
+      "steps": 50,
+      "beta": 0.01,
+      "device": "cuda",
+      "before_loss": 0.15022647380828857,
+      "after_loss": 0.0907473936676979,
+      "before": {
+        "valid_correspondences": 102080,
+        "median_epe_px": 1.5817598104476929,
+        "mean_epe_px": 38.015480041503906,
+        "pck_1": 0.46968063712120056,
+        "pck_3": 0.5580720901489258,
+        "pck_5": 0.5849530100822449,
+        "pck_10": 0.6043005585670471
+      },
+      "after": {
+        "valid_correspondences": 102080,
+        "median_epe_px": 1.6094831228256226,
+        "mean_epe_px": 23.595703125,
+        "pck_1": 0.4610501527786255,
+        "pck_3": 0.559384822845459,
+        "pck_5": 0.5917613506317139,
+        "pck_10": 0.6323276162147522
+      },
+      "observations": [
+        "pixel-space GT crop center is approximately [160.5, 159.5]",
+        "pixel/normalized round-trip tests pass",
+        "the objective is Smooth L1 in normalized coordinates; beta is recorded above",
+        "official ConvRefiner detaches the previous warp between stages",
+        "this experiment narrows the failure to objective/optimization behavior or pair suitability; it does not prove a coordinate-direction bug"
+      ]
+    }
+  },
+  "root_cause": {
+    "classification": "objective/optimization and protocol defects, not a demonstrated coordinate-direction defect",
+    "evidence": [
+      "Smooth-L1 beta was in normalized coordinates: beta=1 equals 320 px per axis at 640, while beta=.01 equals 3.2 px.",
+      "The old loss supervised only the final output even though RoMa detaches each refiner-stage input, leaving strides 4 and 2 without loss gradients.",
+      "The old diagnostic optimized the immutable T0 pair; the replacement runner rejects T0 and trains only on a TRAIN pair.",
+      "Pixel/normalized round trips, non-square affine GT sampling, and raw refiner displacement conversions are regression-tested."
+    ]
+  },
+  "corrected_objective": {
+    "loss": "cs**alpha * ((EPE / cs)**2 + 1)**(alpha / 2)",
+    "alpha": 0.5,
+    "c": 0.001,
+    "strides": [
+      4,
+      2,
+      1
+    ],
+    "ema_decay": 0.999,
+    "overlap": "skipped: no nodata-aware overlap GT",
+    "precision": "skipped: no verified covisible precision target"
+  },
+  "train_pair_ablation": {
+    "robust_lr_1e-5": {
+      "pair_id": "NAC_PHO_E018N3346_M1142603254L__NAC_PHO_E018N3346_M1142603254R",
+      "dataset": "data/expanded/pairs/train.parquet",
+      "t0_rejected": true,
+      "device": "cuda",
+      "setting": "base",
+      "input_size": [
+        640,
+        640
+      ],
+      "objective": {
+        "name": "roma_robust_warp",
+        "alpha": 0.5,
+        "c": 0.001,
+        "strides": [
+          4,
+          2,
+          1
+        ]
+      },
+      "auxiliary_losses": {
+        "overlap": "skipped: no nodata-aware overlap GT",
+        "precision": "skipped: no verified covisible precision target"
+      },
+      "lr": 1e-05,
+      "ema_decay": 0.999,
+      "checkpoints": {
+        "0": {
+          "raw": {
+            "valid_correspondences": 409600,
+            "median_epe_px": 139.87228393554688,
+            "mean_epe_px": 130.64671325683594,
+            "pck_1": 0.2423144429922104,
+            "pck_3": 0.32991209626197815,
+            "pck_5": 0.3477441370487213,
+            "pck_10": 0.3646777272224426
+          }
+        },
+        "10": {
+          "loss": 1.513101577758789,
+          "raw": {
+            "valid_correspondences": 409600,
+            "median_epe_px": 127.31768035888672,
+            "mean_epe_px": 124.7951889038086,
+            "pck_1": 0.26676511764526367,
+            "pck_3": 0.3350756764411926,
+            "pck_5": 0.3513720631599426,
+            "pck_10": 0.36659422516822815
+          },
+          "ema": {
+            "valid_correspondences": 409600,
+            "median_epe_px": 139.84774780273438,
+            "mean_epe_px": 130.62620544433594,
+            "pck_1": 0.24238525331020355,
+            "pck_3": 0.3299658000469208,
+            "pck_5": 0.3477514684200287,
+            "pck_10": 0.3647240996360779
+          }
+        },
+        "25": {
+          "loss": 1.448412299156189,
+          "raw": {
+            "valid_correspondences": 409600,
+            "median_epe_px": 107.76549530029297,
+            "mean_epe_px": 114.66254425048828,
+            "pck_1": 0.29710936546325684,
+            "pck_3": 0.33978271484375,
+            "pck_5": 0.3537963926792145,
+            "pck_10": 0.37042236328125
+          },
+          "ema": {
+            "valid_correspondences": 409600,
+            "median_epe_px": 139.62872314453125,
+            "mean_epe_px": 130.5068817138672,
+            "pck_1": 0.24288085103034973,
+            "pck_3": 0.3302026391029358,
+            "pck_5": 0.34794920682907104,
+            "pck_10": 0.36488279700279236
+          }
+        },
+        "50": {
+          "loss": 1.301954746246338,
+          "raw": {
+            "valid_correspondences": 409600,
+            "median_epe_px": 72.99088287353516,
+            "mean_epe_px": 92.2083969116211,
+            "pck_1": 0.3006005883216858,
+            "pck_3": 0.33921384811401367,
+            "pck_5": 0.35331541299819946,
+            "pck_10": 0.37321043014526367
+          },
+          "ema": {
+            "valid_correspondences": 409600,
+            "median_epe_px": 139.30877685546875,
+            "mean_epe_px": 130.19505310058594,
+            "pck_1": 0.24468994140625,
+            "pck_3": 0.33064696192741394,
+            "pck_5": 0.34810546040534973,
+            "pck_10": 0.36506345868110657
+          }
+        }
+      },
+      "catastrophic_stop": false,
+      "refiners_changed": true,
+      "frozen_parameters_changed": false,
+      "refiner_state": "artifacts/robust_lr_1e-5.pt"
+    },
+    "robust_lr_1e-6": {
+      "pair_id": "NAC_PHO_E018N3346_M1142603254L__NAC_PHO_E018N3346_M1142603254R",
+      "dataset": "data/expanded/pairs/train.parquet",
+      "t0_rejected": true,
+      "device": "cuda",
+      "setting": "base",
+      "input_size": [
+        640,
+        640
+      ],
+      "objective": {
+        "name": "roma_robust_warp",
+        "alpha": 0.5,
+        "c": 0.001,
+        "strides": [
+          4,
+          2,
+          1
+        ]
+      },
+      "auxiliary_losses": {
+        "overlap": "skipped: no nodata-aware overlap GT",
+        "precision": "skipped: no verified covisible precision target"
+      },
+      "lr": 1e-06,
+      "ema_decay": 0.999,
+      "checkpoints": {
+        "0": {
+          "raw": {
+            "valid_correspondences": 409600,
+            "median_epe_px": 139.87228393554688,
+            "mean_epe_px": 130.64671325683594,
+            "pck_1": 0.2423144429922104,
+            "pck_3": 0.32991209626197815,
+            "pck_5": 0.3477441370487213,
+            "pck_10": 0.3646777272224426
+          }
+        },
+        "10": {
+          "loss": 1.5454113483428955,
+          "raw": {
+            "valid_correspondences": 409600,
+            "median_epe_px": 139.17047119140625,
+            "mean_epe_px": 130.15509033203125,
+            "pck_1": 0.2449926733970642,
+            "pck_3": 0.33064940571784973,
+            "pck_5": 0.34822019934654236,
+            "pck_10": 0.3652001917362213
+          },
+          "ema": {
+            "valid_correspondences": 409600,
+            "median_epe_px": 139.9267578125,
+            "mean_epe_px": 130.64451599121094,
+            "pck_1": 0.24229492247104645,
+            "pck_3": 0.3299218714237213,
+            "pck_5": 0.3477709889411926,
+            "pck_10": 0.3647119104862213
+          }
+        },
+        "25": {
+          "loss": 1.540191411972046,
+          "raw": {
+            "valid_correspondences": 409600,
+            "median_epe_px": 137.83590698242188,
+            "mean_epe_px": 129.39276123046875,
+            "pck_1": 0.25029051303863525,
+            "pck_3": 0.3316406309604645,
+            "pck_5": 0.3487231433391571,
+            "pck_10": 0.36570554971694946
+          },
+          "ema": {
+            "valid_correspondences": 409600,
+            "median_epe_px": 139.82713317871094,
+            "mean_epe_px": 130.63575744628906,
+            "pck_1": 0.24244140088558197,
+            "pck_3": 0.32994139194488525,
+            "pck_5": 0.347785621881485,
+            "pck_10": 0.3647119104862213
+          }
+        },
+        "50": {
+          "loss": 1.5291240215301514,
+          "raw": {
+            "valid_correspondences": 409600,
+            "median_epe_px": 134.10560607910156,
+            "mean_epe_px": 127.71050262451172,
+            "pck_1": 0.2571997046470642,
+            "pck_3": 0.33323240280151367,
+            "pck_5": 0.3497021496295929,
+            "pck_10": 0.3662695288658142
+          },
+          "ema": {
+            "valid_correspondences": 409600,
+            "median_epe_px": 139.83889770507812,
+            "mean_epe_px": 130.59478759765625,
+            "pck_1": 0.24259765446186066,
+            "pck_3": 0.33000487089157104,
+            "pck_5": 0.34779050946235657,
+            "pck_10": 0.36476561427116394
+          }
+        }
+      },
+      "catastrophic_stop": false,
+      "refiners_changed": true,
+      "frozen_parameters_changed": false,
+      "refiner_state": "artifacts/robust_lr_1e-6.pt"
+    },
+    "robust_lr_1e-6_100": {
+      "pair_id": "NAC_PHO_E018N3346_M1142603254L__NAC_PHO_E018N3346_M1142603254R",
+      "dataset": "data/expanded/pairs/train.parquet",
+      "t0_rejected": true,
+      "device": "cuda",
+      "setting": "base",
+      "input_size": [
+        640,
+        640
+      ],
+      "objective": {
+        "name": "roma_robust_warp",
+        "alpha": 0.5,
+        "c": 0.001,
+        "strides": [
+          4,
+          2,
+          1
+        ]
+      },
+      "auxiliary_losses": {
+        "overlap": "skipped: no nodata-aware overlap GT",
+        "precision": "skipped: no verified covisible precision target"
+      },
+      "lr": 1e-06,
+      "ema_decay": 0.999,
+      "checkpoints": {
+        "0": {
+          "raw": {
+            "valid_correspondences": 409600,
+            "median_epe_px": 139.87228393554688,
+            "mean_epe_px": 130.64671325683594,
+            "pck_1": 0.2423144429922104,
+            "pck_3": 0.32991209626197815,
+            "pck_5": 0.3477441370487213,
+            "pck_10": 0.3646777272224426
+          }
+        },
+        "10": {
+          "loss": 1.5454113483428955,
+          "raw": {
+            "valid_correspondences": 409600,
+            "median_epe_px": 139.17047119140625,
+            "mean_epe_px": 130.15509033203125,
+            "pck_1": 0.2449926733970642,
+            "pck_3": 0.33064940571784973,
+            "pck_5": 0.34822019934654236,
+            "pck_10": 0.3652001917362213
+          },
+          "ema": {
+            "valid_correspondences": 409600,
+            "median_epe_px": 139.9267578125,
+            "mean_epe_px": 130.64451599121094,
+            "pck_1": 0.24229492247104645,
+            "pck_3": 0.3299218714237213,
+            "pck_5": 0.3477709889411926,
+            "pck_10": 0.3647119104862213
+          }
+        },
+        "25": {
+          "loss": 1.540191411972046,
+          "raw": {
+            "valid_correspondences": 409600,
+            "median_epe_px": 137.83590698242188,
+            "mean_epe_px": 129.39276123046875,
+            "pck_1": 0.25029051303863525,
+            "pck_3": 0.3316406309604645,
+            "pck_5": 0.3487231433391571,
+            "pck_10": 0.36570554971694946
+          },
+          "ema": {
+            "valid_correspondences": 409600,
+            "median_epe_px": 139.82713317871094,
+            "mean_epe_px": 130.63575744628906,
+            "pck_1": 0.24244140088558197,
+            "pck_3": 0.32994139194488525,
+            "pck_5": 0.347785621881485,
+            "pck_10": 0.3647119104862213
+          }
+        },
+        "50": {
+          "loss": 1.5291240215301514,
+          "raw": {
+            "valid_correspondences": 409600,
+            "median_epe_px": 134.10560607910156,
+            "mean_epe_px": 127.71050262451172,
+            "pck_1": 0.2571997046470642,
+            "pck_3": 0.33323240280151367,
+            "pck_5": 0.3497021496295929,
+            "pck_10": 0.3662695288658142
+          },
+          "ema": {
+            "valid_correspondences": 409600,
+            "median_epe_px": 139.83889770507812,
+            "mean_epe_px": 130.59478759765625,
+            "pck_1": 0.24259765446186066,
+            "pck_3": 0.33000487089157104,
+            "pck_5": 0.34779050946235657,
+            "pck_10": 0.36476561427116394
+          }
+        },
+        "100": {
+          "loss": 1.503101110458374,
+          "raw": {
+            "valid_correspondences": 409600,
+            "median_epe_px": 125.27687072753906,
+            "mean_epe_px": 123.75216674804688,
+            "pck_1": 0.26682859659194946,
+            "pck_3": 0.3349291980266571,
+            "pck_5": 0.35081297159194946,
+            "pck_10": 0.36574217677116394
+          },
+          "ema": {
+            "valid_correspondences": 409600,
+            "median_epe_px": 139.53219604492188,
+            "mean_epe_px": 130.4159393310547,
+            "pck_1": 0.2435620129108429,
+            "pck_3": 0.33033689856529236,
+            "pck_5": 0.3480004668235779,
+            "pck_10": 0.36491942405700684
+          }
+        }
+      },
+      "catastrophic_stop": false,
+      "refiners_changed": true,
+      "frozen_parameters_changed": false,
+      "refiner_state": "artifacts/robust_lr_1e-6_100.pt"
+    },
+    "robust_lr_3e-5": {
+      "pair_id": "NAC_PHO_E018N3346_M1142603254L__NAC_PHO_E018N3346_M1142603254R",
+      "dataset": "data/expanded/pairs/train.parquet",
+      "t0_rejected": true,
+      "device": "cuda",
+      "setting": "base",
+      "input_size": [
+        640,
+        640
+      ],
+      "objective": {
+        "name": "roma_robust_warp",
+        "alpha": 0.5,
+        "c": 0.001,
+        "strides": [
+          4,
+          2,
+          1
+        ]
+      },
+      "auxiliary_losses": {
+        "overlap": "skipped: no nodata-aware overlap GT",
+        "precision": "skipped: no verified covisible precision target"
+      },
+      "lr": 3e-05,
+      "ema_decay": 0.999,
+      "checkpoints": {
+        "0": {
+          "raw": {
+            "valid_correspondences": 409600,
+            "median_epe_px": 139.87228393554688,
+            "mean_epe_px": 130.64671325683594,
+            "pck_1": 0.2423144429922104,
+            "pck_3": 0.32991209626197815,
+            "pck_5": 0.3477441370487213,
+            "pck_10": 0.3646777272224426
+          }
+        },
+        "10": {
+          "loss": 1.4468687772750854,
+          "raw": {
+            "valid_correspondences": 409600,
+            "median_epe_px": 104.32154846191406,
+            "mean_epe_px": 113.24937438964844,
+            "pck_1": 0.2966235280036926,
+            "pck_3": 0.33802732825279236,
+            "pck_5": 0.3522265553474426,
+            "pck_10": 0.37025633454322815
+          },
+          "ema": {
+            "valid_correspondences": 409600,
+            "median_epe_px": 139.77157592773438,
+            "mean_epe_px": 130.58529663085938,
+            "pck_1": 0.2426196187734604,
+            "pck_3": 0.330078125,
+            "pck_5": 0.3478173613548279,
+            "pck_10": 0.3647753894329071
+          }
+        },
+        "25": {
+          "loss": 1.213118553161621,
+          "raw": {
+            "valid_correspondences": 409600,
+            "median_epe_px": 53.66664123535156,
+            "mean_epe_px": 78.49351501464844,
+            "pck_1": 0.27567869424819946,
+            "pck_3": 0.33524900674819946,
+            "pck_5": 0.34984374046325684,
+            "pck_10": 0.37349364161491394
+          },
+          "ema": {
+            "valid_correspondences": 409600,
+            "median_epe_px": 139.42599487304688,
+            "mean_epe_px": 130.3385467529297,
+            "pck_1": 0.2442065328359604,
+            "pck_3": 0.33058837056159973,
+            "pck_5": 0.3480322062969208,
+            "pck_10": 0.3649536073207855
+          }
+        },
+        "50": {
+          "loss": 0.8539270162582397,
+          "raw": {
+            "valid_correspondences": 409600,
+            "median_epe_px": 22.849912643432617,
+            "mean_epe_px": 39.79052734375,
+            "pck_1": 0.2993261516094208,
+            "pck_3": 0.34599608182907104,
+            "pck_5": 0.3644165098667145,
+            "pck_10": 0.40025633573532104
+          },
+          "ema": {
+            "valid_correspondences": 409600,
+            "median_epe_px": 138.84628295898438,
+            "mean_epe_px": 129.84457397460938,
+            "pck_1": 0.24799315631389618,
+            "pck_3": 0.33152830600738525,
+            "pck_5": 0.3482299745082855,
+            "pck_10": 0.36521726846694946
+          }
+        }
+      },
+      "catastrophic_stop": false,
+      "refiners_changed": true,
+      "frozen_parameters_changed": false,
+      "refiner_state": "artifacts/robust_lr_3e-5.pt"
+    },
+    "robust_lr_3e-6": {
+      "pair_id": "NAC_PHO_E018N3346_M1142603254L__NAC_PHO_E018N3346_M1142603254R",
+      "dataset": "data/expanded/pairs/train.parquet",
+      "t0_rejected": true,
+      "device": "cuda",
+      "setting": "base",
+      "input_size": [
+        640,
+        640
+      ],
+      "objective": {
+        "name": "roma_robust_warp",
+        "alpha": 0.5,
+        "c": 0.001,
+        "strides": [
+          4,
+          2,
+          1
+        ]
+      },
+      "auxiliary_losses": {
+        "overlap": "skipped: no nodata-aware overlap GT",
+        "precision": "skipped: no verified covisible precision target"
+      },
+      "lr": 3e-06,
+      "ema_decay": 0.999,
+      "checkpoints": {
+        "0": {
+          "raw": {
+            "valid_correspondences": 409600,
+            "median_epe_px": 139.87228393554688,
+            "mean_epe_px": 130.64671325683594,
+            "pck_1": 0.2423144429922104,
+            "pck_3": 0.32991209626197815,
+            "pck_5": 0.3477441370487213,
+            "pck_10": 0.3646777272224426
+          }
+        },
+        "10": {
+          "loss": 1.5390465259552002,
+          "raw": {
+            "valid_correspondences": 409600,
+            "median_epe_px": 137.2455596923828,
+            "mean_epe_px": 129.11920166015625,
+            "pck_1": 0.25184324383735657,
+            "pck_3": 0.3319995105266571,
+            "pck_5": 0.34895995259284973,
+            "pck_10": 0.36592283844947815
+          },
+          "ema": {
+            "valid_correspondences": 409600,
+            "median_epe_px": 139.8535919189453,
+            "mean_epe_px": 130.6410369873047,
+            "pck_1": 0.24231933057308197,
+            "pck_3": 0.32993650436401367,
+            "pck_5": 0.3477709889411926,
+            "pck_10": 0.36472654342651367
+          }
+        },
+        "25": {
+          "loss": 1.5195671319961548,
+          "raw": {
+            "valid_correspondences": 409600,
+            "median_epe_px": 130.5752716064453,
+            "mean_epe_px": 126.20132446289062,
+            "pck_1": 0.26226806640625,
+            "pck_3": 0.3341967761516571,
+            "pck_5": 0.35065916180610657,
+            "pck_10": 0.36647215485572815
+          },
+          "ema": {
+            "valid_correspondences": 409600,
+            "median_epe_px": 139.81085205078125,
+            "mean_epe_px": 130.60308837890625,
+            "pck_1": 0.24251708388328552,
+            "pck_3": 0.33003416657447815,
+            "pck_5": 0.34779050946235657,
+            "pck_10": 0.36476561427116394
+          }
+        },
+        "50": {
+          "loss": 1.4829649925231934,
+          "raw": {
+            "valid_correspondences": 409600,
+            "median_epe_px": 118.93030548095703,
+            "mean_epe_px": 120.53648376464844,
+            "pck_1": 0.27656981348991394,
+            "pck_3": 0.33784177899360657,
+            "pck_5": 0.3521044850349426,
+            "pck_10": 0.3662206828594208
+          },
+          "ema": {
+            "valid_correspondences": 409600,
+            "median_epe_px": 139.6571807861328,
+            "mean_epe_px": 130.47637939453125,
+            "pck_1": 0.24317871034145355,
+            "pck_3": 0.3302563428878784,
+            "pck_5": 0.3479663133621216,
+            "pck_10": 0.3648657202720642
+          }
+        }
+      },
+      "catastrophic_stop": false,
+      "refiners_changed": true,
+      "frozen_parameters_changed": false,
+      "refiner_state": "artifacts/robust_lr_3e-6.pt"
+    }
+  },
+  "validation_before": {
+    "valid_correspondences": 626560,
+    "median_epe_px": 4.000859260559082,
+    "mean_epe_px": 94.63352966308594,
+    "pck_1": 0.10650217058222676,
+    "pck_3": 0.3478581460674157,
+    "pck_5": 0.5226107635342185,
+    "pck_10": 0.5433398237997957,
+    "vrr": 0.5,
+    "far": 0.0
+  },
+  "validation_after": {
+    "valid_correspondences": 626560,
+    "median_epe_px": 3.899777412414551,
+    "mean_epe_px": 91.7525405883789,
+    "pck_1": 0.104818373340143,
+    "pck_3": 0.3680349846782431,
+    "pck_5": 0.525300051072523,
+    "pck_10": 0.5447826225740552,
+    "vrr": 0.5,
+    "far": 0.0
+  },
+  "quality_gate": {
+    "passed": false,
+    "checks": {
+      "median_epe_not_worse": true,
+      "pck1_not_materially_worse": false,
+      "vrr_not_materially_worse": true,
+      "far_not_materially_worse": true,
+      "pck3_or_pck5_improved": true
+    },
+    "config": {
+      "max_median_epe_increase_px": 0.0,
+      "max_pck1_decrease": 0.0,
+      "max_vrr_decrease": 0.0,
+      "max_far_increase": 0.0,
+      "min_pck3_or_pck5_increase": 0.0
+    }
+  },
+  "selected_experiment": "robust_lr_1e-6 at 50 steps, raw refiner weights",
+  "full_training_launched": false
+}

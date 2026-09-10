@@ -117,6 +117,11 @@ def main() -> int:
         default=Path("data/expanded/pairs/validation_negative.parquet"),
     )
     parser.add_argument("--checkpoint", type=Path, default=Path("checkpoints/romav2_official.pt"))
+    parser.add_argument(
+        "--refiner-state",
+        type=Path,
+        help="Optional refiner-only state produced by a controlled training experiment.",
+    )
     parser.add_argument("--setting", default="turbo", choices=("turbo", "fast", "base"))
     parser.add_argument("--crop-size", type=int, default=320)
     parser.add_argument("--max-matches", type=int, default=4000)
@@ -132,6 +137,10 @@ def main() -> int:
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model = RoMaV2(checkpoint_path=str(args.checkpoint))
     model.apply_setting(args.setting)
+    if args.refiner_state is not None:
+        model.refiners.load_state_dict(
+            torch.load(args.refiner_state, map_location=device, weights_only=True)
+        )
     records = {record.image_id: record for record in read_manifest(args.manifest)}
     pairs = read_pairs(args.positive_pairs) + read_pairs(args.negative_pairs)
     if args.acceptance_config.exists():
@@ -144,6 +153,7 @@ def main() -> int:
         acceptance = AcceptanceConfig()
     geometry_config = VerificationConfig()
     rows = []
+    positive_errors: list[np.ndarray] = []
     for pair in pairs:
         first, second = records[pair.image_a], records[pair.image_b]
         label_a = Path(first.image_path).with_suffix(".xml")
@@ -211,6 +221,7 @@ def main() -> int:
             )[0]
             gt = torch.from_numpy(gt_np).to(device)
             errors = torch.linalg.vector_norm(predicted_px - gt, dim=-1)[valid.bool()].cpu().numpy()
+            positive_errors.append(errors)
             row["correspondence_metrics"] = correspondence_metrics(
                 predicted_px[None], gt[None], valid[None], (1, 3, 5, 10)
             )
@@ -238,10 +249,22 @@ def main() -> int:
         "checkpoint_sha256": sha256_file(args.checkpoint),
         "device": str(device),
         "setting": args.setting,
+        "refiner_state": str(args.refiner_state) if args.refiner_state is not None else None,
         "acceptance_config": acceptance.as_dict(),
         "geometry_config": geometry_config.as_dict(),
         "pair_count": len(rows),
         "registration": vrr_far(outcomes),
+        "correspondence_metrics": {
+            "valid_correspondences": int(sum(len(errors) for errors in positive_errors)),
+            "median_epe_px": float(np.median(np.concatenate(positive_errors))),
+            "mean_epe_px": float(np.mean(np.concatenate(positive_errors))),
+            "pck_1": float(np.mean(np.concatenate(positive_errors) <= 1.0)),
+            "pck_3": float(np.mean(np.concatenate(positive_errors) <= 3.0)),
+            "pck_5": float(np.mean(np.concatenate(positive_errors) <= 5.0)),
+            "pck_10": float(np.mean(np.concatenate(positive_errors) <= 10.0)),
+        }
+        if positive_errors
+        else None,
         "pairs": rows,
     }
     args.output_dir.mkdir(parents=True, exist_ok=True)

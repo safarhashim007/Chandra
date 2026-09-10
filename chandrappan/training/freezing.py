@@ -27,3 +27,11 @@ def assert_frozen(module: nn.Module) -> None:
 def assert_trainable(module: nn.Module) -> None:
     if not any(parameter.requires_grad for parameter in module.parameters()):
         raise AssertionError("module expected trainable but has no trainable parameters")
+
+
+def configure_refiner_only_training(model: nn.Module) -> None:
+    """Freeze RoMa globally, then expose only its refiner heads to optimization."""
+    if not hasattr(model, "refiners"):
+        raise TypeError("RoMa model must expose refiners")
+    freeze_module(model)
+    unfreeze_module(model.refiners)

@@ -44,9 +44,9 @@ Severity: HIGH
 
 Affects: all LunarRoMa fine-tuning stages.
 
-Evidence: on the available 320x320 NAC crop, refiner-only CUDA optimization reduced robust warp loss from `0.04048` to `0.00921`, but median EPE increased from `1.58 px` to `11.61 px` and PCK@1 fell from `0.470` to `0.0002` after 50 steps.
+Evidence: the historic 320x320 diagnostic reduced loss from `0.04048` to `0.00921`, but median EPE increased from `1.58 px` to `11.61 px` and PCK@1 fell from `0.470` to `0.0002` after 50 steps. It is now explicitly retired because it optimized the immutable T0 pair. The corrected non-T0 640x640 robust run improves held-out median EPE/PCK@3/PCK@5 and maintains VRR/FAR, but PCK@1 falls from `.106502` to `.104818`; the strict gate fails.
 
-Required action: diagnose the training objective/data sample with a valid LunarMatch-NASA batch, then rerun the one-batch gate. Do not launch full training while this issue remains.
+Required action: obtain enough non-T0 lunar pairs for a statistically meaningful validation gate, add nodata-aware overlap and verified covisible precision GT, then rerun the gate. Do not launch full training while this issue remains.
 
 ## KI-006 — Official LunarMatch-NASA data and benchmark remain unavailable
 

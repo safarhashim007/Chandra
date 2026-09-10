@@ -3,7 +3,8 @@
 from __future__ import annotations
 
 import torch
-from torch.nn import functional as F
+
+from chandrappan.training.coordinates import refiner_head_delta_to_pixel
 
 
 def forward_train(model, image_a: torch.Tensor, image_b: torch.Tensor) -> dict[str, object]:
@@ -12,13 +13,15 @@ def forward_train(model, image_a: torch.Tensor, image_b: torch.Tensor) -> dict[s
         raise ValueError("training images must be BCHW tensors with three channels")
     if image_a.shape[0] != image_b.shape[0]:
         raise ValueError("training image batches must have equal size")
+    expected_lr = (model.H_lr, model.W_lr)
+    if image_a.shape[-2:] != expected_lr or image_b.shape[-2:] != expected_lr:
+        raise ValueError(
+            "forward_train requires source-faithful inputs already prepared at "
+            f"the selected RoMa resolution {expected_lr}; it will not anisotropically resize them"
+        )
 
-    image_a_lr = F.interpolate(
-        image_a, size=(model.H_lr, model.W_lr), mode="bicubic", align_corners=False, antialias=True
-    )
-    image_b_lr = F.interpolate(
-        image_b, size=(model.H_lr, model.W_lr), mode="bicubic", align_corners=False, antialias=True
-    )
+    image_a_lr = image_a
+    image_b_lr = image_b
     features_a = model.f(image_a_lr)
     features_b = model.f(image_b_lr)
     coarse = model.matcher(
@@ -32,20 +35,9 @@ def forward_train(model, image_a: torch.Tensor, image_b: torch.Tensor) -> dict[s
     warp_ba, confidence_ba = coarse["warp_BA"], coarse["confidence_BA"]
     refiners = []
 
-    image_a_hr = (
-        None
-        if model.H_hr is None
-        else F.interpolate(
-            image_a, (model.H_hr, model.W_hr), mode="bicubic", align_corners=False, antialias=True
-        )
-    )
-    image_b_hr = (
-        None
-        if model.H_hr is None
-        else F.interpolate(
-            image_b, (model.H_hr, model.W_hr), mode="bicubic", align_corners=False, antialias=True
-        )
-    )
+    if model.H_hr is not None:
+        raise ValueError("forward_train currently supports single-resolution RoMa settings only")
+    image_a_hr = image_b_hr = None
     for stage, (image_a_stage, image_b_stage) in enumerate(
         zip([image_a_lr, image_a_hr], [image_b_lr, image_b_hr])
     ):
@@ -94,7 +86,22 @@ def forward_train(model, image_a: torch.Tensor, image_b: torch.Tensor) -> dict[s
                     prev_confidence=confidence_ba,
                     scale_factor=scale_factor,
                 )
-            refiners.append({"stride": patch_size, "ab": output_ab, "ba": output_ba})
+            raw_delta_ab = (output_ab["warp"] - warp_ab) * output_ab["warp"].new_tensor(
+                (refiner.cfg.refine_init * width, refiner.cfg.refine_init * height)
+            )
+            refiners.append(
+                {
+                    "stride": patch_size,
+                    "size": (height, width),
+                    "ab": output_ab,
+                    "ba": output_ba,
+                    "previous_warp_ab": warp_ab,
+                    "raw_delta_ab": raw_delta_ab,
+                    "pixel_delta_ab": refiner_head_delta_to_pixel(
+                        raw_delta_ab, refine_init=refiner.cfg.refine_init
+                    ),
+                }
+            )
             warp_ab, confidence_ab = output_ab["warp"], output_ab["confidence"]
             if output_ba is not None:
                 warp_ba, confidence_ba = output_ba["warp"], output_ba["confidence"]

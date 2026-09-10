@@ -6,7 +6,7 @@
 
 ## Current commit
 
-`0e581ea` (geometric verification, real validation, and complete baseline statistics)
+Pending objective-correction commit
 
 ## Goal
 
@@ -14,12 +14,12 @@ Build the verifiable Chandrappan foundation before any model training.
 
 ## Current state
 
-Phase 0 and GEO-001 are complete for the available real products. The canonical Parquet manifest, geographic split/leakage checks, pair generation, frozen project-defined T0, untouched CUDA baseline, VRR/FAR protocol, and validation gate are implemented. Public RoMa v2 source is inspected from an ignored vendor checkout; the official v2.0.1 checkpoint loads and CUDA inference smoke tests pass. A separate gradient-enabled training forward and centralized freezing helpers exist; 23 project tests pass.
+Phase 0/GEO-001 and the available real-data geometric baseline are complete. The new training diagnostic is source-faithful at 640x640: it refuses anisotropic resizing, uses physical pixel GT sampled at every refiner stage, applies the RoMa robust loss at strides 4/2/1, and updates only refiners (including refiner-only EMA). The full suite has 44 tests.
 
 ## Known blockers
 
-The immutable T0 smoke baseline has one pair and remains separate from threshold selection. A genuine expanded LROC corpus now has 20 images across 7 regions, with 2 validation positives and 4 validation negatives. The untouched RoMa baseline is VRR 1.0 and FAR 0.0 under validation-selected thresholds; diagnostic images and outlier/confidence analyses are in `results/validation/`. The one-batch refiner-only diagnostic lowers robust loss but fails the quality gate; TRAIN-001 remains blocked. Use `/usr/bin/python` (Python 3.10), not the incomplete `/usr/local/bin/python3` build. The ignored vendored RoMa checkout contains an existing local checkpoint-path constructor edit; preserve it unless explicitly reviewed.
+The immutable T0 smoke baseline remains untouched. The historic loss-collapse run is now classified as invalid training evidence because it optimized T0; its runner fails loudly. The non-T0 controlled robust run lowers validation median EPE (4.0009→3.8998 px), raises PCK@3/5, and preserves VRR/FAR (.5/.0), but decreases PCK@1 (.106502→.104818). `FULL TRAINING GATE: FAIL`. Details are in `results/training_objective_fix.{json,md}`. Use `/usr/bin/python3.10`, not the incomplete `/usr/local/bin/python3` build. The ignored vendored checkout has a local checkpoint-path constructor edit; preserve it.
 
 ## Next step
 
-Provide the LunarMatch-NASA products/manifest and official geographic split/photometric metadata; resolve the training objective collapse, and only after the validation gate passes consider staged T1 fine-tuning.
+Provide LunarMatch-NASA products/manifest, official splits/metadata, and nodata-aware/covisible GT. Increase validation sample size and rerun the strict gate; do not launch full fine-tuning.

@@ -53,6 +53,10 @@ def main() -> int:
     parser.add_argument("--beta", type=float, default=1.0)
     parser.add_argument("--output", type=Path, default=Path("results/training_regression.json"))
     args = parser.parse_args()
+    raise RuntimeError(
+        "This retired diagnostic targets the immutable T0 pair and is intentionally blocked. "
+        "Use scripts/run_refiner_objective_experiment.py with a TRAIN manifest instead."
+    )
     size = 320
     left = Path("data/raw/lroc_pair/NAC_PHO_E018N3346_M107042466L.TIF")
     right = Path("data/raw/lroc_pair/NAC_PHO_E018N3346_M107042466R.TIF")

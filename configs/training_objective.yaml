@@ -1,0 +1,10 @@
+# Controlled objective diagnostics only. These are not a full-training recipe.
+setting: base
+crop_size: 640
+ema_decay: 0.999
+learning_rates: [1.0e-6, 3.0e-6, 1.0e-5, 3.0e-5]
+checkpoints: [0, 10, 25, 50, 100, 250]
+catastrophic_median_epe_multiplier: 2.0
+catastrophic_pck1_fraction: 0.5
+overlap_weight: 0.0  # No nodata-aware overlap ground truth exists yet.
+precision_weight: 0.0  # No verified covisible precision target exists yet.

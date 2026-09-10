@@ -33,6 +33,8 @@ Priority: HIGH
 Depends on: MATCH-001, LunarMatch-NASA data, T0 benchmark, one-batch overfit
 Goal: Add a validated, source-compatible LunarRoMa training path without modifying official inference.
 
+Evidence: a source-faithful 640x640 refiner-only path now supervises all detached strides (4/2/1) with RoMa's robust EPE loss, limits EMA to refiners, rejects T0 pair IDs, and validates only on the held-out LROC split. The strict gate remains failed because PCK@1 regressed slightly despite EPE/PCK@3/PCK@5 improvement.
+
 ## DATA-001
 
 Status: DONE
@@ -68,3 +70,5 @@ Depends on: BENCH-001, TRAIN-001
 Goal: Prevent full training unless short validation training genuinely improves correspondence quality.
 
 Evidence: hard gate and preflight are implemented and tested. The available NAC diagnostic fails the gate: beta=1.0 changes median EPE 1.5818→11.6061 px and PCK@1 0.4697→0.0002; beta=0.01 avoids collapse but still changes median EPE 1.5818→1.6095 px and PCK@1 0.4697→0.4611. Full fine-tuning remains blocked.
+
+The historical diagnostic used T0 and is now retired as invalid training evidence. The corrected non-T0 robust run improves validation median EPE 4.0009→3.8998 px, PCK@3 .3479→.3680, and PCK@5 .5226→.5253, but PCK@1 .10650→.10482; the gate therefore remains blocked.
