@@ -1,0 +1,41 @@
+{
+  "dataset_version": "lroc-fixture-2026-09-10",
+  "source": {
+    "mission": "Lunar Reconnaissance Orbiter",
+    "instrument": "LROC WAC",
+    "product_id": "WAC_TIO2_E350N0450",
+    "product_type": "map-projected browse GeoTIFF",
+    "image_url": "https://pds.lroc.im-ldi.com/data/LRO-L-LROC-5-RDR-V1.0/LROLRC_2001/EXTRAS/BROWSE/WAC_TIO2/WAC_TIO2_E350N0450.TIF",
+    "metadata_url": "https://pds.lroc.im-ldi.com/data/LRO-L-LROC-5-RDR-V1.0/LROLRC_2001/EXTRAS/BROWSE/WAC_TIO2/WAC_TIO2_E350N0450.xml",
+    "image_md5": "7774860882ef0330cf6afdacbca2b731"
+  },
+  "local_paths": {
+    "image": "data/raw/lroc_fixture/WAC_TIO2_E350N0450.TIF",
+    "metadata": "data/raw/lroc_fixture/WAC_TIO2_E350N0450.xml"
+  },
+  "observed": {
+    "width": 6841,
+    "height": 5321,
+    "dtype": "uint8",
+    "projection": "EQUIRECTANGULAR",
+    "lunar_radius_m": 1737400.0,
+    "pixel_size_m": 398.991452949,
+    "center_latitude_deg": 35.0,
+    "center_longitude_deg_east": 45.0,
+    "nodata": 0,
+    "pixel_interpretation": "area",
+    "affine_coefficients": {
+      "x_origin": 0.0,
+      "x_col": 398.991452949,
+      "x_row": 0.0,
+      "y_origin": 2123033.521141589,
+      "y_col": 0.0,
+      "y_row": -398.991452949
+    }
+  },
+  "validation": {
+    "method": "GeoTIFF ModelPixelScale/ModelTiepoint tags plus PDS4 XML",
+    "max_affine_roundtrip_error_px": 2.5579538487363607e-13,
+    "project_ingestion_test": "not_run; rasterio, pyproj, and shapely are absent"
+  }
+}

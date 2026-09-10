@@ -27,3 +27,15 @@ Reproduction: `python3 -c 'import sqlite3'` fails with `No module named '_sqlite
 Root cause: the host's Python 3.14 build is missing the optional `_sqlite3` extension.
 
 Impact: invoking project scripts through `python3` breaks the SQLite catalog. The supported local interpreter is `/usr/bin/python` (Python 3.10, SQLite enabled); use `python`, not `python3`, for project commands.
+
+## KI-004 — Declared geospatial runtime packages are not installed
+
+Severity: HIGH
+
+Affects: real LROC ingestion and raster-backed metadata validation.
+
+Reproduction: `/usr/bin/python -c 'import rasterio, pyproj, shapely'` fails because the modules are not installed.
+
+Current workaround: the downloaded LROC fixture can be inspected at the GeoTIFF-tag level with the installed `tifffile`; this does not substitute for the project ingestion test.
+
+Permanent fix: provision the declared runtime dependencies in the supported Python 3.10 environment, then add and execute the rasterio-backed real-product regression test.
