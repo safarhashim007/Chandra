@@ -129,6 +129,11 @@ def freeze_selection(
     selected = [pair.as_dict() for pair in pairs if pair.selected]
     manifest = target / "selected_training_data.json"
     manifest.write_text(json.dumps(selected, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    parquet = target / "selected_training_data.parquet"
+    import pyarrow as pa
+    import pyarrow.parquet as pq
+
+    pq.write_table(pa.Table.from_pylist(selected), parquet)
     checksum = hashlib.sha256(manifest.read_bytes()).hexdigest()
     sidecar = target / "selected_training_data.sha256"
     sidecar.write_text(f"{checksum}  {manifest.name}\n", encoding="utf-8")

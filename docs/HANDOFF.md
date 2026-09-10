@@ -23,3 +23,7 @@ The immutable T0 smoke baseline remains untouched. The historic loss-collapse ru
 ## Next step
 
 Provide LunarMatch-NASA products/manifest, official splits/metadata, and nodata-aware/covisible GT. Increase validation sample size and rerun the strict gate; do not launch full fine-tuning.
+
+## Latest curation
+
+Run `scripts/curate_scientific_lroc.py` to reproduce `runs/lroc_curated_v1` and the provenance files in `results/`. It uses only the TRAIN split, evaluates 640px overlap-centred TIFF windows for mask/cycle-valid geographic GT, and reports corrupt-raster reads as explicit rejections. The frozen manifest contains three selected pairs; it is too small and geographically narrow for a smoke-training launch.

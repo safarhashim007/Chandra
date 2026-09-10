@@ -58,3 +58,7 @@ Phase 2 dataset/evaluation foundation is complete for the available real product
 ## Next exact task
 
 Acquire LunarMatch-NASA products, official splits/metadata, and nodata-aware/covisible supervision; expand the real validation corpus before rerunning the strict gate.
+
+## Latest curation run
+
+`6d894b6` created `runs/lroc_curated_v1` from the existing genuine 20-product NAC_PHO TIFF/XML corpus. Twelve TRAIN positive pairs passed 640px overlap-window dense-GT/mask/cycle validation; three pairs from one available TRAIN region were selected and SHA256-frozen. The archive expansion target was not met, and one raster read failure was classified as a rejection. Full fine-tuning was not launched.

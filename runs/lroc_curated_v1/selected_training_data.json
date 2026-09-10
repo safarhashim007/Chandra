@@ -1,0 +1,53 @@
+[
+  {
+    "image_a": "NAC_PHO_E018N3346_M1142603254L",
+    "image_b": "NAC_PHO_E018N3346_M107042466L",
+    "pair_id": "NAC_PHO_E018N3346_M1142603254L__NAC_PHO_E018N3346_M107042466L",
+    "reason": "Selected: 99.8% valid geographic GT coverage and cycle error \u2264 configured limit.",
+    "region_id": "E018N3346",
+    "rejection_reason": null,
+    "score": 0.5996875,
+    "score_components": {
+      "difficulty_score": 0.21769712285633824,
+      "geometry_quality": 0.7823028771436618,
+      "gsd_compatibility": 1.0,
+      "gt_quality": 0.9984375,
+      "photometric_diversity": 0.0
+    },
+    "selected": true
+  },
+  {
+    "image_a": "NAC_PHO_E018N3346_M1142603254L",
+    "image_b": "NAC_PHO_E018N3346_M1197970413R",
+    "pair_id": "NAC_PHO_E018N3346_M1142603254L__NAC_PHO_E018N3346_M1197970413R",
+    "reason": "Selected: 100.0% valid geographic GT coverage and cycle error \u2264 configured limit.",
+    "region_id": "E018N3346",
+    "rejection_reason": null,
+    "score": 0.5466666666666666,
+    "score_components": {
+      "difficulty_score": 0.0,
+      "geometry_quality": 1.0,
+      "gsd_compatibility": 0.7333333333333334,
+      "gt_quality": 1.0,
+      "photometric_diversity": 0.0
+    },
+    "selected": true
+  },
+  {
+    "image_a": "NAC_PHO_E018N3346_M1142603254R",
+    "image_b": "NAC_PHO_E018N3346_M107042466R",
+    "pair_id": "NAC_PHO_E018N3346_M1142603254R__NAC_PHO_E018N3346_M107042466R",
+    "reason": "Selected: 100.0% valid geographic GT coverage and cycle error \u2264 configured limit.",
+    "region_id": "E018N3346",
+    "rejection_reason": null,
+    "score": 0.6,
+    "score_components": {
+      "difficulty_score": 0.09700278177742416,
+      "geometry_quality": 0.9029972182225758,
+      "gsd_compatibility": 1.0,
+      "gt_quality": 1.0,
+      "photometric_diversity": 0.0
+    },
+    "selected": true
+  }
+]

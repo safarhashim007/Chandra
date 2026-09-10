@@ -1,0 +1,17 @@
+{
+  "products_discovered": 20,
+  "scientific_rdr_products": 20,
+  "browse_only_products": 0,
+  "regions": 7,
+  "metadata_availability": {
+    "acquisition_time": 10,
+    "gsd": 20,
+    "incidence": 0,
+    "emission": 0,
+    "phase": 0,
+    "mask": 12
+  },
+  "dense_gt_valid_pairs": 12,
+  "rejected_pairs": 5,
+  "source_type_for_training": "SCIENTIFIC_RDR"
+}
