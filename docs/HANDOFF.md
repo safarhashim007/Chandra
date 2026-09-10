@@ -6,7 +6,7 @@
 
 ## Current commit
 
-`46ea2cc` (dataset, T0, gate, and regression milestone)
+`3d6928c` (final dataset, T0, gate, and regression handoff)
 
 ## Goal
 
