@@ -10,7 +10,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from chandrappan.data.manifest import image_record_from_lroc, write_manifest
-from chandrappan.data.pairs import generate_pairs, write_pairs
+from chandrappan.data.pairs import generate_negative_pairs, generate_pairs, write_pairs
 from chandrappan.data.splits import geographic_split, validate_no_leakage
 from chandrappan.evaluation.t0 import freeze_checksum, verify_checksum
 
@@ -23,6 +23,8 @@ def main() -> int:
     parser.add_argument("--t0-sha256", type=Path, default=Path("benchmarks/T0_v1.sha256"))
     parser.add_argument("--seed", type=int, default=0)
     parser.add_argument("--min-overlap-ratio", type=float, default=0.01)
+    parser.add_argument("--write-negatives", action="store_true")
+    parser.add_argument("--skip-t0", action="store_true")
     args = parser.parse_args()
 
     records = [
@@ -40,8 +42,18 @@ def main() -> int:
             write_pairs(pairs, pair_path)
         elif pair_path.exists():
             pair_path.unlink()
+        if args.write_negatives:
+            negative_path = args.output_root / "pairs" / f"{name}_negative.parquet"
+            negative_pairs = generate_negative_pairs(split_records)
+            if negative_pairs:
+                write_pairs(negative_pairs, negative_path)
+            elif negative_path.exists():
+                negative_path.unlink()
         print(f"{name}: {len(split_records)} images, {len(pairs)} pairs")
 
+    if args.skip_t0:
+        print("T0: skipped by request; existing T0 was not modified")
+        return 0
     test_pairs = generate_pairs(splits["test"], min_overlap_ratio=args.min_overlap_ratio)
     if not test_pairs:
         raise RuntimeError("cannot create T0: test split has no overlapping pair")

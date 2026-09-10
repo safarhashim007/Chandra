@@ -3,7 +3,11 @@ from pathlib import Path
 import pytest
 
 from chandrappan.data.manifest import ImageRecord, read_manifest, validate_manifest, write_manifest
-from chandrappan.data.pairs import generate_pairs
+from chandrappan.data.pairs import (
+    generate_explicit_negative_pairs,
+    generate_negative_pairs,
+    generate_pairs,
+)
 from chandrappan.data.splits import geographic_split, validate_no_leakage
 
 
@@ -60,12 +64,35 @@ def test_pairs_keep_only_geographic_overlap() -> None:
     assert pairs[0].relative_gsd_ratio == 1
 
 
+def test_negative_pairs_are_explicitly_labeled_and_non_overlapping() -> None:
+    records = [_record("a", "region-a", 0), _record("b", "region-b", 30)]
+    pairs = generate_negative_pairs(records)
+    assert len(pairs) == 1
+    assert pairs[0].label == "negative"
+    assert pairs[0].negative_type == "easy_geographic"
+    assert pairs[0].geographic_separation_m > 0
+
+
+def test_explicit_hard_negative_keeps_geographic_label() -> None:
+    records = [_record("a", "region-a", 0), _record("b", "region-b", 30)]
+    pairs = generate_explicit_negative_pairs(records, [("a", "b")])
+    assert pairs[0].negative_type == "hard_visual_candidate"
+    assert pairs[0].label == "negative"
+
+
 def test_geographic_split_is_deterministic_and_region_safe() -> None:
     records = [_record("a", "a", 0), _record("b", "b", 20), _record("c", "c", 40)]
     first = geographic_split(records, seed=7)
     second = geographic_split(records, seed=7)
     assert first == second
     validate_no_leakage(first)
+
+
+def test_large_geographic_split_keeps_validation_and_test_multi_region() -> None:
+    records = [_record(str(index), str(index), index * 20) for index in range(7)]
+    splits = geographic_split(records, seed=7)
+    assert len({record.region_id for record in splits["validation"]}) == 2
+    assert len({record.region_id for record in splits["test"]}) == 2
 
 
 def test_leakage_rejects_cross_split_region_reuse() -> None:

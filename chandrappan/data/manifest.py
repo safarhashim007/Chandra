@@ -40,6 +40,7 @@ class ImageRecord:
     height: int
     nodata: float | None
     region_id: str
+    source_url: str | None = None
 
     def as_dict(self) -> dict[str, Any]:
         return asdict(self)
@@ -59,6 +60,7 @@ def image_record_from_lroc(
     label_path: str | Path | None = None,
     *,
     region_id: str | None = None,
+    source_url: str | None = None,
 ) -> ImageRecord:
     """Create a manifest row from real LROC metadata without filling unknowns."""
     raster = Path(raster_path)
@@ -110,6 +112,7 @@ def image_record_from_lroc(
         height=metadata.height,
         nodata=nodata,
         region_id=derived_region,
+        source_url=source_url,
     )
 
 
@@ -197,4 +200,6 @@ def read_manifest(path: str | Path) -> list[ImageRecord]:
                     row[field] = float(row[field])
     else:
         raise ValueError(f"unsupported manifest format: {source.suffix}")
+    for row in rows:
+        row.setdefault("source_url", None)
     return validate_manifest([ImageRecord(**row) for row in rows])

@@ -21,8 +21,10 @@ def geographic_split(
     random.Random(seed).shuffle(names)
     count = len(names)
     if count >= 3:
-        test_count = max(1, round(count * 0.2))
-        val_count = max(1, round(count * 0.2))
+        # Keep at least two independent groups in validation/test when a corpus
+        # is large enough to support both positive and negative evaluation.
+        test_count = max(2 if count >= 6 else 1, round(count * 0.2))
+        val_count = max(2 if count >= 6 else 1, round(count * 0.2))
         test_names = set(names[:test_count])
         val_names = set(names[test_count : test_count + val_count])
     elif count == 2:
