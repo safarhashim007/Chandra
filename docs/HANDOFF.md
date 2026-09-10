@@ -6,7 +6,7 @@
 
 ## Current commit
 
-pending final milestone commit
+`3c757da` (geometric verification, real validation, and diagnostics)
 
 ## Goal
 

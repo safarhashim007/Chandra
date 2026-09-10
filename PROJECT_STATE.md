@@ -4,7 +4,7 @@ Last updated: 2026-09-11 Asia/Kolkata
 
 Current version: pre-v0.1
 
-Current stable commit: pending final milestone commit (geometric verification, real validation, and diagnostics)
+Current stable commit: `3c757da` (geometric verification, real validation, and diagnostics)
 
 Integration branch: `dev`
 
