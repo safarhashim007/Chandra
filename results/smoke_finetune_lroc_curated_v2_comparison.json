@@ -1,0 +1,66 @@
+{
+  "run_id": "lroc_curated_v2_smoke",
+  "curation_run": "lroc_curated_v2",
+  "curation_sha256": "80641bb801a51e628dbce5d5601e6755fc899f4fcea611e9271694ca7d884a99",
+  "training_manifest": "runs/lroc_curated_v2/selected_training_pairs.parquet",
+  "smoke_state": "artifacts/lroc_curated_v2_refiner_smoke.pt",
+  "checkpoint_promoted": false,
+  "before": {
+    "valid_correspondences": 626560,
+    "median_epe_px": 4.000859260559082,
+    "mean_epe_px": 94.63352966308594,
+    "pck_1": 0.10650217058222676,
+    "pck_3": 0.3478581460674157,
+    "pck_5": 0.5226107635342185,
+    "pck_10": 0.5433398237997957,
+    "positive_count": 2,
+    "negative_count": 4,
+    "vrr": 0.5,
+    "far": 0.0
+  },
+  "after": {
+    "valid_correspondences": 626560,
+    "median_epe_px": 3.899777412414551,
+    "mean_epe_px": 91.7525405883789,
+    "pck_1": 0.104818373340143,
+    "pck_3": 0.3680349846782431,
+    "pck_5": 0.525300051072523,
+    "pck_10": 0.5447826225740552,
+    "positive_count": 2,
+    "negative_count": 4,
+    "vrr": 0.5,
+    "far": 0.0
+  },
+  "delta": {
+    "pck_5": 0.0026892875383044412,
+    "pck_10": 0.0014427987742594572,
+    "vrr": 0.0,
+    "valid_correspondences": 0,
+    "pck_1": -0.0016837972420837566,
+    "mean_epe_px": -2.8809890747070312,
+    "far": 0.0,
+    "positive_count": 0,
+    "pck_3": 0.020176838610827363,
+    "median_epe_px": -0.10108184814453125,
+    "negative_count": 0
+  },
+  "strict_smoke_gate": {
+    "passed": false,
+    "checks": {
+      "median_epe_not_worse": true,
+      "pck1_not_materially_worse": false,
+      "vrr_not_materially_worse": true,
+      "far_not_materially_worse": true,
+      "pck3_or_pck5_improved": true
+    },
+    "config": {
+      "max_median_epe_increase_px": 0.0,
+      "max_pck1_decrease": 0.0,
+      "max_vrr_decrease": 0.0,
+      "max_far_increase": 0.0,
+      "min_pck3_or_pck5_increase": 0.0
+    }
+  },
+  "decision": "SMOKE FINE-TUNING GATE: FAIL",
+  "failure_reason": "PCK@1 decreased under strict zero-regression gate"
+}

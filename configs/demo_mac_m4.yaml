@@ -1,0 +1,37 @@
+# Presentation profile.  This file is copied unchanged into the Mac release.
+mode: inference_only
+region_id: RP-001
+device: auto
+device_priority_on_macos:
+  - mps
+  - cpu
+live_demo_resolution: 640
+batch_size: 1
+preload_model: true
+warmup: true
+network_required_after_setup: false
+cuda_amp: false
+training: false
+dataset_building: false
+evaluation_suites: false
+corpus_acquisition: false
+nvidia_monitoring: false
+paths:
+  checkpoint: models/romav2_official.pt
+  data_root: data/rp001
+  frontend: frontend
+  artifacts: artifacts/live
+reference_bank:
+  descriptor_index: reference_bank/index.json
+  preload_descriptors: true
+  preload_thumbnails: true
+matching:
+  preprocessing: raw
+  top_k: 3
+  confidence_threshold: 0.5
+  minimum_common_valid_coverage: 0.25
+  maximum_geometric_matches: 4000
+visualization:
+  default_visible_matches: 100
+  allowed_visible_matches: [50, 100, 200, all]
+  max_all_visible_matches: 1000

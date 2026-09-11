@@ -1,0 +1,700 @@
+{
+  "region_id": "RP-001",
+  "status": "FAIL",
+  "data_card": {
+    "status": "EXPERIMENTAL_REGION_SPECIALIST",
+    "checkpoint_path": "runs/rp001_demo_adaptation_v1/rp001_specialist_stride1.pt",
+    "base_model": "official RoMa v2",
+    "official_romav2_checkpoint_hash": "1557dec0d21b62366465f7ff4d5fdf228cc695d0582e196ad2b80e05230828b7",
+    "git_commit": "9e26c22ee0858427f311856e445b7d4f0b34d57e",
+    "train_acquisitions": 12,
+    "valid_pair_count": 19,
+    "crop_sample_count": 97,
+    "preprocessing": "raw",
+    "objective": "corrected source-faithful RoMa robust warp loss, stride-1 only",
+    "learning_rate": 3e-06,
+    "steps": 10,
+    "training_metrics": {
+      "valid_correspondences": 7677596,
+      "median_epe_px": 0.6568443775177002,
+      "mean_epe_px": 36.7379150390625,
+      "pck_0.5": 0.42130726857729944,
+      "pck_1": 0.6126264002429928,
+      "pck_3": 0.7692853335861902
+    },
+    "validation_metrics": {
+      "valid_correspondences": 1085981,
+      "median_epe_px": 0.4769289791584015,
+      "mean_epe_px": 20.850807189941406,
+      "pck_0.5": 0.5441872371616078,
+      "pck_1": 0.7417477838010057,
+      "pck_3": 0.8794417213560827
+    },
+    "test_metrics_after_final_freeze": {
+      "valid_correspondences": 1194904,
+      "median_epe_px": 0.3478052616119385,
+      "mean_epe_px": 0.6339951157569885,
+      "pck_0.5": 0.7992282225182944,
+      "pck_1": 0.8257215642428178,
+      "pck_3": 0.9876274579380435
+    },
+    "manifest_sha256": "b9a68b0c913e7059fc2bcc0ca93c89ba54fff207c1fb64268fd4c5ec5830c64e",
+    "PRODUCTION_GATE": "FAIL",
+    "HACKATHON_DEMO_GATE": "FAIL"
+  },
+  "paired_base640_comparison": {
+    "TRAIN": {
+      "official_romav2": {
+        "valid_correspondences": 7677596,
+        "median_epe_px": 0.6565985679626465,
+        "mean_epe_px": 36.73584747314453,
+        "pck_0.5": 0.42162794187138786,
+        "pck_1": 0.6129177674886774,
+        "pck_3": 0.7692342759374158,
+        "vrr": 0.8421052631578947,
+        "accepted": 16,
+        "positive_queries": 19
+      },
+      "rp001_d1": {
+        "valid_correspondences": 7677596,
+        "median_epe_px": 0.6568443775177002,
+        "mean_epe_px": 36.7379150390625,
+        "pck_0.5": 0.42130726857729944,
+        "pck_1": 0.6126264002429928,
+        "pck_3": 0.7692853335861902,
+        "vrr": 0.8421052631578947,
+        "accepted": 16,
+        "positive_queries": 19
+      }
+    },
+    "VALIDATION": {
+      "official_romav2": {
+        "valid_correspondences": 1085981,
+        "median_epe_px": 0.4775448441505432,
+        "mean_epe_px": 20.84709930419922,
+        "pck_0.5": 0.5443870564954636,
+        "pck_1": 0.7459053151021979,
+        "pck_3": 0.8794500087938923,
+        "vrr": 0.75,
+        "accepted": 3,
+        "positive_queries": 4
+      },
+      "rp001_d1": {
+        "valid_correspondences": 1085981,
+        "median_epe_px": 0.4769289791584015,
+        "mean_epe_px": 20.850807189941406,
+        "pck_0.5": 0.5441872371616078,
+        "pck_1": 0.7417477838010057,
+        "pck_3": 0.8794417213560827,
+        "vrr": 0.75,
+        "accepted": 3,
+        "positive_queries": 4
+      }
+    },
+    "TEST": {
+      "official_romav2": {
+        "valid_correspondences": 1194904,
+        "median_epe_px": 0.3476080894470215,
+        "mean_epe_px": 0.6340135335922241,
+        "pck_0.5": 0.7993654720379211,
+        "pck_1": 0.8256621452434673,
+        "pck_3": 0.9875998406566553,
+        "vrr": 1.0,
+        "accepted": 4,
+        "positive_queries": 4
+      },
+      "rp001_d1": {
+        "valid_correspondences": 1194904,
+        "median_epe_px": 0.3478052616119385,
+        "mean_epe_px": 0.6339951157569885,
+        "pck_0.5": 0.7992282225182944,
+        "pck_1": 0.8257215642428178,
+        "pck_3": 0.9876274579380435,
+        "vrr": 1.0,
+        "accepted": 4,
+        "positive_queries": 4
+      }
+    }
+  },
+  "provenance": {
+    "region_id": "RP-001",
+    "training_data": {
+      "observations": 12,
+      "valid_pairs": 19,
+      "crops": 97,
+      "validation_used_for_training": 0,
+      "test_used_for_training": 0
+    },
+    "auto_reference_selection": [
+      {
+        "query_product_id": "NAC_PHO_E009S3481_M114030251R",
+        "role": "VALIDATION",
+        "candidates": [
+          {
+            "product_id": "NAC_PHO_E009S3481_M160030722R",
+            "rank": 1,
+            "score": 0.9999857702755911,
+            "gt_valid_crops": 0
+          },
+          {
+            "product_id": "NAC_PHO_E009S3481_M109311328R",
+            "rank": 2,
+            "score": 0.9999753393566629,
+            "gt_valid_crops": 0
+          },
+          {
+            "product_id": "NAC_PHO_E009S3481_M172995906R",
+            "rank": 3,
+            "score": 0.9999434923907656,
+            "gt_valid_crops": 0
+          },
+          {
+            "product_id": "NAC_PHO_E009S3481_M185962468R",
+            "rank": 4,
+            "score": 0.9997973751416159,
+            "gt_valid_crops": 6
+          },
+          {
+            "product_id": "NAC_PHO_E009S3481_M1106002958L",
+            "rank": 5,
+            "score": 0.9997898086065492,
+            "gt_valid_crops": 0
+          },
+          {
+            "product_id": "NAC_PHO_E009S3481_M1118958225R",
+            "rank": 6,
+            "score": 0.9992029366540978,
+            "gt_valid_crops": 6
+          },
+          {
+            "product_id": "NAC_PHO_E009S3481_M1160184176R",
+            "rank": 7,
+            "score": 0.9991896787726063,
+            "gt_valid_crops": 6
+          },
+          {
+            "product_id": "NAC_PHO_E009S3481_M1291945613R",
+            "rank": 8,
+            "score": 0.9990627592017496,
+            "gt_valid_crops": 6
+          },
+          {
+            "product_id": "NAC_PHO_E009S3481_M1129574893R",
+            "rank": 9,
+            "score": 0.9973410007120925,
+            "gt_valid_crops": 6
+          },
+          {
+            "product_id": "NAC_PHO_E009S3481_M1213150577R",
+            "rank": 10,
+            "score": 0.9969863374782478,
+            "gt_valid_crops": 0
+          },
+          {
+            "product_id": "NAC_PHO_E009S3481_M106949300R",
+            "rank": 11,
+            "score": 0.9957648621051409,
+            "gt_valid_crops": 6
+          },
+          {
+            "product_id": "NAC_PHO_E009S3481_M1096572724R",
+            "rank": 12,
+            "score": 0.9938883833934503,
+            "gt_valid_crops": 6
+          }
+        ],
+        "selected_reference": "NAC_PHO_E009S3481_M185962468R",
+        "selection_method": "TRAIN-only histogram retrieval then GT-valid geometry crop"
+      },
+      {
+        "query_product_id": "NAC_PHO_E009S3481_M1111890780R",
+        "role": "VALIDATION",
+        "candidates": [
+          {
+            "product_id": "NAC_PHO_E009S3481_M160030722R",
+            "rank": 1,
+            "score": 0.9999808251984208,
+            "gt_valid_crops": 0
+          },
+          {
+            "product_id": "NAC_PHO_E009S3481_M109311328R",
+            "rank": 2,
+            "score": 0.9999440503853603,
+            "gt_valid_crops": 0
+          },
+          {
+            "product_id": "NAC_PHO_E009S3481_M172995906R",
+            "rank": 3,
+            "score": 0.9999012771942044,
+            "gt_valid_crops": 0
+          },
+          {
+            "product_id": "NAC_PHO_E009S3481_M185962468R",
+            "rank": 4,
+            "score": 0.9997476232838637,
+            "gt_valid_crops": 0
+          },
+          {
+            "product_id": "NAC_PHO_E009S3481_M1106002958L",
+            "rank": 5,
+            "score": 0.9997307457659628,
+            "gt_valid_crops": 0
+          },
+          {
+            "product_id": "NAC_PHO_E009S3481_M1118958225R",
+            "rank": 6,
+            "score": 0.9991055405211279,
+            "gt_valid_crops": 0
+          },
+          {
+            "product_id": "NAC_PHO_E009S3481_M1160184176R",
+            "rank": 7,
+            "score": 0.999083539647014,
+            "gt_valid_crops": 0
+          },
+          {
+            "product_id": "NAC_PHO_E009S3481_M1291945613R",
+            "rank": 8,
+            "score": 0.9989432146446146,
+            "gt_valid_crops": 2
+          },
+          {
+            "product_id": "NAC_PHO_E009S3481_M1129574893R",
+            "rank": 9,
+            "score": 0.9972217465233284,
+            "gt_valid_crops": 0
+          },
+          {
+            "product_id": "NAC_PHO_E009S3481_M1213150577R",
+            "rank": 10,
+            "score": 0.9967950652991445,
+            "gt_valid_crops": 0
+          },
+          {
+            "product_id": "NAC_PHO_E009S3481_M106949300R",
+            "rank": 11,
+            "score": 0.9956087467384769,
+            "gt_valid_crops": 0
+          },
+          {
+            "product_id": "NAC_PHO_E009S3481_M1096572724R",
+            "rank": 12,
+            "score": 0.9935153016071835,
+            "gt_valid_crops": 0
+          }
+        ],
+        "selected_reference": "NAC_PHO_E009S3481_M1291945613R",
+        "selection_method": "TRAIN-only histogram retrieval then GT-valid geometry crop"
+      },
+      {
+        "query_product_id": "NAC_PHO_E009S3481_M1138987738R",
+        "role": "VALIDATION",
+        "candidates": [
+          {
+            "product_id": "NAC_PHO_E009S3481_M1096572724R",
+            "rank": 1,
+            "score": 0.9981008593784781,
+            "gt_valid_crops": 6
+          },
+          {
+            "product_id": "NAC_PHO_E009S3481_M1291945613R",
+            "rank": 2,
+            "score": 0.9959615514506543,
+            "gt_valid_crops": 0
+          },
+          {
+            "product_id": "NAC_PHO_E009S3481_M1160184176R",
+            "rank": 3,
+            "score": 0.9958550765955961,
+            "gt_valid_crops": 6
+          },
+          {
+            "product_id": "NAC_PHO_E009S3481_M1118958225R",
+            "rank": 4,
+            "score": 0.995669952764333,
+            "gt_valid_crops": 6
+          },
+          {
+            "product_id": "NAC_PHO_E009S3481_M1213150577R",
+            "rank": 5,
+            "score": 0.9956307980476407,
+            "gt_valid_crops": 6
+          },
+          {
+            "product_id": "NAC_PHO_E009S3481_M172995906R",
+            "rank": 6,
+            "score": 0.995563424340308,
+            "gt_valid_crops": 6
+          },
+          {
+            "product_id": "NAC_PHO_E009S3481_M1106002958L",
+            "rank": 7,
+            "score": 0.9953941770168475,
+            "gt_valid_crops": 0
+          },
+          {
+            "product_id": "NAC_PHO_E009S3481_M185962468R",
+            "rank": 8,
+            "score": 0.9951765962109715,
+            "gt_valid_crops": 0
+          },
+          {
+            "product_id": "NAC_PHO_E009S3481_M109311328R",
+            "rank": 9,
+            "score": 0.9951024542103363,
+            "gt_valid_crops": 6
+          },
+          {
+            "product_id": "NAC_PHO_E009S3481_M1129574893R",
+            "rank": 10,
+            "score": 0.994992752345528,
+            "gt_valid_crops": 6
+          },
+          {
+            "product_id": "NAC_PHO_E009S3481_M160030722R",
+            "rank": 11,
+            "score": 0.9947835559973486,
+            "gt_valid_crops": 6
+          },
+          {
+            "product_id": "NAC_PHO_E009S3481_M106949300R",
+            "rank": 12,
+            "score": 0.9938705271525968,
+            "gt_valid_crops": 6
+          }
+        ],
+        "selected_reference": "NAC_PHO_E009S3481_M1096572724R",
+        "selection_method": "TRAIN-only histogram retrieval then GT-valid geometry crop"
+      },
+      {
+        "query_product_id": "NAC_PHO_E009S3481_M1256675053R",
+        "role": "VALIDATION",
+        "candidates": [
+          {
+            "product_id": "NAC_PHO_E009S3481_M1118958225R",
+            "rank": 1,
+            "score": 0.9998506727858247,
+            "gt_valid_crops": 6
+          },
+          {
+            "product_id": "NAC_PHO_E009S3481_M1160184176R",
+            "rank": 2,
+            "score": 0.9998236377714211,
+            "gt_valid_crops": 6
+          },
+          {
+            "product_id": "NAC_PHO_E009S3481_M185962468R",
+            "rank": 3,
+            "score": 0.9997464256820989,
+            "gt_valid_crops": 6
+          },
+          {
+            "product_id": "NAC_PHO_E009S3481_M1106002958L",
+            "rank": 4,
+            "score": 0.9997423972456776,
+            "gt_valid_crops": 0
+          },
+          {
+            "product_id": "NAC_PHO_E009S3481_M172995906R",
+            "rank": 5,
+            "score": 0.999534980258726,
+            "gt_valid_crops": 6
+          },
+          {
+            "product_id": "NAC_PHO_E009S3481_M109311328R",
+            "rank": 6,
+            "score": 0.9994171973313919,
+            "gt_valid_crops": 0
+          },
+          {
+            "product_id": "NAC_PHO_E009S3481_M1291945613R",
+            "rank": 7,
+            "score": 0.9993239043488605,
+            "gt_valid_crops": 6
+          },
+          {
+            "product_id": "NAC_PHO_E009S3481_M1129574893R",
+            "rank": 8,
+            "score": 0.9992963833838113,
+            "gt_valid_crops": 6
+          },
+          {
+            "product_id": "NAC_PHO_E009S3481_M160030722R",
+            "rank": 9,
+            "score": 0.999149101460093,
+            "gt_valid_crops": 0
+          },
+          {
+            "product_id": "NAC_PHO_E009S3481_M1213150577R",
+            "rank": 10,
+            "score": 0.9988418779675288,
+            "gt_valid_crops": 6
+          },
+          {
+            "product_id": "NAC_PHO_E009S3481_M106949300R",
+            "rank": 11,
+            "score": 0.9983955185372799,
+            "gt_valid_crops": 6
+          },
+          {
+            "product_id": "NAC_PHO_E009S3481_M1096572724R",
+            "rank": 12,
+            "score": 0.9950179465604566,
+            "gt_valid_crops": 6
+          }
+        ],
+        "selected_reference": "NAC_PHO_E009S3481_M1118958225R",
+        "selection_method": "TRAIN-only histogram retrieval then GT-valid geometry crop"
+      }
+    ],
+    "showcases": {
+      "training_domain": {
+        "sample_id": "NAC_PHO_E009S3481_M1129574893R__NAC_PHO_E009S3481_M1160184176R__central",
+        "official": {
+          "valid_correspondences": 409600,
+          "median_epe_px": 0.2014649510383606,
+          "mean_epe_px": 0.20735891163349152,
+          "pck_0.5": 0.9986645579338074,
+          "pck_1": 0.9999731183052063,
+          "pck_3": 1.0
+        },
+        "specialist": {
+          "valid_correspondences": 409600,
+          "median_epe_px": 0.19798603653907776,
+          "mean_epe_px": 0.20397895574569702,
+          "pck_0.5": 0.9988573789596558,
+          "pck_1": 0.9999731183052063,
+          "pck_3": 1.0
+        },
+        "metric_delta_pck_1": 0.0,
+        "alignment_assets": {
+          "source": "demo/RP-001/final/training_domain_source.png",
+          "registered": "demo/RP-001/final/training_domain_registered.png",
+          "overlay": "demo/RP-001/final/training_domain_overlay.png",
+          "difference": "demo/RP-001/final/training_domain_difference.png",
+          "blink": "demo/RP-001/final/training_domain_blink.gif"
+        }
+      },
+      "heldout_validation": {
+        "sample_id": "VALIDATION__NAC_PHO_E009S3481_M1256675053R__NAC_PHO_E009S3481_M1118958225R__central",
+        "official": {
+          "valid_correspondences": 409600,
+          "median_epe_px": 0.42703965306282043,
+          "mean_epe_px": 0.4256221354007721,
+          "pck_0.5": 0.8940624594688416,
+          "pck_1": 0.999987781047821,
+          "pck_3": 1.0
+        },
+        "specialist": {
+          "valid_correspondences": 409600,
+          "median_epe_px": 0.42482730746269226,
+          "mean_epe_px": 0.4233121871948242,
+          "pck_0.5": 0.9034594297409058,
+          "pck_1": 0.999987781047821,
+          "pck_3": 1.0
+        },
+        "metric_delta_pck_1": 0.0,
+        "alignment_assets": {
+          "source": "demo/RP-001/final/heldout_validation_source.png",
+          "registered": "demo/RP-001/final/heldout_validation_registered.png",
+          "overlay": "demo/RP-001/final/heldout_validation_overlay.png",
+          "difference": "demo/RP-001/final/heldout_validation_difference.png",
+          "blink": "demo/RP-001/final/heldout_validation_blink.gif"
+        }
+      },
+      "hard_negative": {
+        "verification": {
+          "accepted": false,
+          "selected": {
+            "model_type": "affine",
+            "matrix": [
+              [
+                0.8475246122761745,
+                -0.19698939907349533,
+                620.586457444328
+              ],
+              [
+                -0.42268528302544456,
+                0.9713558814364622,
+                -168.52891970281522
+              ]
+            ],
+            "input_matches": 4000,
+            "inliers": 2359,
+            "inlier_ratio": 0.58975,
+            "mean_reprojection_error_px": 1.2250305159418367,
+            "median_reprojection_error_px": 1.085113836699136,
+            "max_reprojection_error_px": 3.7499842651761583,
+            "scale": 0.8602229344165538,
+            "rotation_degrees": -26.506772996040088,
+            "shear": 0.6152596699288682,
+            "anisotropy": 2.052418256041993,
+            "determinant": 0.7399834968962268,
+            "grid_coverage": 0.03125,
+            "hull_coverage": 0.007003173828125,
+            "degenerate": false,
+            "accepted": false,
+            "rejection_reasons": [
+              "implausible_rotation",
+              "excessive_shear",
+              "excessive_anisotropy",
+              "low_grid_coverage",
+              "low_hull_coverage"
+            ]
+          },
+          "candidates": [
+            {
+              "model_type": "similarity",
+              "matrix": [
+                [
+                  1.1463606073594341,
+                  0.22429013089643698,
+                  498.07238757360994
+                ],
+                [
+                  -0.22429013089643698,
+                  1.1463606073594341,
+                  -221.22747428117057
+                ]
+              ],
+              "input_matches": 4000,
+              "inliers": 783,
+              "inlier_ratio": 0.19575,
+              "mean_reprojection_error_px": 1.4311172312028613,
+              "median_reprojection_error_px": 1.3518956133503959,
+              "max_reprojection_error_px": 3.2056262398755155,
+              "scale": 1.1680961882152647,
+              "rotation_degrees": -11.070307806268062,
+              "shear": 0.0,
+              "anisotropy": 1.0000000000000002,
+              "determinant": 1.3644487049230314,
+              "grid_coverage": 0.03125,
+              "hull_coverage": 0.00531494140625,
+              "degenerate": false,
+              "accepted": false,
+              "rejection_reasons": [
+                "low_inlier_ratio",
+                "low_grid_coverage",
+                "low_hull_coverage"
+              ]
+            },
+            {
+              "model_type": "affine",
+              "matrix": [
+                [
+                  0.8475246122761745,
+                  -0.19698939907349533,
+                  620.586457444328
+                ],
+                [
+                  -0.42268528302544456,
+                  0.9713558814364622,
+                  -168.52891970281522
+                ]
+              ],
+              "input_matches": 4000,
+              "inliers": 2359,
+              "inlier_ratio": 0.58975,
+              "mean_reprojection_error_px": 1.2250305159418367,
+              "median_reprojection_error_px": 1.085113836699136,
+              "max_reprojection_error_px": 3.7499842651761583,
+              "scale": 0.8602229344165538,
+              "rotation_degrees": -26.506772996040088,
+              "shear": 0.6152596699288682,
+              "anisotropy": 2.052418256041993,
+              "determinant": 0.7399834968962268,
+              "grid_coverage": 0.03125,
+              "hull_coverage": 0.007003173828125,
+              "degenerate": false,
+              "accepted": false,
+              "rejection_reasons": [
+                "implausible_rotation",
+                "excessive_shear",
+                "excessive_anisotropy",
+                "low_grid_coverage",
+                "low_hull_coverage"
+              ]
+            },
+            {
+              "model_type": "homography",
+              "matrix": [
+                [
+                  0.3453987481264582,
+                  -0.800513490071459,
+                  606.7701361496921
+                ],
+                [
+                  -0.3027332461081326,
+                  0.5254854708125092,
+                  -77.9309672382653
+                ],
+                [
+                  -0.0004831322745805157,
+                  -0.0011414359758820003,
+                  1.0
+                ]
+              ],
+              "input_matches": 4000,
+              "inliers": 2260,
+              "inlier_ratio": 0.565,
+              "mean_reprojection_error_px": 1.2653125354862487,
+              "median_reprojection_error_px": 1.1985504500510946,
+              "max_reprojection_error_px": 3.7975802712830165,
+              "scale": 1.4811673963367191,
+              "rotation_degrees": -20.921137738440613,
+              "shear": 0.15994261936513499,
+              "anisotropy": 1.519321470074333,
+              "determinant": 2.1938568559708953,
+              "grid_coverage": 0.03125,
+              "hull_coverage": 0.006890869140625,
+              "degenerate": false,
+              "accepted": false,
+              "rejection_reasons": [
+                "implausible_scale",
+                "implausible_rotation",
+                "excessive_anisotropy",
+                "low_grid_coverage",
+                "low_hull_coverage"
+              ]
+            }
+          ],
+          "rejection_reason": "implausible_rotation;excessive_shear;excessive_anisotropy;low_grid_coverage;low_hull_coverage"
+        },
+        "accepted_geometry": false
+      }
+    },
+    "gates": {
+      "PRODUCTION_GATE": "FAIL",
+      "HACKATHON_DEMO_GATE": "FAIL"
+    }
+  },
+  "assets": {
+    "hard_negative.png": "d30e4ee08c3b9b321932d59285588e6bec65e89fdd54e32d08b7ce751ce29937",
+    "heldout_validation_blink.gif": "62d1ff542c2542297c8380d3ae53dd8bb9d1e7d18a51fefd323ebfd5afdd8c38",
+    "heldout_validation_comparison.png": "8c92b851053b213bc967b4fe31bda8d4dd7817faa59103a219774454252436fb",
+    "heldout_validation_comparison_official.png": "1fbc5bfca85445dc2efbedce65c016cad9af4f1bad29d7b33692678625d6fc22",
+    "heldout_validation_comparison_specialist.png": "47af1018ef32ab1007e8aa5fd792c30fc1c02d6ff355af73c89de2cc49d82b99",
+    "heldout_validation_difference.png": "73918ec8e9a790f7d996387a666795705a31ea4f344a2781b8343d1a9534116c",
+    "heldout_validation_overlay.png": "58ed23f57e482086026647545820aee535c095733898b7b0dd950f15199dc418",
+    "heldout_validation_registered.png": "f4f4773ec554df15ed89db507223440177bf42369f9ec55613c76295f0848452",
+    "heldout_validation_source.png": "83458f720c9fdf975db2f66c48af9c0bde8daf445f9ac815129cead710603f3d",
+    "index.html": "3461a96d365520eea1756c1cb4eae650d63fd097fd1ef2b2851b21c5d7e25fd0",
+    "live_demo_smoke.json": "351f069dc682666845748944e946f49d3cffe53a2f7a19baa80c17116decf345",
+    "mac_demo_config.json": "37ed9d61adb8f1873d4863aa169ad441e9ae1105ac1dfbb5928095026d82e4b6",
+    "romav2_official.pt": "1557dec0d21b62366465f7ff4d5fdf228cc695d0582e196ad2b80e05230828b7",
+    "rp001_specialist_stride1.pt": "11a443dda177d8a96611b96d8d57190aacc83f49f0307733e2c4dc14231e5610",
+    "official_vs_specialist_matches.png": "e5cc9f4003d201a3d0dbb009127ccde027eec04ab9a54db8ad15a47d499aafda",
+    "official_vs_specialist_matches_official.png": "7ad1033ac1b22b161bd496c5ca40602a6b7e13b25b7251102cfe6f8173f70d5c",
+    "official_vs_specialist_matches_specialist.png": "1ec5641cda4810a1829124b0f0fcf017229aa4cce6f31a46a7e5d6ace8a70f55",
+    "provenance_manifest.json": "46ba1a1a60fcb6b91990c0fd984ca0e6802e2f6d0954f2e05e27f894841fca39",
+    "rp001_specialist_checkpoint.json": "a3982e7e39d62f9febeb926b2b067eabba1c3935c346046867ebdb17407f2499",
+    "selected_training_pairs.json": "4eae78b99c71afd328924a0ad870016bfceb4b558bd6a548f552eed86c122e82",
+    "training_data_contact_sheet.png": "8f22c3aaea54ae5318e8043419d78706dfe27d0ab608c3f3b3092db03b270ed9",
+    "training_domain_blink.gif": "1cd0ebec29f5167ba1fc7de8537e57686809b55a72de265a6c8152f72c06faba",
+    "training_domain_difference.png": "2e6a5aa9406736c9b7d7a37c028276ac9ada777466537f16d1992e473e132368",
+    "training_domain_overlay.png": "d959fae152b66d14b3623959ab0cb4784fde41d946d9b05dc8f51af36ac0255f",
+    "training_domain_registered.png": "c288125648b2365d9484cf285fdd91d0073fbdb7dd026089e21fa378cf454bbc",
+    "training_domain_source.png": "bcdd21a3a64f2265008075f5eceadb5aad6a5a743c7b220430e4d590cb8cd267"
+  },
+  "report_sha256": "9ac8b370139b02338482a4d99ab201e8d9fa2f187f25aaf950ce5254cbf9f8cd"
+}

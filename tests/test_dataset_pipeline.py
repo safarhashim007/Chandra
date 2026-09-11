@@ -88,6 +88,25 @@ def test_geographic_split_is_deterministic_and_region_safe() -> None:
     validate_no_leakage(first)
 
 
+def test_geographic_split_preserves_fixed_regions_and_assigns_new_groups() -> None:
+    records = [
+        _record("old-train", "old-train", 0),
+        _record("old-val", "old-val", 20),
+        _record("old-test", "old-test", 40),
+        _record("new", "new", 60),
+    ]
+    splits = geographic_split(
+        records,
+        seed=7,
+        fixed_regions={"old-train": "train", "old-val": "validation", "old-test": "test"},
+    )
+
+    assert any(row.region_id == "old-train" for row in splits["train"])
+    assert any(row.region_id == "old-val" for row in splits["validation"])
+    assert any(row.region_id == "old-test" for row in splits["test"])
+    validate_no_leakage(splits)
+
+
 def test_large_geographic_split_keeps_validation_and_test_multi_region() -> None:
     records = [_record(str(index), str(index), index * 20) for index in range(7)]
     splits = geographic_split(records, seed=7)

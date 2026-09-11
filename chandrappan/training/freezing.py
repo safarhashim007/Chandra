@@ -35,3 +35,22 @@ def configure_refiner_only_training(model: nn.Module) -> None:
         raise TypeError("RoMa model must expose refiners")
     freeze_module(model)
     unfreeze_module(model.refiners)
+
+
+def configure_stride1_refiner_training(model: nn.Module) -> nn.Module:
+    """Freeze RoMa except its stride-1 refiner (the RP-001 D1 experiment).
+
+    This is deliberately narrower than :func:`configure_refiner_only_training`.
+    It exists so a small regional adaptation cannot silently optimize the
+    backbone, matcher, or the stride-4/stride-2 refinement stages.
+    """
+    if not hasattr(model, "refiners"):
+        raise TypeError("RoMa model must expose refiners")
+    refiners = model.refiners
+    try:
+        stride1 = refiners["1"]
+    except (KeyError, TypeError) as exc:
+        raise TypeError("RoMa model must expose a stride-1 refiner named '1'") from exc
+    freeze_module(model)
+    unfreeze_module(stride1)
+    return stride1

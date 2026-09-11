@@ -1,0 +1,443 @@
+{
+  "region_id": "RP-001",
+  "matcher": "official RoMa v2, precise bidirectional setting",
+  "available_negative_categories": [
+    "other_lunar_region",
+    "intensity_similarity_candidate",
+    "same_region_nonoverlapping_crop"
+  ],
+  "unavailable_required_category": "No validated shadow mask or independent crater-semantic similarity labels are available; those categories are not claimed as complete.",
+  "registration": {
+    "positive_count": 0,
+    "negative_count": 3,
+    "vrr": NaN,
+    "far": 0.0
+  },
+  "cases": [
+    {
+      "name": "other_lunar_region",
+      "description": "Different mapped lunar region supplied as a retrieval candidate.",
+      "query_product_id": "NAC_PHO_E009S3481_M177711422R",
+      "candidate_product_id": "NAC_PHO_E018N3346_M1142603254L",
+      "matching": {
+        "raw_correspondence_count": 1638400,
+        "filtered_correspondence_count": 4000,
+        "cycle_median_px": 1.9420132637023926,
+        "precision_condition_median": 2.2669429779052734
+      },
+      "verification": {
+        "accepted": false,
+        "selected": {
+          "model_type": "affine",
+          "matrix": [
+            [
+              0.9279592716482978,
+              0.04397319711344685,
+              22.891774822975545
+            ],
+            [
+              -0.10743896912273915,
+              1.023368827783439,
+              49.13014082733791
+            ]
+          ],
+          "input_matches": 4000,
+          "inliers": 3576,
+          "inlier_ratio": 0.894,
+          "mean_reprojection_error_px": 0.5212457958900032,
+          "median_reprojection_error_px": 0.45902834773484147,
+          "max_reprojection_error_px": 2.558155378877556,
+          "scale": 0.97691812708353,
+          "rotation_degrees": -6.604290410281231,
+          "shear": 0.07226093276924359,
+          "anisotropy": 1.1243784470645737,
+          "determinant": 0.9543690270243921,
+          "grid_coverage": 0.03125,
+          "hull_coverage": 0.00311065673828125,
+          "degenerate": false,
+          "accepted": false,
+          "rejection_reasons": [
+            "low_grid_coverage",
+            "low_hull_coverage"
+          ]
+        },
+        "candidates": [
+          {
+            "model_type": "similarity",
+            "matrix": [
+              [
+                1.0006477448547944,
+                0.03112947421278585,
+                -11.425983184893417
+              ],
+              [
+                -0.03112947421278585,
+                1.0006477448547944,
+                16.33313462857298
+              ]
+            ],
+            "input_matches": 4000,
+            "inliers": 3576,
+            "inlier_ratio": 0.894,
+            "mean_reprojection_error_px": 0.7187239810635103,
+            "median_reprojection_error_px": 0.6621497747038186,
+            "max_reprojection_error_px": 2.8239960714078896,
+            "scale": 1.0011318361972863,
+            "rotation_degrees": -1.7818582558365146,
+            "shear": 0.0,
+            "anisotropy": 1.0,
+            "determinant": 1.0022649534477501,
+            "grid_coverage": 0.03125,
+            "hull_coverage": 0.00311065673828125,
+            "degenerate": false,
+            "accepted": false,
+            "rejection_reasons": [
+              "low_grid_coverage",
+              "low_hull_coverage"
+            ]
+          },
+          {
+            "model_type": "affine",
+            "matrix": [
+              [
+                0.9279592716482978,
+                0.04397319711344685,
+                22.891774822975545
+              ],
+              [
+                -0.10743896912273915,
+                1.023368827783439,
+                49.13014082733791
+              ]
+            ],
+            "input_matches": 4000,
+            "inliers": 3576,
+            "inlier_ratio": 0.894,
+            "mean_reprojection_error_px": 0.5212457958900032,
+            "median_reprojection_error_px": 0.45902834773484147,
+            "max_reprojection_error_px": 2.558155378877556,
+            "scale": 0.97691812708353,
+            "rotation_degrees": -6.604290410281231,
+            "shear": 0.07226093276924359,
+            "anisotropy": 1.1243784470645737,
+            "determinant": 0.9543690270243921,
+            "grid_coverage": 0.03125,
+            "hull_coverage": 0.00311065673828125,
+            "degenerate": false,
+            "accepted": false,
+            "rejection_reasons": [
+              "low_grid_coverage",
+              "low_hull_coverage"
+            ]
+          },
+          {
+            "model_type": "homography",
+            "matrix": [
+              [
+                0.22832150366379705,
+                0.1285861313475066,
+                193.14869174252914
+              ],
+              [
+                -0.30851591120422306,
+                0.7509054096514952,
+                137.99381460706192
+              ],
+              [
+                -0.0007284303031882364,
+                0.00018156407963910022,
+                1.0
+              ]
+            ],
+            "input_matches": 4000,
+            "inliers": 3575,
+            "inlier_ratio": 0.89375,
+            "mean_reprojection_error_px": 0.5669827236933666,
+            "median_reprojection_error_px": 0.5173715600009199,
+            "max_reprojection_error_px": 1.923290931251464,
+            "scale": 0.7155344709293348,
+            "rotation_degrees": -7.036830805743312,
+            "shear": 0.034634975266537624,
+            "anisotropy": 1.3756973593083457,
+            "determinant": 0.511989579088123,
+            "grid_coverage": 0.03125,
+            "hull_coverage": 0.00309417724609375,
+            "degenerate": false,
+            "accepted": false,
+            "rejection_reasons": [
+              "implausible_scale",
+              "excessive_anisotropy",
+              "low_grid_coverage",
+              "low_hull_coverage"
+            ]
+          }
+        ],
+        "rejection_reason": "low_grid_coverage;low_hull_coverage"
+      },
+      "accepted": false
+    },
+    {
+      "name": "intensity_similarity_candidate",
+      "description": "Out-of-region lunar terrain candidate. It is a coarse photometric hard candidate, not a claim of crater-semantic similarity.",
+      "query_product_id": "NAC_PHO_E009S3481_M1177841115R",
+      "candidate_product_id": "NAC_PHO_E199N0308_M1096343661R",
+      "matching": {
+        "raw_correspondence_count": 1638400,
+        "filtered_correspondence_count": 0,
+        "cycle_median_px": Infinity,
+        "precision_condition_median": Infinity
+      },
+      "verification": {
+        "accepted": false,
+        "selected": null,
+        "candidates": [
+          {
+            "model_type": "similarity",
+            "matrix": null,
+            "input_matches": 0,
+            "inliers": 0,
+            "inlier_ratio": 0.0,
+            "mean_reprojection_error_px": Infinity,
+            "median_reprojection_error_px": Infinity,
+            "max_reprojection_error_px": Infinity,
+            "scale": NaN,
+            "rotation_degrees": NaN,
+            "shear": NaN,
+            "anisotropy": NaN,
+            "determinant": NaN,
+            "grid_coverage": 0.0,
+            "hull_coverage": 0.0,
+            "degenerate": true,
+            "accepted": false,
+            "rejection_reasons": [
+              "insufficient_matches"
+            ]
+          },
+          {
+            "model_type": "affine",
+            "matrix": null,
+            "input_matches": 0,
+            "inliers": 0,
+            "inlier_ratio": 0.0,
+            "mean_reprojection_error_px": Infinity,
+            "median_reprojection_error_px": Infinity,
+            "max_reprojection_error_px": Infinity,
+            "scale": NaN,
+            "rotation_degrees": NaN,
+            "shear": NaN,
+            "anisotropy": NaN,
+            "determinant": NaN,
+            "grid_coverage": 0.0,
+            "hull_coverage": 0.0,
+            "degenerate": true,
+            "accepted": false,
+            "rejection_reasons": [
+              "insufficient_matches"
+            ]
+          },
+          {
+            "model_type": "homography",
+            "matrix": null,
+            "input_matches": 0,
+            "inliers": 0,
+            "inlier_ratio": 0.0,
+            "mean_reprojection_error_px": Infinity,
+            "median_reprojection_error_px": Infinity,
+            "max_reprojection_error_px": Infinity,
+            "scale": NaN,
+            "rotation_degrees": NaN,
+            "shear": NaN,
+            "anisotropy": NaN,
+            "determinant": NaN,
+            "grid_coverage": 0.0,
+            "hull_coverage": 0.0,
+            "degenerate": true,
+            "accepted": false,
+            "rejection_reasons": [
+              "insufficient_matches"
+            ]
+          }
+        ],
+        "rejection_reason": "no_model_fit"
+      },
+      "accepted": false
+    },
+    {
+      "name": "same_region_nonoverlapping_crop",
+      "description": "Same RP-001 maps with deliberately disjoint pixel windows.",
+      "query_product_id": "NAC_PHO_E009S3481_M1323677870R",
+      "candidate_product_id": "NAC_PHO_E009S3481_M1345996066R",
+      "matching": {
+        "raw_correspondence_count": 1638400,
+        "filtered_correspondence_count": 286,
+        "cycle_median_px": 1.999247670173645,
+        "precision_condition_median": 1.7249770164489746
+      },
+      "verification": {
+        "accepted": false,
+        "selected": {
+          "model_type": "homography",
+          "matrix": [
+            [
+              -0.41942452377273054,
+              -0.05238588693629278,
+              133.88758544048628
+            ],
+            [
+              -0.8747278657298412,
+              -0.5586130543731004,
+              586.424163214066
+            ],
+            [
+              -0.0015858441724799616,
+              -0.0006390828081885946,
+              1.0
+            ]
+          ],
+          "input_matches": 286,
+          "inliers": 275,
+          "inlier_ratio": 0.9615384615384616,
+          "mean_reprojection_error_px": 0.33737002286393536,
+          "median_reprojection_error_px": 0.28198182958376006,
+          "max_reprojection_error_px": 0.9260780277574547,
+          "scale": 1.2363273176321268,
+          "rotation_degrees": -161.55129396270468,
+          "shear": 0.5965061959914455,
+          "anisotropy": 2.6193877874591265,
+          "determinant": 1.52850523632345,
+          "grid_coverage": 0.046875,
+          "hull_coverage": 0.00621826171875,
+          "degenerate": false,
+          "accepted": false,
+          "rejection_reasons": [
+            "implausible_rotation",
+            "excessive_shear",
+            "excessive_anisotropy",
+            "low_grid_coverage",
+            "low_hull_coverage"
+          ]
+        },
+        "candidates": [
+          {
+            "model_type": "similarity",
+            "matrix": [
+              [
+                -0.3778861272275665,
+                0.0021306628163258933,
+                143.18469423153877
+              ],
+              [
+                -0.0021306628163258933,
+                -0.3778861272275665,
+                611.7959965444862
+              ]
+            ],
+            "input_matches": 286,
+            "inliers": 224,
+            "inlier_ratio": 0.7832167832167832,
+            "mean_reprojection_error_px": 0.5462278773306093,
+            "median_reprojection_error_px": 0.3924385687204581,
+            "max_reprojection_error_px": 1.6844022853999057,
+            "scale": 0.37789213391533494,
+            "rotation_degrees": -179.67694846542585,
+            "shear": 0.0,
+            "anisotropy": 1.0,
+            "determinant": 0.14280246487508544,
+            "grid_coverage": 0.046875,
+            "hull_coverage": 0.0043695068359375,
+            "degenerate": false,
+            "accepted": false,
+            "rejection_reasons": [
+              "implausible_scale",
+              "implausible_rotation",
+              "low_grid_coverage",
+              "low_hull_coverage"
+            ]
+          },
+          {
+            "model_type": "affine",
+            "matrix": [
+              [
+                -0.5960023502239719,
+                -0.026810697847848352,
+                196.52479933872223
+              ],
+              [
+                -0.26731423412537353,
+                -0.41689008147520007,
+                676.8345209111513
+              ]
+            ],
+            "input_matches": 286,
+            "inliers": 275,
+            "inlier_ratio": 0.9615384615384616,
+            "mean_reprojection_error_px": 0.9207122855902709,
+            "median_reprojection_error_px": 0.9520590533902669,
+            "max_reprojection_error_px": 1.7820639421556046,
+            "scale": 0.4912235613065786,
+            "rotation_degrees": -155.8431909647608,
+            "shear": 0.466950086577965,
+            "anisotropy": 1.988597584080938,
+            "determinant": 0.241300587182718,
+            "grid_coverage": 0.046875,
+            "hull_coverage": 0.00621826171875,
+            "degenerate": false,
+            "accepted": false,
+            "rejection_reasons": [
+              "implausible_scale",
+              "implausible_rotation",
+              "excessive_shear",
+              "excessive_anisotropy",
+              "low_grid_coverage",
+              "low_hull_coverage"
+            ]
+          },
+          {
+            "model_type": "homography",
+            "matrix": [
+              [
+                -0.41942452377273054,
+                -0.05238588693629278,
+                133.88758544048628
+              ],
+              [
+                -0.8747278657298412,
+                -0.5586130543731004,
+                586.424163214066
+              ],
+              [
+                -0.0015858441724799616,
+                -0.0006390828081885946,
+                1.0
+              ]
+            ],
+            "input_matches": 286,
+            "inliers": 275,
+            "inlier_ratio": 0.9615384615384616,
+            "mean_reprojection_error_px": 0.33737002286393536,
+            "median_reprojection_error_px": 0.28198182958376006,
+            "max_reprojection_error_px": 0.9260780277574547,
+            "scale": 1.2363273176321268,
+            "rotation_degrees": -161.55129396270468,
+            "shear": 0.5965061959914455,
+            "anisotropy": 2.6193877874591265,
+            "determinant": 1.52850523632345,
+            "grid_coverage": 0.046875,
+            "hull_coverage": 0.00621826171875,
+            "degenerate": false,
+            "accepted": false,
+            "rejection_reasons": [
+              "implausible_rotation",
+              "excessive_shear",
+              "excessive_anisotropy",
+              "low_grid_coverage",
+              "low_hull_coverage"
+            ]
+          }
+        ],
+        "rejection_reason": "implausible_rotation;excessive_shear;excessive_anisotropy;low_grid_coverage;low_hull_coverage"
+      },
+      "accepted": false
+    }
+  ]
+}

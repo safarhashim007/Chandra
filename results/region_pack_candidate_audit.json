@@ -1,0 +1,609 @@
+{
+  "audit_version": "RP-001-candidate-audit-v1",
+  "inputs": {
+    "manifest": "data/expanded/images.parquet",
+    "train_manifest": "data/expanded/train.parquet",
+    "site_discovery": "results/lroc_site_discovery.json",
+    "curation": "results/dataset_curation_lroc_curated_v2.json"
+  },
+  "scientific_limitations": [
+    "The local full-browse GeoTIFFs are one-band browse representations.",
+    "Illumination/backplane statistics require the official four-band PDS IMG files.",
+    "A browse-product creation time is not substituted for source acquisition time.",
+    "Scores rank acquisition candidates only; they are not registration performance claims."
+  ],
+  "current_train_regions": [
+    "E011N1499",
+    "E018N3346",
+    "E041N1229",
+    "E090S0155",
+    "E186N1213",
+    "E199N0308",
+    "E207N3357"
+  ],
+  "candidates": [
+    {
+      "site_id": "E009S3481",
+      "official_discovery": {
+        "product_count": 83,
+        "candidate_positive_pairs": 3403,
+        "geotiff_kbytes_total": 1826083,
+        "product_img_kbytes_total": 29465083,
+        "all_products_have_masks": true,
+        "acquisition_priority": 1.9082768965047043
+      },
+      "local_corpus": {
+        "product_count": 4,
+        "products": [
+          "NAC_PHO_E009S3481_M106949300L",
+          "NAC_PHO_E009S3481_M106949300R",
+          "NAC_PHO_E009S3481_M109311328L",
+          "NAC_PHO_E009S3481_M109311328R"
+        ],
+        "map_projected_valid_count": 4,
+        "positive_pairs_with_at_least_1pct_overlap": 6,
+        "median_overlap_ratio": 1.0,
+        "minimum_overlap_ratio": 1.0,
+        "maximum_overlap_ratio": 1.0,
+        "gsd_m_per_px": {
+          "min": 4.9999999999999005,
+          "max": 4.9999999999999005,
+          "span": 0.0
+        },
+        "incidence_deg": null,
+        "emission_deg": null,
+        "phase_deg": null,
+        "angle_metadata_coverage": {
+          "incidence": 0.0,
+          "emission": 0.0,
+          "phase": 0.0
+        },
+        "reported_acquisition_times": [
+          "2022-09-09T20:53:39",
+          "2022-09-09T20:56:07",
+          "2022-09-09T20:57:49",
+          "2022-09-09T20:58:26"
+        ]
+      },
+      "curation": {
+        "candidate_positive_pairs": 0,
+        "dense_gt_valid_pairs": 0,
+        "selected_pairs": 0,
+        "pair_yield": 0.0
+      },
+      "candidate_score": 77.65,
+      "rank": 1
+    },
+    {
+      "site_id": "E186N1213",
+      "official_discovery": {
+        "product_count": 100,
+        "candidate_positive_pairs": 4950,
+        "geotiff_kbytes_total": 15839100,
+        "product_img_kbytes_total": 247124100,
+        "all_products_have_masks": true,
+        "acquisition_priority": 0.32001818285129835
+      },
+      "local_corpus": {
+        "product_count": 6,
+        "products": [
+          "NAC_PHO_E186N1213_M1098051352L",
+          "NAC_PHO_E186N1213_M1098051352R",
+          "NAC_PHO_E186N1213_M1131039402L",
+          "NAC_PHO_E186N1213_M1133399520R",
+          "NAC_PHO_E186N1213_M1207580881R",
+          "NAC_PHO_E186N1213_M185097931L"
+        ],
+        "map_projected_valid_count": 6,
+        "positive_pairs_with_at_least_1pct_overlap": 2,
+        "median_overlap_ratio": 0.1854438301404212,
+        "minimum_overlap_ratio": 0.09811342312632798,
+        "maximum_overlap_ratio": 0.27277423715451443,
+        "gsd_m_per_px": {
+          "min": 1.2,
+          "max": 1.4,
+          "span": 0.19999999999999996
+        },
+        "incidence_deg": null,
+        "emission_deg": null,
+        "phase_deg": null,
+        "angle_metadata_coverage": {
+          "incidence": 0.0,
+          "emission": 0.0,
+          "phase": 0.0
+        },
+        "reported_acquisition_times": []
+      },
+      "curation": {
+        "candidate_positive_pairs": 2,
+        "dense_gt_valid_pairs": 2,
+        "selected_pairs": 2,
+        "pair_yield": 1.0
+      },
+      "candidate_score": 76.836096,
+      "rank": 2
+    },
+    {
+      "site_id": "E207N3357",
+      "official_discovery": {
+        "product_count": 80,
+        "candidate_positive_pairs": 3160,
+        "geotiff_kbytes_total": 2960080,
+        "product_img_kbytes_total": 47840080,
+        "all_products_have_masks": true,
+        "acquisition_priority": 1.0931596443339369
+      },
+      "local_corpus": {
+        "product_count": 6,
+        "products": [
+          "NAC_PHO_E207N3357_M102314667L",
+          "NAC_PHO_E207N3357_M109392442R",
+          "NAC_PHO_E207N3357_M1103723772L",
+          "NAC_PHO_E207N3357_M1114334439L",
+          "NAC_PHO_E207N3357_M1114334439R",
+          "NAC_PHO_E207N3357_M1121401526R"
+        ],
+        "map_projected_valid_count": 6,
+        "positive_pairs_with_at_least_1pct_overlap": 15,
+        "median_overlap_ratio": 1.0,
+        "minimum_overlap_ratio": 1.0,
+        "maximum_overlap_ratio": 1.0,
+        "gsd_m_per_px": {
+          "min": 4.9999999999999005,
+          "max": 4.9999999999999005,
+          "span": 0.0
+        },
+        "incidence_deg": null,
+        "emission_deg": null,
+        "phase_deg": null,
+        "angle_metadata_coverage": {
+          "incidence": 0.0,
+          "emission": 0.0,
+          "phase": 0.0
+        },
+        "reported_acquisition_times": [
+          "2020-09-25T19:47:20",
+          "2020-09-25T19:54:50",
+          "2020-09-25T19:59:22",
+          "2020-09-25T20:07:26",
+          "2020-09-25T20:24:27",
+          "2020-09-25T20:40:56"
+        ]
+      },
+      "curation": {
+        "candidate_positive_pairs": 15,
+        "dense_gt_valid_pairs": 0,
+        "selected_pairs": 0,
+        "pair_yield": 0.0
+      },
+      "candidate_score": 76.0,
+      "rank": 3
+    },
+    {
+      "site_id": "E090S0155",
+      "official_discovery": {
+        "product_count": 65,
+        "candidate_positive_pairs": 2080,
+        "geotiff_kbytes_total": 1950065,
+        "product_img_kbytes_total": 31330065,
+        "all_products_have_masks": true,
+        "acquisition_priority": 1.092230258991367
+      },
+      "local_corpus": {
+        "product_count": 6,
+        "products": [
+          "NAC_PHO_E090S0155_M102057602R",
+          "NAC_PHO_E090S0155_M102064759R",
+          "NAC_PHO_E090S0155_M106777343R",
+          "NAC_PHO_E090S0155_M109134835L",
+          "NAC_PHO_E090S0155_M109134835R",
+          "NAC_PHO_E090S0155_M1101110051L"
+        ],
+        "map_projected_valid_count": 6,
+        "positive_pairs_with_at_least_1pct_overlap": 15,
+        "median_overlap_ratio": 1.0,
+        "minimum_overlap_ratio": 1.0,
+        "maximum_overlap_ratio": 1.0,
+        "gsd_m_per_px": {
+          "min": 2.0000000000006,
+          "max": 2.0000000000006,
+          "span": 0.0
+        },
+        "incidence_deg": null,
+        "emission_deg": null,
+        "phase_deg": null,
+        "angle_metadata_coverage": {
+          "incidence": 0.0,
+          "emission": 0.0,
+          "phase": 0.0
+        },
+        "reported_acquisition_times": [
+          "2020-11-30T07:35:50",
+          "2020-11-30T07:36:04",
+          "2020-11-30T07:36:18",
+          "2020-11-30T07:36:32",
+          "2020-11-30T07:36:46",
+          "2020-11-30T07:37:00"
+        ]
+      },
+      "curation": {
+        "candidate_positive_pairs": 15,
+        "dense_gt_valid_pairs": 6,
+        "selected_pairs": 6,
+        "pair_yield": 0.4
+      },
+      "candidate_score": 71.75,
+      "rank": 4
+    },
+    {
+      "site_id": "E010N0230",
+      "official_discovery": {
+        "product_count": 99,
+        "candidate_positive_pairs": 4851,
+        "geotiff_kbytes_total": 12731099,
+        "product_img_kbytes_total": 202075098,
+        "all_products_have_masks": true,
+        "acquisition_priority": 0.3901802978674504
+      },
+      "local_corpus": {
+        "product_count": 2,
+        "products": [
+          "NAC_PHO_E010N0230_M119699983L",
+          "NAC_PHO_E010N0230_M119699983R"
+        ],
+        "map_projected_valid_count": 2,
+        "positive_pairs_with_at_least_1pct_overlap": 1,
+        "median_overlap_ratio": 0.11665519614566276,
+        "minimum_overlap_ratio": 0.11665519614566276,
+        "maximum_overlap_ratio": 0.11665519614566276,
+        "gsd_m_per_px": {
+          "min": 0.6,
+          "max": 0.6,
+          "span": 0.0
+        },
+        "incidence_deg": null,
+        "emission_deg": null,
+        "phase_deg": null,
+        "angle_metadata_coverage": {
+          "incidence": 0.0,
+          "emission": 0.0,
+          "phase": 0.0
+        },
+        "reported_acquisition_times": []
+      },
+      "curation": {
+        "candidate_positive_pairs": 0,
+        "dense_gt_valid_pairs": 0,
+        "selected_pairs": 0,
+        "pair_yield": 0.0
+      },
+      "candidate_score": 64.36638,
+      "rank": 5
+    },
+    {
+      "site_id": "E199N0308",
+      "official_discovery": {
+        "product_count": 54,
+        "candidate_positive_pairs": 1431,
+        "geotiff_kbytes_total": 7318354,
+        "product_img_kbytes_total": 114462054,
+        "all_products_have_masks": true,
+        "acquisition_priority": 0.20022863064563426
+      },
+      "local_corpus": {
+        "product_count": 6,
+        "products": [
+          "NAC_PHO_E199N0308_M1096343661R",
+          "NAC_PHO_E199N0308_M1182232465L",
+          "NAC_PHO_E199N0308_M1184583087L",
+          "NAC_PHO_E199N0308_M1212862656R",
+          "NAC_PHO_E199N0308_M1215169458L",
+          "NAC_PHO_E199N0308_M192703697R"
+        ],
+        "map_projected_valid_count": 6,
+        "positive_pairs_with_at_least_1pct_overlap": 15,
+        "median_overlap_ratio": 0.897990115094436,
+        "minimum_overlap_ratio": 0.19518702514460268,
+        "maximum_overlap_ratio": 1.0,
+        "gsd_m_per_px": {
+          "min": 1.2,
+          "max": 2.9,
+          "span": 1.7
+        },
+        "incidence_deg": null,
+        "emission_deg": null,
+        "phase_deg": null,
+        "angle_metadata_coverage": {
+          "incidence": 0.0,
+          "emission": 0.0,
+          "phase": 0.0
+        },
+        "reported_acquisition_times": []
+      },
+      "curation": {
+        "candidate_positive_pairs": 15,
+        "dense_gt_valid_pairs": 4,
+        "selected_pairs": 4,
+        "pair_yield": 0.26666666666666666
+      },
+      "candidate_score": 63.51642,
+      "rank": 6
+    },
+    {
+      "site_id": "E011N1499",
+      "official_discovery": {
+        "product_count": 88,
+        "candidate_positive_pairs": 3828,
+        "geotiff_kbytes_total": 27327088,
+        "product_img_kbytes_total": 426300085,
+        "all_products_have_masks": true,
+        "acquisition_priority": 0.14344272613313208
+      },
+      "local_corpus": {
+        "product_count": 2,
+        "products": [
+          "NAC_PHO_E011N1499_M1117892781L",
+          "NAC_PHO_E011N1499_M1117892781R"
+        ],
+        "map_projected_valid_count": 2,
+        "positive_pairs_with_at_least_1pct_overlap": 1,
+        "median_overlap_ratio": 0.18011853604493056,
+        "minimum_overlap_ratio": 0.18011853604493056,
+        "maximum_overlap_ratio": 0.18011853604493056,
+        "gsd_m_per_px": {
+          "min": 1.1,
+          "max": 1.1,
+          "span": 0.0
+        },
+        "incidence_deg": null,
+        "emission_deg": null,
+        "phase_deg": null,
+        "angle_metadata_coverage": {
+          "incidence": 0.0,
+          "emission": 0.0,
+          "phase": 0.0
+        },
+        "reported_acquisition_times": []
+      },
+      "curation": {
+        "candidate_positive_pairs": 1,
+        "dense_gt_valid_pairs": 0,
+        "selected_pairs": 0,
+        "pair_yield": 0.0
+      },
+      "candidate_score": 59.902963,
+      "rank": 7
+    },
+    {
+      "site_id": "E064S3160",
+      "official_discovery": {
+        "product_count": 50,
+        "candidate_positive_pairs": 1225,
+        "geotiff_kbytes_total": 1750050,
+        "product_img_kbytes_total": 28000050,
+        "all_products_have_masks": true,
+        "acquisition_priority": 0.7167795205851262
+      },
+      "local_corpus": {
+        "product_count": 2,
+        "products": [
+          "NAC_PHO_E064S3160_M1188650032L",
+          "NAC_PHO_E064S3160_M1188650032R"
+        ],
+        "map_projected_valid_count": 2,
+        "positive_pairs_with_at_least_1pct_overlap": 1,
+        "median_overlap_ratio": 1.0,
+        "minimum_overlap_ratio": 1.0,
+        "maximum_overlap_ratio": 1.0,
+        "gsd_m_per_px": {
+          "min": 2.999999999999,
+          "max": 2.999999999999,
+          "span": 0.0
+        },
+        "incidence_deg": null,
+        "emission_deg": null,
+        "phase_deg": null,
+        "angle_metadata_coverage": {
+          "incidence": 0.0,
+          "emission": 0.0,
+          "phase": 0.0
+        },
+        "reported_acquisition_times": [
+          "2020-10-26T22:38:26",
+          "2020-10-26T22:42:28"
+        ]
+      },
+      "curation": {
+        "candidate_positive_pairs": 0,
+        "dense_gt_valid_pairs": 0,
+        "selected_pairs": 0,
+        "pair_yield": 0.0
+      },
+      "candidate_score": 59.5,
+      "rank": 8
+    },
+    {
+      "site_id": "E018N3346",
+      "official_discovery": {
+        "product_count": 54,
+        "candidate_positive_pairs": 1431,
+        "geotiff_kbytes_total": 14350054,
+        "product_img_kbytes_total": 223800052,
+        "all_products_have_masks": true,
+        "acquisition_priority": 0.10211418019751006
+      },
+      "local_corpus": {
+        "product_count": 6,
+        "products": [
+          "NAC_PHO_E018N3346_M107042466L",
+          "NAC_PHO_E018N3346_M107042466R",
+          "NAC_PHO_E018N3346_M1142603254L",
+          "NAC_PHO_E018N3346_M1142603254R",
+          "NAC_PHO_E018N3346_M1197970413L",
+          "NAC_PHO_E018N3346_M1197970413R"
+        ],
+        "map_projected_valid_count": 6,
+        "positive_pairs_with_at_least_1pct_overlap": 15,
+        "median_overlap_ratio": 0.4682279579567923,
+        "minimum_overlap_ratio": 0.035616541343802766,
+        "maximum_overlap_ratio": 1.0,
+        "gsd_m_per_px": {
+          "min": 1.1,
+          "max": 1.6,
+          "span": 0.5
+        },
+        "incidence_deg": null,
+        "emission_deg": null,
+        "phase_deg": null,
+        "angle_metadata_coverage": {
+          "incidence": 0.0,
+          "emission": 0.0,
+          "phase": 0.0
+        },
+        "reported_acquisition_times": []
+      },
+      "curation": {
+        "candidate_positive_pairs": 15,
+        "dense_gt_valid_pairs": 12,
+        "selected_pairs": 12,
+        "pair_yield": 0.8
+      },
+      "candidate_score": 56.905699,
+      "rank": 9
+    },
+    {
+      "site_id": "E041N1229",
+      "official_discovery": {
+        "product_count": 32,
+        "candidate_positive_pairs": 496,
+        "geotiff_kbytes_total": 7669032,
+        "product_img_kbytes_total": 119725031,
+        "all_products_have_masks": true,
+        "acquisition_priority": 0.06622791507454917
+      },
+      "local_corpus": {
+        "product_count": 2,
+        "products": [
+          "NAC_PHO_E041N1229_M1113368103L",
+          "NAC_PHO_E041N1229_M1113368103R"
+        ],
+        "map_projected_valid_count": 2,
+        "positive_pairs_with_at_least_1pct_overlap": 1,
+        "median_overlap_ratio": 0.29871818688470864,
+        "minimum_overlap_ratio": 0.29871818688470864,
+        "maximum_overlap_ratio": 0.29871818688470864,
+        "gsd_m_per_px": {
+          "min": 1.1,
+          "max": 1.1,
+          "span": 0.0
+        },
+        "incidence_deg": null,
+        "emission_deg": null,
+        "phase_deg": null,
+        "angle_metadata_coverage": {
+          "incidence": 0.0,
+          "emission": 0.0,
+          "phase": 0.0
+        },
+        "reported_acquisition_times": [
+          "2018-02-27T02:10:29",
+          "2018-02-27T05:22:02"
+        ]
+      },
+      "curation": {
+        "candidate_positive_pairs": 1,
+        "dense_gt_valid_pairs": 1,
+        "selected_pairs": 1,
+        "pair_yield": 1.0
+      },
+      "candidate_score": 42.067955,
+      "rank": 10
+    },
+    {
+      "site_id": "E074N3010",
+      "official_discovery": {
+        "product_count": 20,
+        "candidate_positive_pairs": 190,
+        "geotiff_kbytes_total": 4692020,
+        "product_img_kbytes_total": 73052020,
+        "all_products_have_masks": true,
+        "acquisition_priority": 0.04146614890814617
+      },
+      "local_corpus": {
+        "product_count": 2,
+        "products": [
+          "NAC_PHO_E074N3010_M1127569280L",
+          "NAC_PHO_E074N3010_M1127569280R"
+        ],
+        "map_projected_valid_count": 2,
+        "positive_pairs_with_at_least_1pct_overlap": 1,
+        "median_overlap_ratio": 0.7843713278494451,
+        "minimum_overlap_ratio": 0.7843713278494451,
+        "maximum_overlap_ratio": 0.7843713278494451,
+        "gsd_m_per_px": {
+          "min": 2.7,
+          "max": 2.7,
+          "span": 0.0
+        },
+        "incidence_deg": null,
+        "emission_deg": null,
+        "phase_deg": null,
+        "angle_metadata_coverage": {
+          "incidence": 0.0,
+          "emission": 0.0,
+          "phase": 0.0
+        },
+        "reported_acquisition_times": [
+          "2017-12-14T11:26:41",
+          "2018-02-01T18:16:29"
+        ]
+      },
+      "curation": {
+        "candidate_positive_pairs": 0,
+        "dense_gt_valid_pairs": 0,
+        "selected_pairs": 0,
+        "pair_yield": 0.0
+      },
+      "candidate_score": 37.609283,
+      "rank": 11
+    },
+    {
+      "site_id": "E223S3203",
+      "official_discovery": {
+        "product_count": 40,
+        "candidate_positive_pairs": 780,
+        "geotiff_kbytes_total": 2440040,
+        "product_img_kbytes_total": 40000040,
+        "all_products_have_masks": true,
+        "acquisition_priority": 0.3273388960836708
+      },
+      "local_corpus": {
+        "product_count": 0,
+        "products": [],
+        "map_projected_valid_count": 0,
+        "positive_pairs_with_at_least_1pct_overlap": 0,
+        "median_overlap_ratio": null,
+        "minimum_overlap_ratio": null,
+        "maximum_overlap_ratio": null,
+        "gsd_m_per_px": null,
+        "incidence_deg": null,
+        "emission_deg": null,
+        "phase_deg": null,
+        "angle_metadata_coverage": {
+          "incidence": 0.0,
+          "emission": 0.0,
+          "phase": 0.0
+        },
+        "reported_acquisition_times": []
+      },
+      "curation": {
+        "candidate_positive_pairs": 0,
+        "dense_gt_valid_pairs": 0,
+        "selected_pairs": 0,
+        "pair_yield": 0.0
+      },
+      "candidate_score": 29.0,
+      "rank": 12
+    }
+  ]
+}

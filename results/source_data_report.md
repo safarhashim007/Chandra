@@ -1,10 +1,11 @@
 # Scientific LROC source report
 
-- products_discovered: 20
-- scientific_rdr_products: 20
+- products_discovered: 44
+- scientific_rdr_products: 44
 - browse_only_products: 0
-- regions: 7
-- metadata_availability: {'acquisition_time': 10, 'gsd': 20, 'incidence': 0, 'emission': 0, 'phase': 0, 'mask': 12}
-- dense_gt_valid_pairs: 12
-- rejected_pairs: 5
+- regions: 11
+- metadata_availability: {'acquisition_time': 22, 'gsd': 44, 'incidence': 0, 'emission': 0, 'phase': 0, 'mask': 29}
+- dense_gt_valid_pairs: 25
+- rejected_pairs: 39
 - source_type_for_training: SCIENTIFIC_RDR
+- note: The local training raster is the official PDS full browse GeoTIFF representation listed by ODE for SDPPHO products; full IMG product URLs are preserved in data/raw/lroc_corpus/provenance.json.

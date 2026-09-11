@@ -1,0 +1,477 @@
+[
+  {
+    "difficulty_class": "hard",
+    "image_a": "NAC_PHO_E018N3346_M107042466L",
+    "image_b": "NAC_PHO_E018N3346_M107042466R",
+    "pair_id": "NAC_PHO_E018N3346_M107042466L__NAC_PHO_E018N3346_M107042466R",
+    "reason": "Selected: valid TRAIN pair with 22.0% dense GT coverage; balanced sampler down-weights overrepresented regions.",
+    "region_id": "E018N3346",
+    "rejection_reason": null,
+    "sampling_weight": 0.018930041152263377,
+    "score": 0.4440830078125,
+    "score_components": {
+      "difficulty_score": 0.8917182169263818,
+      "geometry_quality": 0.10828178307361822,
+      "gsd_compatibility": 1.0,
+      "gt_quality": 0.2204150390625,
+      "photometric_diversity": 0.0
+    },
+    "selected": true
+  },
+  {
+    "difficulty_class": "easy",
+    "image_a": "NAC_PHO_E018N3346_M1142603254L",
+    "image_b": "NAC_PHO_E018N3346_M107042466L",
+    "pair_id": "NAC_PHO_E018N3346_M1142603254L__NAC_PHO_E018N3346_M107042466L",
+    "reason": "Selected: valid TRAIN pair with 99.8% dense GT coverage; balanced sampler down-weights overrepresented regions.",
+    "region_id": "E018N3346",
+    "rejection_reason": null,
+    "sampling_weight": 0.013991769547325105,
+    "score": 0.5996875,
+    "score_components": {
+      "difficulty_score": 0.21769712285633824,
+      "geometry_quality": 0.7823028771436618,
+      "gsd_compatibility": 1.0,
+      "gt_quality": 0.9984375,
+      "photometric_diversity": 0.0
+    },
+    "selected": true
+  },
+  {
+    "difficulty_class": "hard",
+    "image_a": "NAC_PHO_E018N3346_M1142603254L",
+    "image_b": "NAC_PHO_E018N3346_M1142603254R",
+    "pair_id": "NAC_PHO_E018N3346_M1142603254L__NAC_PHO_E018N3346_M1142603254R",
+    "reason": "Selected: valid TRAIN pair with 21.7% dense GT coverage; balanced sampler down-weights overrepresented regions.",
+    "region_id": "E018N3346",
+    "rejection_reason": null,
+    "sampling_weight": 0.018930041152263377,
+    "score": 0.44348193359375,
+    "score_components": {
+      "difficulty_score": 0.7896977437211645,
+      "geometry_quality": 0.2103022562788355,
+      "gsd_compatibility": 1.0,
+      "gt_quality": 0.21740966796875,
+      "photometric_diversity": 0.0
+    },
+    "selected": true
+  },
+  {
+    "difficulty_class": "medium",
+    "image_a": "NAC_PHO_E018N3346_M1142603254L",
+    "image_b": "NAC_PHO_E018N3346_M1197970413L",
+    "pair_id": "NAC_PHO_E018N3346_M1142603254L__NAC_PHO_E018N3346_M1197970413L",
+    "reason": "Selected: valid TRAIN pair with 100.0% dense GT coverage; balanced sampler down-weights overrepresented regions.",
+    "region_id": "E018N3346",
+    "rejection_reason": null,
+    "sampling_weight": 0.01646090534979424,
+    "score": 0.5375,
+    "score_components": {
+      "difficulty_score": 0.5317720420432077,
+      "geometry_quality": 0.4682279579567923,
+      "gsd_compatibility": 0.6875,
+      "gt_quality": 1.0,
+      "photometric_diversity": 0.0
+    },
+    "selected": true
+  },
+  {
+    "difficulty_class": "easy",
+    "image_a": "NAC_PHO_E018N3346_M1142603254L",
+    "image_b": "NAC_PHO_E018N3346_M1197970413R",
+    "pair_id": "NAC_PHO_E018N3346_M1142603254L__NAC_PHO_E018N3346_M1197970413R",
+    "reason": "Selected: valid TRAIN pair with 100.0% dense GT coverage; balanced sampler down-weights overrepresented regions.",
+    "region_id": "E018N3346",
+    "rejection_reason": null,
+    "sampling_weight": 0.013991769547325105,
+    "score": 0.5466666666666666,
+    "score_components": {
+      "difficulty_score": 0.0,
+      "geometry_quality": 1.0,
+      "gsd_compatibility": 0.7333333333333334,
+      "gt_quality": 1.0,
+      "photometric_diversity": 0.0
+    },
+    "selected": true
+  },
+  {
+    "difficulty_class": "hard",
+    "image_a": "NAC_PHO_E018N3346_M1142603254R",
+    "image_b": "NAC_PHO_E018N3346_M107042466L",
+    "pair_id": "NAC_PHO_E018N3346_M1142603254R__NAC_PHO_E018N3346_M107042466L",
+    "reason": "Selected: valid TRAIN pair with 61.6% dense GT coverage; balanced sampler down-weights overrepresented regions.",
+    "region_id": "E018N3346",
+    "rejection_reason": null,
+    "sampling_weight": 0.018930041152263377,
+    "score": 0.52327490234375,
+    "score_components": {
+      "difficulty_score": 0.8394266109521366,
+      "geometry_quality": 0.16057338904786342,
+      "gsd_compatibility": 1.0,
+      "gt_quality": 0.61637451171875,
+      "photometric_diversity": 0.0
+    },
+    "selected": true
+  },
+  {
+    "difficulty_class": "easy",
+    "image_a": "NAC_PHO_E018N3346_M1142603254R",
+    "image_b": "NAC_PHO_E018N3346_M107042466R",
+    "pair_id": "NAC_PHO_E018N3346_M1142603254R__NAC_PHO_E018N3346_M107042466R",
+    "reason": "Selected: valid TRAIN pair with 100.0% dense GT coverage; balanced sampler down-weights overrepresented regions.",
+    "region_id": "E018N3346",
+    "rejection_reason": null,
+    "sampling_weight": 0.013991769547325105,
+    "score": 0.6,
+    "score_components": {
+      "difficulty_score": 0.09700278177742416,
+      "geometry_quality": 0.9029972182225758,
+      "gsd_compatibility": 1.0,
+      "gt_quality": 1.0,
+      "photometric_diversity": 0.0
+    },
+    "selected": true
+  },
+  {
+    "difficulty_class": "easy",
+    "image_a": "NAC_PHO_E018N3346_M1142603254R",
+    "image_b": "NAC_PHO_E018N3346_M1197970413L",
+    "pair_id": "NAC_PHO_E018N3346_M1142603254R__NAC_PHO_E018N3346_M1197970413L",
+    "reason": "Selected: valid TRAIN pair with 100.0% dense GT coverage; balanced sampler down-weights overrepresented regions.",
+    "region_id": "E018N3346",
+    "rejection_reason": null,
+    "sampling_weight": 0.013991769547325105,
+    "score": 0.5375,
+    "score_components": {
+      "difficulty_score": 0.07690896729649255,
+      "geometry_quality": 0.9230910327035075,
+      "gsd_compatibility": 0.6875,
+      "gt_quality": 1.0,
+      "photometric_diversity": 0.0
+    },
+    "selected": true
+  },
+  {
+    "difficulty_class": "medium",
+    "image_a": "NAC_PHO_E018N3346_M1197970413L",
+    "image_b": "NAC_PHO_E018N3346_M107042466L",
+    "pair_id": "NAC_PHO_E018N3346_M1197970413L__NAC_PHO_E018N3346_M107042466L",
+    "reason": "Selected: valid TRAIN pair with 47.3% dense GT coverage; balanced sampler down-weights overrepresented regions.",
+    "region_id": "E018N3346",
+    "rejection_reason": null,
+    "sampling_weight": 0.01646090534979424,
+    "score": 0.43203125,
+    "score_components": {
+      "difficulty_score": 0.6341583821103297,
+      "geometry_quality": 0.3658416178896703,
+      "gsd_compatibility": 0.6875,
+      "gt_quality": 0.47265625,
+      "photometric_diversity": 0.0
+    },
+    "selected": true
+  },
+  {
+    "difficulty_class": "easy",
+    "image_a": "NAC_PHO_E018N3346_M1197970413L",
+    "image_b": "NAC_PHO_E018N3346_M107042466R",
+    "pair_id": "NAC_PHO_E018N3346_M1197970413L__NAC_PHO_E018N3346_M107042466R",
+    "reason": "Selected: valid TRAIN pair with 47.3% dense GT coverage; balanced sampler down-weights overrepresented regions.",
+    "region_id": "E018N3346",
+    "rejection_reason": null,
+    "sampling_weight": 0.013991769547325105,
+    "score": 0.43203125,
+    "score_components": {
+      "difficulty_score": 0.09060638245125985,
+      "geometry_quality": 0.9093936175487402,
+      "gsd_compatibility": 0.6875,
+      "gt_quality": 0.47265625,
+      "photometric_diversity": 0.0
+    },
+    "selected": true
+  },
+  {
+    "difficulty_class": "medium",
+    "image_a": "NAC_PHO_E018N3346_M1197970413L",
+    "image_b": "NAC_PHO_E018N3346_M1197970413R",
+    "pair_id": "NAC_PHO_E018N3346_M1197970413L__NAC_PHO_E018N3346_M1197970413R",
+    "reason": "Selected: valid TRAIN pair with 40.2% dense GT coverage; balanced sampler down-weights overrepresented regions.",
+    "region_id": "E018N3346",
+    "rejection_reason": null,
+    "sampling_weight": 0.01646090534979424,
+    "score": 0.46784912109375,
+    "score_components": {
+      "difficulty_score": 0.5141680272151927,
+      "geometry_quality": 0.48583197278480733,
+      "gsd_compatibility": 0.9375,
+      "gt_quality": 0.40174560546875,
+      "photometric_diversity": 0.0
+    },
+    "selected": true
+  },
+  {
+    "difficulty_class": "easy",
+    "image_a": "NAC_PHO_E018N3346_M1197970413R",
+    "image_b": "NAC_PHO_E018N3346_M107042466L",
+    "pair_id": "NAC_PHO_E018N3346_M1197970413R__NAC_PHO_E018N3346_M107042466L",
+    "reason": "Selected: valid TRAIN pair with 53.7% dense GT coverage; balanced sampler down-weights overrepresented regions.",
+    "region_id": "E018N3346",
+    "rejection_reason": null,
+    "sampling_weight": 0.013991769547325105,
+    "score": 0.4540694986979167,
+    "score_components": {
+      "difficulty_score": 0.24089859878409592,
+      "geometry_quality": 0.7591014012159041,
+      "gsd_compatibility": 0.7333333333333334,
+      "gt_quality": 0.53701416015625,
+      "photometric_diversity": 0.0
+    },
+    "selected": true
+  },
+  {
+    "difficulty_class": "hard",
+    "image_a": "NAC_PHO_E041N1229_M1113368103L",
+    "image_b": "NAC_PHO_E041N1229_M1113368103R",
+    "pair_id": "NAC_PHO_E041N1229_M1113368103L__NAC_PHO_E041N1229_M1113368103R",
+    "reason": "Selected: valid TRAIN pair with 100.0% dense GT coverage; balanced sampler down-weights overrepresented regions.",
+    "region_id": "E041N1229",
+    "rejection_reason": null,
+    "sampling_weight": 0.22716049382716053,
+    "score": 0.6,
+    "score_components": {
+      "difficulty_score": 0.7012818131152914,
+      "geometry_quality": 0.29871818688470864,
+      "gsd_compatibility": 1.0,
+      "gt_quality": 1.0,
+      "photometric_diversity": 0.0
+    },
+    "selected": true
+  },
+  {
+    "difficulty_class": "easy",
+    "image_a": "NAC_PHO_E090S0155_M102064759R",
+    "image_b": "NAC_PHO_E090S0155_M106777343R",
+    "pair_id": "NAC_PHO_E090S0155_M102064759R__NAC_PHO_E090S0155_M106777343R",
+    "reason": "Selected: valid TRAIN pair with 100.0% dense GT coverage; balanced sampler down-weights overrepresented regions.",
+    "region_id": "E090S0155",
+    "rejection_reason": null,
+    "sampling_weight": 0.02798353909465021,
+    "score": 0.6,
+    "score_components": {
+      "difficulty_score": 0.0,
+      "geometry_quality": 1.0,
+      "gsd_compatibility": 1.0,
+      "gt_quality": 1.0,
+      "photometric_diversity": 0.0
+    },
+    "selected": true
+  },
+  {
+    "difficulty_class": "easy",
+    "image_a": "NAC_PHO_E090S0155_M102064759R",
+    "image_b": "NAC_PHO_E090S0155_M109134835L",
+    "pair_id": "NAC_PHO_E090S0155_M102064759R__NAC_PHO_E090S0155_M109134835L",
+    "reason": "Selected: valid TRAIN pair with 84.0% dense GT coverage; balanced sampler down-weights overrepresented regions.",
+    "region_id": "E090S0155",
+    "rejection_reason": null,
+    "sampling_weight": 0.02798353909465021,
+    "score": 0.56802490234375,
+    "score_components": {
+      "difficulty_score": 0.0,
+      "geometry_quality": 1.0,
+      "gsd_compatibility": 1.0,
+      "gt_quality": 0.84012451171875,
+      "photometric_diversity": 0.0
+    },
+    "selected": true
+  },
+  {
+    "difficulty_class": "medium",
+    "image_a": "NAC_PHO_E090S0155_M102064759R",
+    "image_b": "NAC_PHO_E090S0155_M109134835R",
+    "pair_id": "NAC_PHO_E090S0155_M102064759R__NAC_PHO_E090S0155_M109134835R",
+    "reason": "Selected: valid TRAIN pair with 21.0% dense GT coverage; balanced sampler down-weights overrepresented regions.",
+    "region_id": "E090S0155",
+    "rejection_reason": null,
+    "sampling_weight": 0.03292181069958848,
+    "score": 0.44198046875,
+    "score_components": {
+      "difficulty_score": 0.0,
+      "geometry_quality": 1.0,
+      "gsd_compatibility": 1.0,
+      "gt_quality": 0.20990234375,
+      "photometric_diversity": 0.0
+    },
+    "selected": true
+  },
+  {
+    "difficulty_class": "easy",
+    "image_a": "NAC_PHO_E090S0155_M106777343R",
+    "image_b": "NAC_PHO_E090S0155_M109134835L",
+    "pair_id": "NAC_PHO_E090S0155_M106777343R__NAC_PHO_E090S0155_M109134835L",
+    "reason": "Selected: valid TRAIN pair with 84.0% dense GT coverage; balanced sampler down-weights overrepresented regions.",
+    "region_id": "E090S0155",
+    "rejection_reason": null,
+    "sampling_weight": 0.02798353909465021,
+    "score": 0.56802490234375,
+    "score_components": {
+      "difficulty_score": 0.0,
+      "geometry_quality": 1.0,
+      "gsd_compatibility": 1.0,
+      "gt_quality": 0.84012451171875,
+      "photometric_diversity": 0.0
+    },
+    "selected": true
+  },
+  {
+    "difficulty_class": "medium",
+    "image_a": "NAC_PHO_E090S0155_M106777343R",
+    "image_b": "NAC_PHO_E090S0155_M109134835R",
+    "pair_id": "NAC_PHO_E090S0155_M106777343R__NAC_PHO_E090S0155_M109134835R",
+    "reason": "Selected: valid TRAIN pair with 21.0% dense GT coverage; balanced sampler down-weights overrepresented regions.",
+    "region_id": "E090S0155",
+    "rejection_reason": null,
+    "sampling_weight": 0.03292181069958848,
+    "score": 0.44198046875,
+    "score_components": {
+      "difficulty_score": 0.0,
+      "geometry_quality": 1.0,
+      "gsd_compatibility": 1.0,
+      "gt_quality": 0.20990234375,
+      "photometric_diversity": 0.0
+    },
+    "selected": true
+  },
+  {
+    "difficulty_class": "hard",
+    "image_a": "NAC_PHO_E090S0155_M109134835L",
+    "image_b": "NAC_PHO_E090S0155_M109134835R",
+    "pair_id": "NAC_PHO_E090S0155_M109134835L__NAC_PHO_E090S0155_M109134835R",
+    "reason": "Selected: valid TRAIN pair with 5.0% dense GT coverage; balanced sampler down-weights overrepresented regions.",
+    "region_id": "E090S0155",
+    "rejection_reason": null,
+    "sampling_weight": 0.037860082304526754,
+    "score": 0.41000537109375,
+    "score_components": {
+      "difficulty_score": 0.0,
+      "geometry_quality": 1.0,
+      "gsd_compatibility": 1.0,
+      "gt_quality": 0.05002685546875,
+      "photometric_diversity": 0.0
+    },
+    "selected": true
+  },
+  {
+    "difficulty_class": "hard",
+    "image_a": "NAC_PHO_E186N1213_M1098051352L",
+    "image_b": "NAC_PHO_E186N1213_M1098051352R",
+    "pair_id": "NAC_PHO_E186N1213_M1098051352L__NAC_PHO_E186N1213_M1098051352R",
+    "reason": "Selected: valid TRAIN pair with 21.5% dense GT coverage; balanced sampler down-weights overrepresented regions.",
+    "region_id": "E186N1213",
+    "rejection_reason": null,
+    "sampling_weight": 0.11358024691358026,
+    "score": 0.4430244140625,
+    "score_components": {
+      "difficulty_score": 0.901886576873672,
+      "geometry_quality": 0.09811342312632798,
+      "gsd_compatibility": 1.0,
+      "gt_quality": 0.2151220703125,
+      "photometric_diversity": 0.0
+    },
+    "selected": true
+  },
+  {
+    "difficulty_class": "hard",
+    "image_a": "NAC_PHO_E186N1213_M1098051352R",
+    "image_b": "NAC_PHO_E186N1213_M1131039402L",
+    "pair_id": "NAC_PHO_E186N1213_M1098051352R__NAC_PHO_E186N1213_M1131039402L",
+    "reason": "Selected: valid TRAIN pair with 81.1% dense GT coverage; balanced sampler down-weights overrepresented regions.",
+    "region_id": "E186N1213",
+    "rejection_reason": null,
+    "sampling_weight": 0.11358024691358026,
+    "score": 0.5468463416466346,
+    "score_components": {
+      "difficulty_score": 0.7272257628454856,
+      "geometry_quality": 0.27277423715451443,
+      "gsd_compatibility": 0.9230769230769229,
+      "gt_quality": 0.81115478515625,
+      "photometric_diversity": 0.0
+    },
+    "selected": true
+  },
+  {
+    "difficulty_class": "easy",
+    "image_a": "NAC_PHO_E199N0308_M1096343661R",
+    "image_b": "NAC_PHO_E199N0308_M1215169458L",
+    "pair_id": "NAC_PHO_E199N0308_M1096343661R__NAC_PHO_E199N0308_M1215169458L",
+    "reason": "Selected: valid TRAIN pair with 86.8% dense GT coverage; balanced sampler down-weights overrepresented regions.",
+    "region_id": "E199N0308",
+    "rejection_reason": null,
+    "sampling_weight": 0.041975308641975316,
+    "score": 0.5528674737338362,
+    "score_components": {
+      "difficulty_score": 0.11133619907502035,
+      "geometry_quality": 0.8886638009249797,
+      "gsd_compatibility": 0.896551724137931,
+      "gt_quality": 0.86778564453125,
+      "photometric_diversity": 0.0
+    },
+    "selected": true
+  },
+  {
+    "difficulty_class": "easy",
+    "image_a": "NAC_PHO_E199N0308_M1182232465L",
+    "image_b": "NAC_PHO_E199N0308_M1215169458L",
+    "pair_id": "NAC_PHO_E199N0308_M1182232465L__NAC_PHO_E199N0308_M1215169458L",
+    "reason": "Selected: valid TRAIN pair with 98.0% dense GT coverage; balanced sampler down-weights overrepresented regions.",
+    "region_id": "E199N0308",
+    "rejection_reason": null,
+    "sampling_weight": 0.041975308641975316,
+    "score": 0.5477480637122845,
+    "score_components": {
+      "difficulty_score": 0.00010119665015295709,
+      "geometry_quality": 0.999898803349847,
+      "gsd_compatibility": 0.7586206896551725,
+      "gt_quality": 0.98011962890625,
+      "photometric_diversity": 0.0
+    },
+    "selected": true
+  },
+  {
+    "difficulty_class": "easy",
+    "image_a": "NAC_PHO_E199N0308_M1184583087L",
+    "image_b": "NAC_PHO_E199N0308_M1215169458L",
+    "pair_id": "NAC_PHO_E199N0308_M1184583087L__NAC_PHO_E199N0308_M1215169458L",
+    "reason": "Selected: valid TRAIN pair with 97.3% dense GT coverage; balanced sampler down-weights overrepresented regions.",
+    "region_id": "E199N0308",
+    "rejection_reason": null,
+    "sampling_weight": 0.041975308641975316,
+    "score": 0.5531368029364224,
+    "score_components": {
+      "difficulty_score": 0.0,
+      "geometry_quality": 1.0,
+      "gsd_compatibility": 0.793103448275862,
+      "gt_quality": 0.97258056640625,
+      "photometric_diversity": 0.0
+    },
+    "selected": true
+  },
+  {
+    "difficulty_class": "easy",
+    "image_a": "NAC_PHO_E199N0308_M1215169458L",
+    "image_b": "NAC_PHO_E199N0308_M192703697R",
+    "pair_id": "NAC_PHO_E199N0308_M1215169458L__NAC_PHO_E199N0308_M192703697R",
+    "reason": "Selected: valid TRAIN pair with 81.1% dense GT coverage; balanced sampler down-weights overrepresented regions.",
+    "region_id": "E199N0308",
+    "rejection_reason": null,
+    "sampling_weight": 0.041975308641975316,
+    "score": 0.548352404364224,
+    "score_components": {
+      "difficulty_score": 0.0,
+      "geometry_quality": 1.0,
+      "gsd_compatibility": 0.9310344827586208,
+      "gt_quality": 0.8107275390625,
+      "photometric_diversity": 0.0
+    },
+    "selected": true
+  }
+]

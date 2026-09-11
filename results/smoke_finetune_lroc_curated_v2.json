@@ -1,0 +1,107 @@
+{
+  "pair_id": "NAC_PHO_E018N3346_M1142603254L__NAC_PHO_E018N3346_M1142603254R",
+  "dataset": "runs/lroc_curated_v2/selected_training_pairs.parquet",
+  "t0_rejected": true,
+  "device": "cuda",
+  "setting": "base",
+  "input_size": [
+    640,
+    640
+  ],
+  "objective": {
+    "name": "roma_robust_warp",
+    "alpha": 0.5,
+    "c": 0.001,
+    "strides": [
+      4,
+      2,
+      1
+    ]
+  },
+  "auxiliary_losses": {
+    "overlap": "skipped: no nodata-aware overlap GT",
+    "precision": "skipped: no verified covisible precision target"
+  },
+  "lr": 1e-06,
+  "ema_decay": 0.999,
+  "checkpoints": {
+    "0": {
+      "raw": {
+        "valid_correspondences": 409600,
+        "median_epe_px": 139.87228393554688,
+        "mean_epe_px": 130.64671325683594,
+        "pck_1": 0.2423144429922104,
+        "pck_3": 0.32991209626197815,
+        "pck_5": 0.3477441370487213,
+        "pck_10": 0.3646777272224426
+      }
+    },
+    "10": {
+      "loss": 1.5454113483428955,
+      "raw": {
+        "valid_correspondences": 409600,
+        "median_epe_px": 139.17047119140625,
+        "mean_epe_px": 130.15509033203125,
+        "pck_1": 0.2449926733970642,
+        "pck_3": 0.33064940571784973,
+        "pck_5": 0.34822019934654236,
+        "pck_10": 0.3652001917362213
+      },
+      "ema": {
+        "valid_correspondences": 409600,
+        "median_epe_px": 139.9267578125,
+        "mean_epe_px": 130.64451599121094,
+        "pck_1": 0.24229492247104645,
+        "pck_3": 0.3299218714237213,
+        "pck_5": 0.3477709889411926,
+        "pck_10": 0.3647119104862213
+      }
+    },
+    "25": {
+      "loss": 1.540191411972046,
+      "raw": {
+        "valid_correspondences": 409600,
+        "median_epe_px": 137.83590698242188,
+        "mean_epe_px": 129.39276123046875,
+        "pck_1": 0.25029051303863525,
+        "pck_3": 0.3316406309604645,
+        "pck_5": 0.3487231433391571,
+        "pck_10": 0.36570554971694946
+      },
+      "ema": {
+        "valid_correspondences": 409600,
+        "median_epe_px": 139.82713317871094,
+        "mean_epe_px": 130.63575744628906,
+        "pck_1": 0.24244140088558197,
+        "pck_3": 0.32994139194488525,
+        "pck_5": 0.347785621881485,
+        "pck_10": 0.3647119104862213
+      }
+    },
+    "50": {
+      "loss": 1.5291240215301514,
+      "raw": {
+        "valid_correspondences": 409600,
+        "median_epe_px": 134.10560607910156,
+        "mean_epe_px": 127.71050262451172,
+        "pck_1": 0.2571997046470642,
+        "pck_3": 0.33323240280151367,
+        "pck_5": 0.3497021496295929,
+        "pck_10": 0.3662695288658142
+      },
+      "ema": {
+        "valid_correspondences": 409600,
+        "median_epe_px": 139.83889770507812,
+        "mean_epe_px": 130.59478759765625,
+        "pck_1": 0.24259765446186066,
+        "pck_3": 0.33000487089157104,
+        "pck_5": 0.34779050946235657,
+        "pck_10": 0.36476561427116394
+      }
+    }
+  },
+  "catastrophic_stop": false,
+  "refiners_changed": true,
+  "frozen_parameters_changed": false,
+  "refiner_state": "artifacts/lroc_curated_v2_refiner_smoke.pt"
+}

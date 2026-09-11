@@ -4,8 +4,10 @@
 
 from __future__ import annotations
 
+import argparse
 import json
 import sys
+from collections import Counter
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
@@ -17,6 +19,9 @@ from chandrappan.data.scientific import SCIENTIFIC_RDR, classify_source, dense_g
 
 
 def main() -> int:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--run-id", default="lroc_curated_v2")
+    args = parser.parse_args()
     records = read_manifest("data/expanded/images.parquet")
     train = read_manifest("data/expanded/train.parquet")
     pairs = read_pairs("data/expanded/pairs/train.parquet")
@@ -25,11 +30,34 @@ def main() -> int:
         by_id = {record.image_id: record for record in train}
         quality[pair.pair_id] = dense_gt_quality(by_id[pair.image_a], by_id[pair.image_b])
     curated = curate_train_pairs(train, pairs, quality)
-    manifest, checksum = freeze_selection("lroc_curated_v1", curated, "runs")
+    manifest, checksum = freeze_selection(args.run_id, curated, "runs")
     selected = [row for row in curated if row.selected]
     source_types = [classify_source(row.image_path, row.product_id) for row in records]
+    region_candidates = Counter(pair.region_id for pair in pairs)
+    region_valid = Counter(pair.region_id for pair in pairs if quality[pair.pair_id].accepted)
+    region_selected = Counter(row.region_id for row in selected)
+    region_yield = {
+        region: {
+            "candidate_positive_pairs": count,
+            "dense_gt_valid_pairs": region_valid[region],
+            "selected_pairs": region_selected[region],
+            "pair_yield": region_valid[region] / count if count else 0,
+        }
+        for region, count in sorted(region_candidates.items())
+    }
+    rejection_reasons = Counter(item.rejection_reason or "accepted" for item in quality.values())
+    selected_fraction_by_region = (
+        {region: count / len(selected) for region, count in region_selected.items()}
+        if selected
+        else {}
+    )
+    curation_gate = (
+        len(selected) >= 15
+        and len({image for row in selected for image in (row.image_a, row.image_b)}) >= 12
+        and len(region_selected) >= 4
+    )
     result = {
-        "run_id": "lroc_curated_v1",
+        "run_id": args.run_id,
         "products_discovered": len(records),
         "scientific_products": source_types.count(SCIENTIFIC_RDR),
         "browse_only_products": len(records) - source_types.count(SCIENTIFIC_RDR),
@@ -50,12 +78,20 @@ def main() -> int:
         "sha256": checksum.read_text().split()[0],
         "pairs": [row.as_dict() for row in curated],
         "gt_quality": {pair_id: item.as_dict() for pair_id, item in quality.items()},
+        "region_pair_yield": region_yield,
+        "rejection_reasons": dict(rejection_reasons),
+        "selected_fraction_by_region": selected_fraction_by_region,
+        "max_selected_region_fraction": max(selected_fraction_by_region.values(), default=0),
+        "data_curation_gate": "PASS" if curation_gate else "FAIL",
         "checkpoint_provenance": None,
     }
     Path("results").mkdir(exist_ok=True)
+    Path(f"results/dataset_curation_{args.run_id}.json").write_text(
+        json.dumps(result, indent=2) + "\n"
+    )
     Path("results/dataset_curation.json").write_text(json.dumps(result, indent=2) + "\n")
     lines = [
-        "# Scientific LROC curation",
+        f"# Scientific LROC curation — {args.run_id}",
         "",
         *(
             f"- {key}: {value}"
@@ -68,7 +104,16 @@ def main() -> int:
         "VALIDATION USED FOR TRAINING: 0",
         "TEST USED FOR TRAINING: 0",
         "T0 USED FOR TRAINING: 0",
+        "",
+        "## Region pair yield",
+        "",
+        *(
+            f"- {region}: {stats['dense_gt_valid_pairs']}/{stats['candidate_positive_pairs']} "
+            f"valid, {stats['selected_pairs']} selected, yield {stats['pair_yield']:.1%}"
+            for region, stats in region_yield.items()
+        ),
     ]
+    Path(f"results/dataset_curation_{args.run_id}.md").write_text("\n".join(lines) + "\n")
     Path("results/dataset_curation.md").write_text("\n".join(lines) + "\n")
     source_report = {
         "products_discovered": len(records),
@@ -86,6 +131,11 @@ def main() -> int:
         "dense_gt_valid_pairs": result["dense_gt_valid_pairs"],
         "rejected_pairs": result["rejected_pairs"],
         "source_type_for_training": SCIENTIFIC_RDR,
+        "note": (
+            "The local training raster is the official PDS full browse GeoTIFF representation "
+            "listed by ODE for SDPPHO products; full IMG product URLs are preserved in "
+            "data/raw/lroc_corpus/provenance.json."
+        ),
     }
     Path("results/source_data_report.json").write_text(json.dumps(source_report, indent=2) + "\n")
     Path("results/source_data_report.md").write_text(
@@ -94,7 +144,8 @@ def main() -> int:
         + "\n"
     )
     cards = "".join(
-        f"<li><b>{row.pair_id}</b> — {'USED FOR FINE-TUNING' if row.selected else 'NOT SELECTED'}: {row.reason}</li>"
+        f"<li><b>{row.pair_id}</b> — {'USED FOR FINE-TUNING' if row.selected else 'NOT SELECTED'}"
+        f" — region {row.region_id} — weight {row.sampling_weight:.4f}: {row.reason}</li>"
         for row in curated
     )
     Path("results/demo_curation.html").write_text(
