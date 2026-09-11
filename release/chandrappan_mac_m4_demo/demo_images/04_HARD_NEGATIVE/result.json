@@ -1,0 +1,256 @@
+{
+  "demo_id": "DEMO_HARD_NEGATIVE",
+  "role": "hard_negative",
+  "query_product_id": "NAC_PHO_E018N3346_M1142603254L",
+  "source_region": "E018N3346",
+  "verdict": "REJECTED",
+  "selected_reference_product_id": "NAC_PHO_E009S3481_M160030722R",
+  "selected_reference_split": "TRAIN",
+  "rejection_reason": "no_model_fit",
+  "official_negative_evidence": {
+    "name": "other_lunar_region",
+    "description": "Different mapped lunar region supplied as a retrieval candidate.",
+    "query_product_id": "NAC_PHO_E009S3481_M177711422R",
+    "candidate_product_id": "NAC_PHO_E018N3346_M1142603254L",
+    "matching": {
+      "raw_correspondence_count": 1638400,
+      "filtered_correspondence_count": 4000,
+      "cycle_median_px": 1.9420132637023926,
+      "precision_condition_median": 2.2669429779052734
+    },
+    "verification": {
+      "accepted": false,
+      "selected": {
+        "model_type": "affine",
+        "matrix": [
+          [
+            0.9279592716482978,
+            0.04397319711344685,
+            22.891774822975545
+          ],
+          [
+            -0.10743896912273915,
+            1.023368827783439,
+            49.13014082733791
+          ]
+        ],
+        "input_matches": 4000,
+        "inliers": 3576,
+        "inlier_ratio": 0.894,
+        "mean_reprojection_error_px": 0.5212457958900032,
+        "median_reprojection_error_px": 0.45902834773484147,
+        "max_reprojection_error_px": 2.558155378877556,
+        "scale": 0.97691812708353,
+        "rotation_degrees": -6.604290410281231,
+        "shear": 0.07226093276924359,
+        "anisotropy": 1.1243784470645737,
+        "determinant": 0.9543690270243921,
+        "grid_coverage": 0.03125,
+        "hull_coverage": 0.00311065673828125,
+        "degenerate": false,
+        "accepted": false,
+        "rejection_reasons": [
+          "low_grid_coverage",
+          "low_hull_coverage"
+        ]
+      },
+      "candidates": [
+        {
+          "model_type": "similarity",
+          "matrix": [
+            [
+              1.0006477448547944,
+              0.03112947421278585,
+              -11.425983184893417
+            ],
+            [
+              -0.03112947421278585,
+              1.0006477448547944,
+              16.33313462857298
+            ]
+          ],
+          "input_matches": 4000,
+          "inliers": 3576,
+          "inlier_ratio": 0.894,
+          "mean_reprojection_error_px": 0.7187239810635103,
+          "median_reprojection_error_px": 0.6621497747038186,
+          "max_reprojection_error_px": 2.8239960714078896,
+          "scale": 1.0011318361972863,
+          "rotation_degrees": -1.7818582558365146,
+          "shear": 0.0,
+          "anisotropy": 1.0,
+          "determinant": 1.0022649534477501,
+          "grid_coverage": 0.03125,
+          "hull_coverage": 0.00311065673828125,
+          "degenerate": false,
+          "accepted": false,
+          "rejection_reasons": [
+            "low_grid_coverage",
+            "low_hull_coverage"
+          ]
+        },
+        {
+          "model_type": "affine",
+          "matrix": [
+            [
+              0.9279592716482978,
+              0.04397319711344685,
+              22.891774822975545
+            ],
+            [
+              -0.10743896912273915,
+              1.023368827783439,
+              49.13014082733791
+            ]
+          ],
+          "input_matches": 4000,
+          "inliers": 3576,
+          "inlier_ratio": 0.894,
+          "mean_reprojection_error_px": 0.5212457958900032,
+          "median_reprojection_error_px": 0.45902834773484147,
+          "max_reprojection_error_px": 2.558155378877556,
+          "scale": 0.97691812708353,
+          "rotation_degrees": -6.604290410281231,
+          "shear": 0.07226093276924359,
+          "anisotropy": 1.1243784470645737,
+          "determinant": 0.9543690270243921,
+          "grid_coverage": 0.03125,
+          "hull_coverage": 0.00311065673828125,
+          "degenerate": false,
+          "accepted": false,
+          "rejection_reasons": [
+            "low_grid_coverage",
+            "low_hull_coverage"
+          ]
+        },
+        {
+          "model_type": "homography",
+          "matrix": [
+            [
+              0.22832150366379705,
+              0.1285861313475066,
+              193.14869174252914
+            ],
+            [
+              -0.30851591120422306,
+              0.7509054096514952,
+              137.99381460706192
+            ],
+            [
+              -0.0007284303031882364,
+              0.00018156407963910022,
+              1.0
+            ]
+          ],
+          "input_matches": 4000,
+          "inliers": 3575,
+          "inlier_ratio": 0.89375,
+          "mean_reprojection_error_px": 0.5669827236933666,
+          "median_reprojection_error_px": 0.5173715600009199,
+          "max_reprojection_error_px": 1.923290931251464,
+          "scale": 0.7155344709293348,
+          "rotation_degrees": -7.036830805743312,
+          "shear": 0.034634975266537624,
+          "anisotropy": 1.3756973593083457,
+          "determinant": 0.511989579088123,
+          "grid_coverage": 0.03125,
+          "hull_coverage": 0.00309417724609375,
+          "degenerate": false,
+          "accepted": false,
+          "rejection_reasons": [
+            "implausible_scale",
+            "excessive_anisotropy",
+            "low_grid_coverage",
+            "low_hull_coverage"
+          ]
+        }
+      ],
+      "rejection_reason": "low_grid_coverage;low_hull_coverage"
+    },
+    "accepted": false
+  },
+  "direct_official_run": {
+    "matching": {
+      "raw_correspondence_count": 1638400,
+      "filtered_correspondence_count": 0,
+      "cycle_median_px": Infinity,
+      "precision_condition_median": Infinity
+    },
+    "verification": {
+      "accepted": false,
+      "selected": null,
+      "candidates": [
+        {
+          "model_type": "similarity",
+          "matrix": null,
+          "input_matches": 0,
+          "inliers": 0,
+          "inlier_ratio": 0.0,
+          "mean_reprojection_error_px": Infinity,
+          "median_reprojection_error_px": Infinity,
+          "max_reprojection_error_px": Infinity,
+          "scale": NaN,
+          "rotation_degrees": NaN,
+          "shear": NaN,
+          "anisotropy": NaN,
+          "determinant": NaN,
+          "grid_coverage": 0.0,
+          "hull_coverage": 0.0,
+          "degenerate": true,
+          "accepted": false,
+          "rejection_reasons": [
+            "insufficient_matches"
+          ]
+        },
+        {
+          "model_type": "affine",
+          "matrix": null,
+          "input_matches": 0,
+          "inliers": 0,
+          "inlier_ratio": 0.0,
+          "mean_reprojection_error_px": Infinity,
+          "median_reprojection_error_px": Infinity,
+          "max_reprojection_error_px": Infinity,
+          "scale": NaN,
+          "rotation_degrees": NaN,
+          "shear": NaN,
+          "anisotropy": NaN,
+          "determinant": NaN,
+          "grid_coverage": 0.0,
+          "hull_coverage": 0.0,
+          "degenerate": true,
+          "accepted": false,
+          "rejection_reasons": [
+            "insufficient_matches"
+          ]
+        },
+        {
+          "model_type": "homography",
+          "matrix": null,
+          "input_matches": 0,
+          "inliers": 0,
+          "inlier_ratio": 0.0,
+          "mean_reprojection_error_px": Infinity,
+          "median_reprojection_error_px": Infinity,
+          "max_reprojection_error_px": Infinity,
+          "scale": NaN,
+          "rotation_degrees": NaN,
+          "shear": NaN,
+          "anisotropy": NaN,
+          "determinant": NaN,
+          "grid_coverage": 0.0,
+          "hull_coverage": 0.0,
+          "degenerate": true,
+          "accepted": false,
+          "rejection_reasons": [
+            "insufficient_matches"
+          ]
+        }
+      ],
+      "rejection_reason": "no_model_fit"
+    },
+    "verdict": "REJECTED"
+  },
+  "release_package_case": "04_HARD_NEGATIVE",
+  "expected_verdict": "REJECTED"
+}

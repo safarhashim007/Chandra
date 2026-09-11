@@ -1,0 +1,18 @@
+{
+  "demo_case": "01_PRIMARY_VERIFIED",
+  "query_product_id": "NAC_PHO_E009S3481_M1345996066R",
+  "query_source_path": "data/region_packs/RP-001/processed/NAC_PHO_E009S3481_M1345996066R_science.tif",
+  "query_source_sha256": "a7301bd8b596b0b3380a10ccb97007bbf05e43205aa991b58146aa02ace49ea5",
+  "query_copied_sha256": "a7301bd8b596b0b3380a10ccb97007bbf05e43205aa991b58146aa02ace49ea5",
+  "query_split": "TEST",
+  "expected_verdict": "VERIFIED",
+  "selected_reference_product_id": "NAC_PHO_E009S3481_M1118958225R",
+  "selected_reference_split": "TRAIN",
+  "selected_reference_rank": 1,
+  "reference_source_path": "data/region_packs/RP-001/processed/NAC_PHO_E009S3481_M1118958225R_science.tif",
+  "reference_sha256": "ad3869c161738f0218140841c34d1578edd219eafcbef5f5d46dbf807e1888ae",
+  "source_region": "RP-001",
+  "matcher": "official RoMa v2, precise bidirectional setting",
+  "used_for_training": false,
+  "conversion": "TIFF uint8 band 1 -> grayscale PNG, same width/height, same pixel values, no crop/rotation/flip/enhancement"
+}

@@ -1,0 +1,18 @@
+{
+  "demo_case": "02_DIFFICULT_LIGHTING_VERIFIED",
+  "query_product_id": "NAC_PHO_E009S3481_M1177841115R",
+  "query_source_path": "data/region_packs/RP-001/processed/NAC_PHO_E009S3481_M1177841115R_science.tif",
+  "query_source_sha256": "33dcc8dd103d9d37eb0351f25d046a8367bd31a7efc13c3246771fb9101081d5",
+  "query_copied_sha256": "33dcc8dd103d9d37eb0351f25d046a8367bd31a7efc13c3246771fb9101081d5",
+  "query_split": "TEST",
+  "expected_verdict": "VERIFIED",
+  "selected_reference_product_id": "NAC_PHO_E009S3481_M106949300R",
+  "selected_reference_split": "TRAIN",
+  "selected_reference_rank": 3,
+  "reference_source_path": "data/region_packs/RP-001/processed/NAC_PHO_E009S3481_M106949300R_science.tif",
+  "reference_sha256": "4575e1169bcf36a85a2142b5ff0d6f32926e3ab823185d4d9fb5d345a4e44c63",
+  "source_region": "RP-001",
+  "matcher": "official RoMa v2, precise bidirectional setting",
+  "used_for_training": false,
+  "conversion": "TIFF uint8 band 1 -> grayscale PNG, same width/height, same pixel values, no crop/rotation/flip/enhancement"
+}

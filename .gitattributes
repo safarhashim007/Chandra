@@ -1,0 +1,4 @@
+*.tif filter=lfs diff=lfs merge=lfs -text
+*.TIF filter=lfs diff=lfs merge=lfs -text
+release/chandrappan_mac_m4_demo/demo_images/04_HARD_NEGATIVE/query.png filter=lfs diff=lfs merge=lfs -text
+release/chandrappan_mac_m4_demo/demo_images/UPLOAD_THESE/04_HARD_NEGATIVE.png filter=lfs diff=lfs merge=lfs -text
