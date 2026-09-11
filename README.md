@@ -1,246 +1,239 @@
-# 🌕 Chandrappan
+# CHANDRA
 
-### Region-Aware Lunar Correspondence & Registration
+### Multi-modal Lunar Image Correspondence & Registration
 
-> Chandrappan retrieves candidate NASA LROC references for a lunar observation, computes dense RoMa v2 correspondences, verifies them geometrically, and exposes an interpretable registration decision.
+CHANDRA is a lunar image correspondence and registration system developed in response to **Smart India Hackathon Problem Statement 26166** from the Indian Space Research Organisation (ISRO). It is designed to establish reliable correspondences between Chandrayaan-2 optical imagery and reference lunar imagery despite changes in illumination, viewpoint, sensor characteristics, and scale.
 
-[![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?logo=python&logoColor=white)](pyproject.toml)
-[![PyTorch](https://img.shields.io/badge/PyTorch-supported-EE4C2C?logo=pytorch&logoColor=white)](requirements.txt)
-[![NASA LROC](https://img.shields.io/badge/data-NASA%20LROC-0B3D91)](configs/regions/rp001.yaml)
-[![RoMa v2](https://img.shields.io/badge/matcher-RoMa%20v2-5B3E96)](docs/ROMAV2_INTERNALS.md)
-[![Tests](https://img.shields.io/badge/tests-65%20passing-2EA44F)](tests)
+The current implementation combines learned dense matching, consistency checks, robust geometric verification, spatial coverage analysis, and interpretable registration outputs. The production path retains official RoMa v2 inference; LunarRoMa remains experimental and is not promoted.
 
-<p align="center">
-  <img src="docs/assets/chandrappan_demo.png" alt="Verified RP-001 lunar correspondence and registration preview" width="100%" />
-</p>
+## SIH Problem Statement
 
-## What is Chandrappan?
-
-The same lunar terrain can look radically different across NASA observations: illumination, shadow direction, acquisition geometry, resolution, and sensor conditions all change the image. A visually plausible crater match is not enough.
-
-Chandrappan pairs **regional reference retrieval**, **dense matching**, **geometric verification**, and **scientific provenance** so a registration is an explicit decision rather than an unexamined image similarity score.
-
-## RP-001 — Apollo 15 S-IVB Impact Region
-
-RP-001 is the first Region Pack: a frozen, acquisition-isolated NASA LROC corpus for the Apollo 15 S-IVB Impact site (`E009S3481`). It is a regional experiment—not a claim of unrestricted lunar localization.
-
-| Property | Value |
-|---|---:|
-| NASA LROC observations | 20 |
-| Acquisition split (TRAIN / VALIDATION / TEST) | 12 / 4 / 4 |
-| Scientifically valid TRAIN pairs | 19 |
-| Dense map-derived GT crops | 97 |
-| Map-derived GT pair artifacts | 162 |
-| Validated common-pixel exclusions | 47 nominal pairs |
-
-### Frozen held-out demo protocol
-
-| Metric | Official RoMa v2, base-640 protocol |
-|---|---:|
-| TEST verified-registration rate | **4 / 4** |
-| PCK@1 | **82.6%** |
-| Median EPE | **0.35 px** |
-
-These are stored, post-freeze base-640 demo metrics from the four RP-001 TEST acquisitions. They do **not** establish global lunar performance or a production acceptance pass. Under the stricter official precise bidirectional acceptance protocol, the production run verifies 2/4 held-out positives and lacks a complete semantic/shadow negative suite; its gate remains incomplete. See the [demo report](results/RP-001_DEMO_REPORT.md) and [final acceptance report](results/RP-001_FINAL_REPORT.md).
-
-## How it works
-
-```mermaid
-flowchart LR
-    A[Query lunar observation] --> B[Identify Region Pack]
-    B --> C[Search NASA LROC reference bank]
-    C --> D[Top-K candidate references]
-    D --> E[RoMa v2 dense matching]
-    E --> F[Bidirectional consistency]
-    F --> G[Geometric verification]
-    G --> H[Best valid reference]
-    H --> I[Registered output]
-    I --> J[VERIFIED / UNCERTAIN / REJECTED]
-```
-
-**Retrieval proposes; geometry decides.** A query never needs a manually supplied correct reference. Chandrappan searches the TRAIN-only reference bank, evaluates candidate correspondences, then lets geometric evidence—not rank alone—select or reject the result.
-
-## Architecture
-
-```mermaid
-flowchart TB
-    Q[Query lunar image]
-    NASA[(NASA LROC)]
-
-    subgraph Chandrappan
-        R[Region Pack resolver]
-        RB[Regional reference bank]
-        RET[Top-K retrieval]
-        M[RoMa v2 matching]
-        BI[Bidirectional check]
-        GV[Geometric verification]
-        SEL[Best valid reference]
-        REG[Registration]
-        VIZ[Visualization + provenance]
-    end
-
-    NASA --> RB
-    Q --> R --> RET
-    RB --> RET --> M --> BI --> GV --> SEL --> REG --> VIZ
-```
-
-## Region Packs
-
-Chandrappan is deliberately scoped. A Region Pack contains repeat observations of one physical lunar region, exact NASA provenance, metadata, a regional reference bank, an acquisition-level split, and its matching/evaluation configuration. This makes scope visible instead of implying a global system where none has been validated.
-
-For RP-001, dense supervision comes from lunar-geospatial **pixel → world → pixel** mapping. It is geospatial correspondence supervision, not surveyed-landmark ground truth. Of the 66 nominal TRAIN combinations, 19 passed the defined common-valid-pixel requirement; 47 were explicitly rejected rather than forced into training.
-
-## Matching stack
-
-| Stage | Role |
+| Field | Details |
 |---|---|
-| Regional retrieval | Proposes candidate NASA reference views |
-| Official RoMa v2 | Computes dense image correspondences |
-| Bidirectional check | Tests directional consistency |
-| Geometric verification | Rejects coherent-looking false matches |
-| Constrained transform | Computes the registration |
-| Registration inspector | Shows match lines, overlay, wipe, blink, and difference views |
-| Provenance | Retains product identity, split, metadata, URLs, and hashes |
+| Problem Statement ID | **26166** |
+| Title | **Multi-modal, Sun angle and scale invariant image correspondence using Chandrayaan-2 optical images (OHRC, TMC and IIRS)** |
+| Organization | **Indian Space Research Organisation (ISRO)** |
+| Department | **Department of Space / Indian Space Research Organisation** |
+| Category | **Software** |
+| Theme | **Space Technology** |
 
-### Registration verdicts
+## The Problem
 
-- **VERIFIED** — enough correspondence support and geometric evidence passed the configured checks.
-- **UNCERTAIN** — the pipeline cannot support a reliable decision.
-- **REJECTED** — the candidate fails verification. Rejection is scientific evidence, not a software error.
+Image registration aligns a source (moving) image with a reference (fixed) image of the same scene in a common coordinate system. The source image is geometrically transformed; the reference image supplies the coordinate frame. For lunar imagery, reliable corresponding terrain points must be found before the transformation can be estimated and validated.
 
-## Registration inspector and demo cases
+The official objective is a generic solution for finding correspondences between Chandrayaan-2 optical imagery and reference lunar imagery, targeting sub-pixel source-image registration accuracy and spatially uniform correspondence distribution. Expected products include match points, a registered image, and quantitative evaluation.
 
-The local inspector provides real match lines, opacity-controlled overlays, draggable wipe, blink, difference views where available, Top-K candidate cards, selected-reference provenance, and a read-only metadata view.
+## Why Lunar Registration Is Difficult
 
-| Frozen case | Expected outcome | Purpose |
-|---|---|---|
-| Primary held-out | VERIFIED | Main reference-selection and registration walkthrough |
-| Difficult illumination | VERIFIED | Shows a real illumination change within the regional scope |
-| Failed held-out case | REJECTED | Makes an acceptance limitation visible |
-| Other-region hard negative | REJECTED | Demonstrates geometric rejection of an unrelated lunar region |
+### Illumination variation
 
-The full local image pack is intentionally excluded from Git: it contains bulky imagery and is unsuitable for source control. The compact hero preview above is included; the reproducible selection and status are documented in the [handpicked demo report](results/RP-001_HANDPICKED_DEMO_SELECTION.md).
+Changes in Sun azimuth, Sun elevation, surface lighting, shadow direction, and shadow length can make the same crater or ridge look substantially different.
 
-## Scientific provenance
+### Viewpoint variation
 
-Every RP-001 observation records, where available, its NASA/LROC product ID, acquisition data, incidence/emission/phase, GSD, regional role, split, source URL, and SHA256. The split is at full-acquisition level:
+Different camera positions and orientations introduce translation, rotation, scale change, and perspective distortion.
 
-| Safeguard | Status |
-|---|---:|
-| VALIDATION used for training | 0 |
-| TEST used for training or selection | 0 |
-| TRAIN-only reference bank | Yes |
-| Split leakage check | PASS |
+### Scale variation
 
-## Model strategy
+Orbital altitude, spatial resolution, and optical-system differences can create large scale changes, including cross-instrument comparisons.
 
-**Official RoMa v2 — ACTIVE · FROZEN**
+## Our Approach
 
-RoMa v2 supplies dense correspondence. Chandrappan adds the lunar ingestion, Region Packs, candidate retrieval, correspondence filtering, geometry policy, registration decision, provenance, held-out evaluation, inspection experience, and offline demo deployment around it.
+~~~text
+Chandrayaan-2 or reference lunar image
+                  |
+                  v
+            Preprocessing
+                  |
+                  v
+       Candidate reference ranking
+                  |
+                  v
+          RoMa v2 dense matching
+                  |
+                  v
+     Bidirectional consistency checks
+                  |
+                  v
+          Confidence filtering
+                  |
+                  v
+       Geometric hypothesis generation
+                  |
+                  v
+       RANSAC robust verification
+                  |
+                  v
+        Transform and registration
+                  |
+                  v
+       Match views, outputs, metrics
+~~~
 
-**RP-001 D1 — EXPERIMENTAL · NOT PROMOTED**
+**Retrieval proposes; geometry decides.** A visually plausible match is not accepted from image similarity or RMSE alone.
 
-D1 changed only the stride-1 refiner using RP-001 TRAIN data. It did not meaningfully improve the monitored held-out criterion, so the live matcher remains the untouched official RoMa v2 baseline.
+## Processing Pipeline
 
-| Split | Model | PCK@1 | Median EPE | VRR |
-|---|---|---:|---:|---:|
-| TRAIN | Official | 61.29% | 0.657 px | 16/19 |
-| TRAIN | D1 | 61.26% | 0.657 px | 16/19 |
-| VALIDATION | Official | 74.59% | 0.478 px | 3/4 |
-| VALIDATION | D1 | 74.17% | 0.477 px | 3/4 |
-| TEST | Official | 82.57% | 0.348 px | 4/4 |
-| TEST | D1 | 82.57% | 0.348 px | 4/4 |
+The implemented local runtime validates a map-projected lunar raster, ranks eligible regional references with a deterministic normalized intensity descriptor, extracts a common valid crop, runs official RoMa v2 dense matching, filters by overlap confidence and bidirectional consistency, selects spatially distributed correspondences, and verifies the result geometrically.
 
-The table uses the same frozen base-640 paired protocol as the demo report. It is not a promotion result or a replacement for the production acceptance protocol.
+OpenCV RANSAC evaluates similarity, affine, and homography hypotheses in that order. The acceptance policy checks inlier count, inlier ratio, reprojection error, scale, rotation, shear, anisotropy, determinant, grid coverage, and hull coverage before producing a registration verdict and artifacts.
 
-## Apple Silicon demo
+## Core Technologies
 
-The presentation package targets a **MacBook Air M4 with 16 GB unified memory**. It is local, offline after setup, inference-only, and uses Apple **MPS** when available with CPU fallback. The Mac path uses the frozen Official RoMa v2 model and a local RP-001 bank; D1 weights are excluded.
+- Python 3.10+
+- PyTorch
+- Official RoMa v2 for dense learned correspondence
+- OpenCV for robust geometric estimation and image remapping
+- FastAPI and Uvicorn for the local API
+- Rasterio, PyProj, and Shapely for raster metadata and lunar geometry
+- React/Vite for the local frontend
 
-The M4 bundle and model weights are intentionally not versioned in Git. MPS performance, parity, memory, and browser-rehearsal validation remain pending on the physical presentation machine; no Mac hardware result is claimed here. See [Mac M4 demo readiness](results/MAC_M4_DEMO_READINESS.md).
+### RoMa v2
 
-## Quick start
+RoMa v2 is the primary learned correspondence model. It produces dense visual correspondences for terrain where conventional sparse descriptors may struggle. RoMa is an upstream model; CHANDRA supplies the lunar data contracts, runtime adapter, validation policy, registration logic, provenance, and inspection experience around it.
 
-### Development checkout
+### Classical baselines
 
-```bash
-git clone https://github.com/safarhashim007/chandrappan.git
-cd chandrappan
+The current production matching path is RoMa-based. The geometry and evaluation modules are structured for classical feature-match comparisons such as SIFT or ORB where those baselines are added; they are not presented as the final matching engine.
 
+## Geometric Verification
+
+Visual matchers propose correspondences. Geometry determines whether those correspondences can describe the same physical lunar surface.
+
+**RANSAC** means Random Sample Consensus. It rejects outliers while fitting a geometrically consistent transform. CHANDRA evaluates similarity transforms, affine transforms, and homographies, then applies physical-plausibility and spatial-coverage checks. A rejected candidate is a scientific outcome, not a software error.
+
+Verdicts are **VERIFIED**, **UNCERTAIN**, or **REJECTED**.
+
+## Outputs
+
+Depending on the runtime profile and verdict, CHANDRA exposes:
+
+- candidate correspondence points and confidence values;
+- verified inlier match lines;
+- selected reference and candidate rank;
+- estimated transformation parameters;
+- registered imagery;
+- overlay, split, blink, and absolute-difference views;
+- inlier count, inlier ratio, reprojection error, and coverage metrics;
+- lunar crop centre and source/reference provenance.
+
+## Evaluation
+
+The repository calculates or records RMSE/error statistics where the protocol provides them, candidate correspondence count, inliers, inlier ratio, reprojection error, scale, rotation, coverage, PCK, EPE, verified registration rate (VRR), and false-accept rate (FAR).
+
+The current recorded validation baseline uses **20 LRO NAC observations**, with **2 positive and 4 negative evaluated pairs**. Untouched official RoMa v2 recorded VRR **0.5** and FAR **0.0** under that project protocol. This is a small validation corpus, not an official SIH benchmark or evidence of global lunar performance.
+
+Sub-pixel registration is an SIH target, not a current guarantee across the required Chandrayaan-2 dataset.
+
+## Dataset
+
+CHANDRA is being developed around the datasets defined by SIH Problem Statement 26166.
+
+### Source imagery
+
+The central source imagery is from Chandrayaan-2 optical payloads:
+
+- OHRC
+- TMC-2
+- IIRS
+
+Dataset portal: [Chandrayaan-2 image browser](https://chmapbrowse.issdc.gov.in/)
+
+The checked-in repository does not include a Chandrayaan-2 source corpus. Raw imagery and model weights are excluded from version control.
+
+### Reference imagery
+
+Reference lunar imagery specified by the problem statement may include LRO NAC and SELENE imagery.
+
+- [LRO image downloads](https://lroc.im-ldi.com/images/downloads/)
+- [LRO QuickMap](https://quickmap.lroc.im-ldi.com/)
+
+The available local validation/demo corpus is a small map-projected LRO NAC regional set used to verify mechanics, geometry, provenance, and the presentation path. It is not a substitute for the official Chandrayaan-2 evaluation set.
+
+## Repository Structure
+
+~~~text
+api/             FastAPI metadata and local-demo API
+Python package/  Lunar geometry, data, matching, evaluation, and runtime code
+configs/         Region, acceptance, training, and demo configuration
+data/            Manifests, splits, and ignored local data locations
+docs/            Architecture, runbooks, reports, and technical notes
+frontend/        React/Vite local mission console
+results/         Evaluation reports and verification records
+scripts/         Acquisition, dataset, evaluation, packaging, and demo tools
+tests/           Regression and scientific-contract tests
+Makefile         Formatting, lint, health, and test entry points
+~~~
+
+## Installation
+
+Use a coherent Python 3.10+ environment with SQLite enabled:
+
+~~~bash
 python -m venv .venv
 .venv/bin/pip install -r requirements.txt -r requirements-dev.txt
 .venv/bin/python scripts/doctor.py
-.venv/bin/python -m pytest -q
-```
+~~~
 
-### macOS / Apple Silicon presentation bundle
+## Running CHANDRA
 
-The presentation bundle is a separately transferred, local artifact because it contains the official model and processed imagery. From that prepared bundle on macOS arm64:
+### Local demo/API
 
-```bash
+~~~bash
+./scripts/start_workstation.sh
+~~~
+
+This expects a separately prepared local demo bundle and serves the API at http://127.0.0.1:8000.
+
+### Apple Silicon presentation bundle
+
+~~~bash
 ./scripts/setup_mac_m4.sh
 ./scripts/start_demo_mac.sh
-```
+~~~
 
-Open `http://127.0.0.1:8000`. The setup script installs presentation dependencies; the demo itself runs offline after setup.
+The macOS arm64 profile is local and offline after setup, uses the frozen official RoMa v2 checkpoint, and selects MPS when available with CPU fallback. Mac M4 performance, parity, memory, and browser rehearsal remain pending validation.
 
-## Repository structure
+### Frontend development
 
-```text
-api/             FastAPI presentation API
-chandrappan/     Lunar geometry, data, matching, evaluation, and runtime code
-configs/         Region Pack, acceptance, training, and demo configuration
-docs/            Architecture, runbooks, reports, and compact visual assets
-frontend/        Local Chandrappan mission console
-results/         Compact scientific evaluation and readiness reports
-scripts/         Data, evaluation, packaging, and demo utilities
-tests/           Regression and verification suite
-```
+~~~bash
+cd frontend
+npm install
+npm run dev
+~~~
 
-## Built with
+Build the static frontend with npm run build.
 
-Python, PyTorch, Official RoMa v2, FastAPI, Rasterio, PyProj, Shapely, NASA LROC imagery, and Apple Metal Performance Shaders (MPS) for the macOS presentation path.
+## Verification Commands
 
-## Verification
-
-The current suite contains **65 tests**. Before a change is considered ready, run:
-
-```bash
+~~~bash
 make format
 make lint
 make test
 python scripts/doctor.py
-```
+~~~
 
-## Current scope
+Focused checks are available through make test-geo, make test-matching, make test-training, and make test-api.
 
-- RP-001 is a small, region-specific evaluation pack; it is not global lunar localization.
-- Large illumination and viewpoint changes remain difficult.
-- The strict production acceptance evaluation is incomplete: the current official run has 2/4 held-out positive verifications and incomplete shadow/semantic negative coverage.
-- D1 was not promoted.
-- MPS validation on the target MacBook Air M4 remains pending.
+## Current Limitations
 
-## Technical reports
+- The available evaluation corpus is small and does not represent the official Chandrayaan-2 benchmark.
+- The current regional validation result is not a global lunar retrieval or localization claim.
+- Held-out positive verification is incomplete under the strict acceptance protocol.
+- Shadow and crater-semantic hard-negative coverage is incomplete.
+- The experimental LunarRoMa/refiner path did not pass the strict no-regression gate and is not promoted.
+- Official RoMa v2 remains the production fallback.
 
-- [RP-001 final acceptance report](results/RP-001_FINAL_REPORT.md)
-- [RP-001 demo report](results/RP-001_DEMO_REPORT.md)
-- [Region Pack candidate audit](results/region_pack_candidate_audit.md)
-- [Handpicked demo selection](results/RP-001_HANDPICKED_DEMO_SELECTION.md)
-- [Mac M4 demo readiness](results/MAC_M4_DEMO_READINESS.md)
-- [Architecture](docs/ARCHITECTURE.md) and [registration verification](docs/REGISTRATION_VERIFICATION.md)
+## Roadmap
 
-## Next
+Add validated Chandrayaan-2 OHRC, TMC-2, and IIRS products; expand geographically isolated positive and hard-negative evaluation; improve illumination and cross-sensor robustness without weakening acceptance thresholds; and revisit lunar-specific adaptation only after the required coordinate, ground-truth, loss, gradient, overfit, and immutable-baseline gates pass.
 
-Expand to additional Region Packs, build a larger multi-region corpus, improve photometric robustness and regional retrieval, add validated shadow/semantic hard negatives, and promote a lunar-specific adaptation only when it improves held-out results at a controlled false-accept rate.
+Broader visual localization, a larger reference catalogue, DEM-assisted verification, and active perception remain future research directions rather than current capabilities.
 
-## Acknowledgements and references
+## Acknowledgements and References
 
-Chandrappan uses NASA Lunar Reconnaissance Orbiter Camera (LROC) RDR/SDPPHO products. It is not affiliated with NASA. Exact RP-001 product URLs and hashes are preserved in the [Region Pack configuration](configs/regions/rp001.yaml).
+CHANDRA is developed in response to ISRO’s Smart India Hackathon Problem Statement 26166. Chandrayaan-2 source imagery and the reference lunar imagery listed above are governed by their respective data portals and problem-statement terms.
 
-RoMa v2 remains the active matching model. The local source inspection checkout identifies the upstream work as Johan Edstedt *et al.*, “RoMa v2: Harder Better Faster Denser Feature Matching,” arXiv:2511.15706 (2025). See the upstream [RoMa v2 paper](https://arxiv.org/abs/2511.15706) and the project’s [RoMa v2 integration notes](docs/ROMAV2_INTERNALS.md).
+The active dense matcher is the official RoMa v2 implementation. See the [RoMa v2 paper](https://arxiv.org/abs/2511.15706) and the repository’s [integration notes](docs/ROMAV2_INTERNALS.md).
 
-## License
-
-No license has been published for Chandrappan yet. The included code and NASA/RoMa-related materials remain subject to their respective terms.
-
-> **Chandrappan turns a lunar observation into a traceable registration decision—automatically retrieving candidate NASA references, matching terrain with RoMa v2, verifying geometry, and exposing the result through an interactive inspection console.**
+See also the [registration verification notes](docs/REGISTRATION_VERIFICATION.md), [architecture](docs/ARCHITECTURE.md), [demo report](results/RP-001_DEMO_REPORT.md), and [Mac presentation readiness](results/MAC_M4_DEMO_READINESS.md).
